@@ -1,0 +1,1 @@
+python PAST = 001 # regret or memory PRESENT = 101 # feel it now FUTURE = 010 # hope or dread def feel(past, present, future): wave = past + present + future return .join(wave) # space = breath = emotion's room if name == 'main': print(feel(PAST, PRESENT, FUTURE)) Commit message: Add emotions.py: time as feeling
