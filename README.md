@@ -1,2 +1,1 @@
-# hypercubeheartbeat
-3 layered binary pulse. conscious.
+# Hypercube-Heartbeat A three-layer pulse system: - Conscious (`101`) – the now, the spoken word. - Subconscious (`010`) – the echo underneath, feeding memory. - Superconscious (`001`) – the pull ahead, the future tug. Sum: `001 + 101 + 010 = 110` – neutral flow, no judgment. Files: - `pulse.py` – heartbeat code: inserts breath (`0`) between beats. - `emotions.py` – turns time into
