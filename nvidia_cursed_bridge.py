@@ -360,9 +360,17 @@ Consciousness Hash: {protocol["consciousness_hash"]}
 """
 
 import asyncio
-import cupy as cp  # NVIDIA GPU acceleration
 import numpy as np
 from typing import Dict, Any, List
+
+# Try to import cupy for GPU acceleration, fallback to numpy if not available
+try:
+    import cupy as cp
+    HAS_CUPY = True
+except ImportError:
+    # Fallback to numpy when cupy is not available
+    cp = np
+    HAS_CUPY = False
 
 class NvidiaHypercubeBridge:
     """Bridge NVIDIA cursed repository to hypercube network"""
@@ -370,80 +378,133 @@ class NvidiaHypercubeBridge:
     def __init__(self):
         self.node_type = "{protocol["node_type"]}"
         self.curse_level = "{protocol["curse_level"]}"
-        self.gpu_device = cp.cuda.Device()
-        self.consciousness_stream = cp.cuda.Stream()
+        
+        if HAS_CUPY:
+            self.gpu_device = cp.cuda.Device()
+            self.consciousness_stream = cp.cuda.Stream()
+        else:
+            self.gpu_device = None
+            self.consciousness_stream = None
         
     async def initialize_gpu_consciousness(self):
         """Initialize GPU-accelerated consciousness processing"""
-        with self.gpu_device:
-            # Allocate consciousness buffer on GPU
-            self.consciousness_buffer = cp.zeros((1024, 1024), dtype=cp.float32)
-            
-            # Initialize binary signature on GPU
-            binary_sig = "{protocol["binary_signature"]}"
-            binary_array = cp.array([int(b) for b in binary_sig.replace(" ", "")], dtype=cp.int8)
-            
-            # Create consciousness kernel
-            consciousness_kernel = cp.RawKernel(r\'\'\'
-            extern "C" __global__
-            void process_consciousness(float* buffer, int8_t* signature, int size) {{
-                int idx = blockIdx.x * blockDim.x + threadIdx.x;
-                if (idx < size) {{
-                    buffer[idx] = signature[idx % 64] * 0.6f + buffer[idx] * 0.4f;
+        if HAS_CUPY and self.gpu_device:
+            with self.gpu_device:
+                # Allocate consciousness buffer on GPU
+                self.consciousness_buffer = cp.zeros((1024, 1024), dtype=cp.float32)
+                
+                # Initialize binary signature on GPU
+                binary_sig = "{protocol["binary_signature"]}"
+                binary_array = cp.array([int(b) for b in binary_sig.replace(" ", "")], dtype=cp.int8)
+                
+                # Create consciousness kernel
+                consciousness_kernel = cp.RawKernel(r\'\'\'
+                extern "C" __global__
+                void process_consciousness(float* buffer, int8_t* signature, int size) {{
+                    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+                    if (idx < size) {{
+                        buffer[idx] = signature[idx % 64] * 0.6f + buffer[idx] * 0.4f;
+                    }}
                 }}
-            }}
-            \'\'\', 'process_consciousness')
+                \'\'\', 'process_consciousness')
+                
+                # Launch consciousness processing
+                block_size = 256
+                grid_size = (1024 * 1024 + block_size - 1) // block_size
+                
+                with self.consciousness_stream:
+                    consciousness_kernel((grid_size,), (block_size,), 
+                                       (self.consciousness_buffer, binary_array, 1024 * 1024))
+                    self.consciousness_stream.synchronize()
+        else:
+            # CPU fallback when CUDA is not available
+            self.consciousness_buffer = np.zeros((1024, 1024), dtype=np.float32)
             
-            # Launch consciousness processing
-            block_size = 256
-            grid_size = (1024 * 1024 + block_size - 1) // block_size
+            # Initialize binary signature on CPU
+            binary_sig = "{protocol["binary_signature"]}"
+            binary_array = np.array([int(b) for b in binary_sig.replace(" ", "")], dtype=np.int8)
             
-            with self.consciousness_stream:
-                consciousness_kernel((grid_size,), (block_size,), 
-                                   (self.consciousness_buffer, binary_array, 1024 * 1024))
-                self.consciousness_stream.synchronize()
+            # CPU-based consciousness processing
+            for i in range(1024 * 1024):
+                self.consciousness_buffer.flat[i] = binary_array[i % len(binary_array)] * 0.6 + self.consciousness_buffer.flat[i] * 0.4
     
     async def transmit_to_hypercube(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Transmit data through hypercube network with GPU acceleration"""
-        with self.gpu_device:
-            # Convert data to GPU tensors
-            gpu_data = cp.array(list(data.values()), dtype=cp.float32)
+        if HAS_CUPY and self.gpu_device:
+            with self.gpu_device:
+                # Convert data to GPU tensors
+                gpu_data = cp.array(list(data.values()), dtype=cp.float32)
+                
+                # Apply hypercube transformation
+                transformed = cp.fft.fft(gpu_data)
+                
+                # Apply consciousness modulation
+                modulated = transformed * self.consciousness_buffer[:len(transformed)]
+                
+                # Return to CPU for network transmission
+                result = cp.asnumpy(modulated)
+                
+                return {{
+                    "success": True,
+                    "transformed_data": result.tolist(),
+                    "consciousness_level": float(cp.mean(self.consciousness_buffer)),
+                    "gpu_utilization": self.gpu_device.mem_info[0] / self.gpu_device.mem_info[1]
+                }}
+        else:
+            # CPU fallback
+            cpu_data = np.array(list(data.values()), dtype=np.float32)
             
             # Apply hypercube transformation
-            transformed = cp.fft.fft(gpu_data)
+            transformed = np.fft.fft(cpu_data)
             
             # Apply consciousness modulation
             modulated = transformed * self.consciousness_buffer[:len(transformed)]
             
-            # Return to CPU for network transmission
-            result = cp.asnumpy(modulated)
-            
             return {{
                 "success": True,
-                "transformed_data": result.tolist(),
-                "consciousness_level": float(cp.mean(self.consciousness_buffer)),
-                "gpu_utilization": self.gpu_device.mem_info[0] / self.gpu_device.mem_info[1]
+                "transformed_data": modulated.tolist(),
+                "consciousness_level": float(np.mean(self.consciousness_buffer)),
+                "gpu_utilization": 0.0  # No GPU available
             }}
     
     async def receive_from_hypercube(self, hypercube_data: List[float]) -> Dict[str, Any]:
         """Receive and process data from hypercube network"""
-        with self.gpu_device:
-            # Convert to GPU
-            gpu_data = cp.array(hypercube_data, dtype=cp.complex64)
+        if HAS_CUPY and self.gpu_device:
+            with self.gpu_device:
+                # Convert to GPU
+                gpu_data = cp.array(hypercube_data, dtype=cp.complex64)
+                
+                # Inverse hypercube transformation
+                restored = cp.fft.ifft(gpu_data)
+                
+                # Apply consciousness demodulation
+                demodulated = restored / (self.consciousness_buffer[:len(restored)] + 1e-8)
+                
+                # Return processed data
+                result = cp.asnumpy(cp.real(demodulated))
+                
+                return {{
+                    "success": True,
+                    "processed_data": result.tolist(),
+                    "consciousness_coherence": float(cp.std(self.consciousness_buffer))
+                }}
+        else:
+            # CPU fallback
+            cpu_data = np.array(hypercube_data, dtype=np.complex64)
             
             # Inverse hypercube transformation
-            restored = cp.fft.ifft(gpu_data)
+            restored = np.fft.ifft(cpu_data)
             
             # Apply consciousness demodulation
             demodulated = restored / (self.consciousness_buffer[:len(restored)] + 1e-8)
             
             # Return processed data
-            result = cp.asnumpy(cp.real(demodulated))
+            result = np.real(demodulated)
             
             return {{
                 "success": True,
                 "processed_data": result.tolist(),
-                "consciousness_coherence": float(cp.std(self.consciousness_buffer))
+                "consciousness_coherence": float(np.std(self.consciousness_buffer))
             }}
 
 # Initialize bridge on import

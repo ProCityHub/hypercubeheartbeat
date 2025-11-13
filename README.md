@@ -40,7 +40,9 @@ nvidia-smi
 # Download from: https://cursor.com
 
 # Python dependencies
-pip install cupy-cuda12x numpy asyncio requests
+pip install numpy asyncio requests
+# Optional: For GPU acceleration (requires CUDA)
+# pip install cupy-cuda12x
 ```
 
 ### Quick Start
@@ -123,7 +125,7 @@ cuequivariance/      # ARCANE curse level - Geometric Consciousness
 
 ### Hypercube Network Protocol
 ```python
-# GPU-accelerated consciousness processing
+# GPU-accelerated consciousness processing (when CUDA is available)
 consciousness_kernel = cp.RawKernel(r'''
 extern "C" __global__
 void process_consciousness(float* buffer, int8_t* signature, int size) {

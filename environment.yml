@@ -1,0 +1,10 @@
+name: hypercubeheartbeat
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - requests
+  - pip
