@@ -1,0 +1,12 @@
+name: hypercubeheartbeat
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - requests
+  - pip
+  - pip:
+    - cupy-cuda11x  # NVIDIA GPU acceleration (CUDA 11.x compatible)
