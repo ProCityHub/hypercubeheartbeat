@@ -8,5 +8,3 @@ dependencies:
   - pandas
   - requests
   - pip
-  - pip:
-    - cupy-cuda11x  # NVIDIA GPU acceleration (CUDA 11.x compatible)
