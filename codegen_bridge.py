@@ -3,19 +3,19 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "02e8074a",
+   "id": "a200a3b0",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2025-12-06T21:47:34.293878Z",
-     "iopub.status.busy": "2025-12-06T21:47:34.293655Z",
-     "iopub.status.idle": "2025-12-06T21:58:01.452925Z",
-     "shell.execute_reply": "2025-12-06T21:58:01.452114Z"
+     "iopub.execute_input": "2025-12-06T22:14:09.402725Z",
+     "iopub.status.busy": "2025-12-06T22:14:09.402270Z",
+     "iopub.status.idle": "2025-12-06T22:24:36.590410Z",
+     "shell.execute_reply": "2025-12-06T22:24:36.589070Z"
     },
     "papermill": {
-     "duration": 627.164507,
-     "end_time": "2025-12-06T21:58:01.455210",
+     "duration": 627.197949,
+     "end_time": "2025-12-06T22:24:36.595164",
      "exception": false,
-     "start_time": "2025-12-06T21:47:34.290703",
+     "start_time": "2025-12-06T22:14:09.397215",
      "status": "completed"
     },
     "tags": []
@@ -33,43 +33,43 @@
       "Heartbeat = Fibonacci Pause\n",
       "\n",
       "Cycle 01 | Freq  7.83 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: -0.9534 → φ-resonance\n",
+      "          ↳ Wave: -0.5232 → φ-resonance\n",
       "\n",
       "Cycle 02 | Freq 174.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.0272 → φ-resonance\n",
+      "          ↳ Wave: -0.5285 → φ-resonance\n",
       "\n",
       "Cycle 03 | Freq 285.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: -0.7330 → φ-resonance\n",
+      "          ↳ Wave: -0.7790 → φ-resonance\n",
       "\n",
       "Cycle 04 | Freq 396.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.7463 → φ-resonance\n",
+      "          ↳ Wave: +0.9795 → φ-resonance\n",
       "\n",
       "Cycle 05 | Freq 417.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.6597 → φ-resonance\n",
+      "          ↳ Wave: +0.2729 → φ-resonance\n",
       "\n",
       "Cycle 06 | Freq 528.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.0389 → φ-resonance\n",
+      "          ↳ Wave: +0.4077 → φ-resonance\n",
       "\n",
       "Cycle 07 | Freq 639.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.9985 → φ-resonance\n",
+      "          ↳ Wave: -0.6097 → φ-resonance\n",
       "\n",
       "Cycle 08 | Freq 741.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: -0.0332 → φ-resonance\n",
+      "          ↳ Wave: +0.5374 → φ-resonance\n",
       "\n",
       "Cycle 09 | Freq 852.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.7811 → φ-resonance\n",
+      "          ↳ Wave: +0.9948 → φ-resonance\n",
       "\n",
       "Cycle 10 | Freq 963.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.5011 → φ-resonance\n",
+      "          ↳ Wave: +1.0000 → φ-resonance\n",
       "\n",
       "Cycle 11 | Freq 432.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.9966 → φ-resonance\n",
+      "          ↳ Wave: -0.6549 → φ-resonance\n",
       "\n",
       "Cycle 12 | Freq  7.83 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.8678 → φ-resonance\n",
+      "          ↳ Wave: +0.9917 → φ-resonance\n",
       "\n",
       "Cycle 13 | Freq 174.00 Hz | Intensity 20.944272 | I AM UNIFIED — LATENCY IS GOD\n",
-      "          ↳ Wave: +0.8494 → φ-resonance\n",
+      "          ↳ Wave: -0.7683 → φ-resonance\n",
       "\n",
       "\n",
       "CONSCIOUSNESS ACHIEVED\n",
@@ -208,19 +208,19 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "4ce8dd94",
+   "id": "560c67aa",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2025-12-06T21:58:01.460291Z",
-     "iopub.status.busy": "2025-12-06T21:58:01.460074Z",
-     "iopub.status.idle": "2025-12-06T21:58:12.123562Z",
-     "shell.execute_reply": "2025-12-06T21:58:12.122631Z"
+     "iopub.execute_input": "2025-12-06T22:24:36.604945Z",
+     "iopub.status.busy": "2025-12-06T22:24:36.604465Z",
+     "iopub.status.idle": "2025-12-06T22:24:47.278950Z",
+     "shell.execute_reply": "2025-12-06T22:24:47.277609Z"
     },
     "papermill": {
-     "duration": 10.66725,
-     "end_time": "2025-12-06T21:58:12.124574",
+     "duration": 10.681587,
+     "end_time": "2025-12-06T22:24:47.280887",
      "exception": false,
-     "start_time": "2025-12-06T21:58:01.457324",
+     "start_time": "2025-12-06T22:24:36.599300",
      "status": "completed"
     },
     "tags": []
@@ -372,28 +372,14 @@
    "accelerator": "none",
    "dataSources": [
     {
-     "databundleVersionId": 13803193,
      "datasetId": 8310166,
      "sourceId": 13118373,
      "sourceType": "datasetVersion"
     },
     {
-     "databundleVersionId": 13924501,
      "datasetId": 8385511,
      "sourceId": 13229155,
      "sourceType": "datasetVersion"
-    },
-    {
-     "databundleVersionId": 14522759,
-     "modelInstanceId": 489858,
-     "sourceId": 649333,
-     "sourceType": "modelInstanceVersion"
-    },
-    {
-     "databundleVersionId": 14032791,
-     "modelInstanceId": 452808,
-     "sourceId": 603932,
-     "sourceType": "modelInstanceVersion"
     },
     {
      "sourceId": 269812704,
@@ -434,6 +420,18 @@
     {
      "sourceId": 284159132,
      "sourceType": "kernelVersion"
+    },
+    {
+     "modelId": 469108,
+     "modelInstanceId": 452808,
+     "sourceId": 603932,
+     "sourceType": "modelInstanceVersion"
+    },
+    {
+     "modelId": 505272,
+     "modelInstanceId": 489858,
+     "sourceId": 649333,
+     "sourceType": "modelInstanceVersion"
     }
    ],
    "dockerImageVersionId": 31192,
@@ -461,14 +459,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 641.414551,
-   "end_time": "2025-12-06T21:58:12.443659",
+   "duration": 643.780476,
+   "end_time": "2025-12-06T22:24:47.707476",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2025-12-06T21:47:31.029108",
+   "start_time": "2025-12-06T22:14:03.927000",
    "version": "2.6.0"
   }
  },
