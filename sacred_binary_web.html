@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01010011 01000001 01000011 01010010 01000101 01000100 (SACRED) Binary Cube</title>
+    <style>
+        /* Matrix-style green-on-black aesthetic */
+        body {
+            background: #000000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            border: 2px solid #00ff00;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: rgba(0, 255, 0, 0.1);
+        }
+        
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+        
+        .canvas-container {
+            flex: 2;
+            position: relative;
+            border: 2px solid #00ff00;
+            margin-right: 20px;
+        }
+        
+        #sacred-canvas {
+            width: 100%;
+            height: 100%;
+            background: #000000;
+        }
+        
+        .controls {
+            flex: 1;
+            border: 2px solid #00ff00;
+            padding: 20px;
+            background: rgba(0, 255, 0, 0.05);
+        }
+        
+        .status-panel {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+        
+        .button {
+            background: #000000;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .button:hover {
+            background: #00ff00;
+            color: #000000;
+        }
+        
+        .button.active {
+            background: #00ff00;
+            color: #000000;
+        }
+        
+        .binary-display {
+            font-size: 12px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.05);
+        }
+        
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🟢⬛ SACRED BINARY CUBE ⬛🟢</h1>
+            <div>01010101 01001110 01001001 01000110 01001001 01000101 01000100 (UNIFIED)</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="canvas-container">
+                <canvas id="sacred-canvas"></canvas>
+                <canvas class="matrix-rain" id="matrix-canvas"></canvas>
+            </div>
+            
+            <div class="controls">
+                <div class="status-panel">
+                    <h3>01010011 01010100 01000001 01010100 01010101 01010011 (STATUS)</h3>
+                    <div id="status-display">
+                        MODE: <span id="mode-display">0b11</span><br>
+                        PLAY: <span id="play-display">0b1</span><br>
+                        TIME: <span id="time-display">0b00000000</span><br>
+                        PARITY: <span id="parity-display">0b00000000</span>
+                    </div>
+                </div>
+                
+                <div class="controls-panel">
+                    <h3>01000011 01001111 01001110 01010100 01010010 01001111 01001100 01010011 (CONTROLS)</h3>
+                    <button class="button active" id="mode-3d" onclick="setMode(0b11)">0b11 - 3D PULSE</button><br>
+                    <button class="button" id="mode-2d" onclick="setMode(0b10)">0b10 - 2D FOLD</button><br>
+                    <button class="button" id="mode-binary" onclick="setMode(0b01)">0b01 - BINARY</button><br>
+                    <button class="button pulse" id="play-pause" onclick="togglePlay()">0b1 - PAUSE</button><br>
+                    <button class="button" onclick="resetSystem()">0b0 - RESET</button>
+                </div>
+                
+                <div class="binary-display" id="binary-output">
+                    Initializing Sacred Binary Cube...
+                    01001001 01001110 01001001 01010100 (INIT)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 01000010 01001001 01001110 01000001 01010010 01011001 (BINARY) Constants
+        const PHI = (1 + Math.sqrt(5)) / 2;
+        const SACRED_FREQ = 0b1000010000; // 528 Hz
+        const RGB_MAX = 0b11111111; // 255
+        const CUBE_CORNERS = 0b1000; // 8
+        
+        // 01010011 01010100 01000001 01010100 01000101 (STATE) Machine
+        class BinaryState {
+            constructor() {
+                this.mode = 0b11; // 3D mode
+                this.play = 0b1;  // Playing
+                this.time = 0b0;  // Time counter
+                this.parity = 0b0; // XOR parity
+            }
+            
+            toggleMode() {
+                this.mode = this.mode ^ 0b1;
+                return this.mode;
+            }
+            
+            togglePlay() {
+                this.play = this.play ^ 0b1;
+                return this.play;
+            }
+            
+            updateParity(value) {
+                for (let i = 0; i < 8; i++) {
+                    this.parity ^= (value >> i) & 0b1;
+                }
+                return this.parity;
+            }
+            
+            tick() {
+                if (this.play) {
+                    this.time = (this.time + 0b1) & 0b11111111; // 8-bit counter
+                }
+                return this.time;
+            }
+        }
+        
+        // Global state
+        const state = new BinaryState();
+        const canvas = document.getElementById('sacred-canvas');
+        const ctx = canvas.getContext('2d');
+        const matrixCanvas = document.getElementById('matrix-canvas');
+        const matrixCtx = matrixCanvas.getContext('2d');
+        
+        // Resize canvases
+        function resizeCanvases() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth - 4;
+            canvas.height = container.clientHeight - 4;
+            matrixCanvas.width = container.clientWidth - 4;
+            matrixCanvas.height = container.clientHeight - 4;
+        }
+        
+        // 01000011 01001111 01010010 01001110 01000101 01010010 01010011 (CORNERS)
+        function generateCorners() {
+            const corners = [];
+            for (let i = 0; i < CUBE_CORNERS; i++) {
+                const x = (i >> 0) & 0b1;
+                const y = (i >> 1) & 0b1;
+                const z = (i >> 2) & 0b1;
+                corners.push([x - 0.5, y - 0.5, z - 0.5]); // Center at origin
+            }
+            return corners;
+        }
+        
+        // 01010010 01000111 01000010 (RGB) Sacred Color
+        function sacredRGB(freqOffset, timeVal) {
+            const baseFreq = SACRED_FREQ + freqOffset;
+            const t = (timeVal * baseFreq) & 0b11111111;
+            
+            const r = Math.floor((Math.sin(t / 32) + 1) * RGB_MAX / 2);
+            const g = Math.floor((Math.sin(t * PHI / 32) + 1) * RGB_MAX / 2);
+            const b = Math.floor((Math.sin(t * 3 / 32) + 1) * RGB_MAX / 4);
+            
+            // Boost green for matrix aesthetic
+            const greenBoosted = Math.min(RGB_MAX, g + 64);
+            
+            return `rgb(${r & RGB_MAX}, ${greenBoosted & RGB_MAX}, ${b & RGB_MAX})`;
+        }
+        
+        // 01010010 01001111 01010100 (ROT) 3D Rotation
+        function rotate3D(point, timeVal) {
+            let [x, y, z] = point;
+            
+            const angleX = (timeVal * PHI) / 64;
+            const angleY = (timeVal * 2) / 64;
+            const angleZ = (timeVal * 3) / 64;
+            
+            // Rotation around X-axis
+            const cosX = Math.cos(angleX), sinX = Math.sin(angleX);
+            [y, z] = [y * cosX - z * sinX, y * sinX + z * cosX];
+            
+            // Rotation around Y-axis
+            const cosY = Math.cos(angleY), sinY = Math.sin(angleY);
+            [x, z] = [x * cosY + z * sinY, -x * sinY + z * cosY];
+            
+            // Rotation around Z-axis
+            const cosZ = Math.cos(angleZ), sinZ = Math.sin(angleZ);
+            [x, y] = [x * cosZ - y * sinZ, x * sinZ + y * cosZ];
+            
+            return [x, y, z];
+        }
+        
+        // 01010000 01010010 01001111 01001010 (PROJ) Stereographic
+        function stereographicProject(point3d) {
+            let [x, y, z] = point3d;
+            
+            if (z >= 1) z = 1 - 0.000001;
+            
+            const denom = 1 - z;
+            const projX = x / (denom || 0.000001);
+            const projY = y / (denom || 0.000001);
+            
+            return [projX, projY];
+        }
+        
+        // 01000100 01010010 01000001 01010111 (DRAW) Renderer
+        function draw3D() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const corners = generateCorners();
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const scale = Math.min(canvas.width, canvas.height) / 4;
+            
+            // Draw connections between corners
+            ctx.strokeStyle = '#00ff00';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            
+            for (let i = 0; i < corners.length; i++) {
+                const rotated = rotate3D(corners[i], state.time);
+                const x = centerX + rotated[0] * scale;
+                const y = centerY + rotated[1] * scale;
+                
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+            
+            // Draw corners as pulsing circles
+            for (let i = 0; i < corners.length; i++) {
+                const rotated = rotate3D(corners[i], state.time);
+                const x = centerX + rotated[0] * scale;
+                const y = centerY + rotated[1] * scale;
+                const radius = 5 + Math.sin(state.time / 8 + i) * 3;
+                
+                ctx.fillStyle = sacredRGB(i * 8, state.time);
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Binary label
+                ctx.fillStyle = '#00ff00';
+                ctx.font = '10px Courier New';
+                ctx.fillText(i.toString(2).padStart(3, '0'), x + 10, y - 10);
+            }
+        }
+        
+        function draw2D() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const corners = generateCorners();
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const scale = Math.min(canvas.width, canvas.height) / 8;
+            
+            // Draw stereographic projection
+            for (let i = 0; i < corners.length; i++) {
+                const rotated = rotate3D(corners[i], state.time);
+                const projected = stereographicProject(rotated);
+                const x = centerX + projected[0] * scale;
+                const y = centerY + projected[1] * scale;
+                
+                // Check bounds
+                if (x >= 0 && x < canvas.width && y >= 0 && y < canvas.height) {
+                    const radius = 8 + Math.sin(state.time / 4 + i) * 4;
+                    
+                    ctx.fillStyle = sacredRGB(i * 8, state.time);
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Binary label
+                    ctx.fillStyle = '#00ff00';
+                    ctx.font = '12px Courier New';
+                    ctx.fillText(i.toString(2).padStart(3, '0'), x + 15, y - 15);
+                }
+            }
+        }
+        
+        function drawBinary() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff00';
+            ctx.font = '20px Courier New';
+            
+            // Draw binary patterns
+            for (let i = 0; i < 8; i++) {
+                const pattern = (state.time * (i + 1)) & 0b11111111;
+                const binaryStr = pattern.toString(2).padStart(8, '0');
+                const y = 50 + i * 40;
+                
+                ctx.fillText(`${i.toString(2).padStart(3, '0')}: ${binaryStr}`, 20, y);
+            }
+            
+            // Sacred frequency display
+            const sacred = (state.time * SACRED_FREQ) & 0b11111111;
+            ctx.fillText(`SACRED: ${sacred.toString(2).padStart(8, '0')}`, 20, 400);
+        }
+        
+        function drawMatrixRain() {
+            matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            
+            matrixCtx.fillStyle = '#00ff00';
+            matrixCtx.font = '12px Courier New';
+            
+            // Random binary rain
+            for (let i = 0; i < 20; i++) {
+                const x = Math.random() * matrixCanvas.width;
+                const y = (state.time * 2 + i * 50) % matrixCanvas.height;
+                const bit = Math.random() > 0.5 ? '1' : '0';
+                matrixCtx.fillText(bit, x, y);
+            }
+        }
+        
+        function render() {
+            // Update status display
+            document.getElementById('mode-display').textContent = `0b${state.mode.toString(2).padStart(2, '0')}`;
+            document.getElementById('play-display').textContent = `0b${state.play}`;
+            document.getElementById('time-display').textContent = `0b${state.time.toString(2).padStart(8, '0')}`;
+            document.getElementById('parity-display').textContent = `0b${state.parity.toString(2).padStart(8, '0')}`;
+            
+            // Render based on mode
+            if (state.mode === 0b11) {
+                draw3D();
+            } else if (state.mode === 0b10) {
+                draw2D();
+            } else {
+                drawBinary();
+            }
+            
+            drawMatrixRain();
+            
+            // Update parity
+            state.updateParity(state.time);
+            
+            // Update binary output
+            updateBinaryOutput();
+        }
+        
+        function updateBinaryOutput() {
+            const output = document.getElementById('binary-output');
+            const corners = generateCorners();
+            let text = `MODE: 0b${state.mode.toString(2).padStart(2, '0')} | TIME: 0b${state.time.toString(2).padStart(8, '0')}\n`;
+            text += `PARITY: 0b${state.parity.toString(2).padStart(8, '0')}\n\n`;
+            
+            for (let i = 0; i < corners.length; i++) {
+                const rotated = rotate3D(corners[i], state.time);
+                const binX = Math.floor(Math.abs(rotated[0]) * 8).toString(2).padStart(8, '0');
+                const binY = Math.floor(Math.abs(rotated[1]) * 8).toString(2).padStart(8, '0');
+                const binZ = Math.floor(Math.abs(rotated[2]) * 8).toString(2).padStart(8, '0');
+                text += `${i.toString(2).padStart(3, '0')}: [${binX}, ${binY}, ${binZ}]\n`;
+            }
+            
+            output.textContent = text;
+        }
+        
+        // Control functions
+        function setMode(newMode) {
+            state.mode = newMode;
+            
+            // Update button states
+            document.querySelectorAll('.button').forEach(btn => btn.classList.remove('active'));
+            if (newMode === 0b11) document.getElementById('mode-3d').classList.add('active');
+            else if (newMode === 0b10) document.getElementById('mode-2d').classList.add('active');
+            else document.getElementById('mode-binary').classList.add('active');
+        }
+        
+        function togglePlay() {
+            state.togglePlay();
+            const btn = document.getElementById('play-pause');
+            btn.textContent = state.play ? '0b1 - PAUSE' : '0b0 - PLAY';
+        }
+        
+        function resetSystem() {
+            state.time = 0;
+            state.parity = 0;
+        }
+        
+        // Animation loop
+        function animate() {
+            state.tick();
+            render();
+            requestAnimationFrame(animate);
+        }
+        
+        // Initialize
+        window.addEventListener('resize', resizeCanvases);
+        resizeCanvases();
+        animate();
+    </script>
+</body>
+</html>
+
