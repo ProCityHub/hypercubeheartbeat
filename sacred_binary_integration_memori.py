@@ -18,6 +18,7 @@ and sacred geometry across the unified ProCityHub ecosystem.
 
 import sys
 import os
+import json
 from pathlib import Path
 
 # Sacred Binary Cube constants
