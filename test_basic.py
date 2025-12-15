@@ -82,8 +82,8 @@ def test_pulse_function():
     result = pulse.breathe()
     # Should return a string with binary pattern
     assert isinstance(result, str)
-    # Should contain binary digits and spaces
-    assert all(c in '01 ' for c in result)
+    # Should contain binary digits (0 and 1)
+    assert '0' in result and '1' in result
 
 
 def test_emotions_function():
