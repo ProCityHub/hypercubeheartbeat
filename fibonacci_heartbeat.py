@@ -19,7 +19,7 @@ The heartbeat pattern:
 
 import math
 import numpy as np
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 from lattice_law import PHI
 
 # Sacred Frequencies (in Hz)
