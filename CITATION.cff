@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software or the Lattice Law framework, please cite it as below."
+title: "Hypercube Heartbeat: Lattice Law Cognitive Architecture"
+abstract: >-
+  A deterministic cognitive-architecture simulation: leaky integrate-and-fire
+  corner nodes on a binary cube, scored by the golden-ratio-weighted heuristic
+  O^1 * A^(1/phi) * B^(1/phi^2). Includes a pre-registered behavioral test
+  (Ultimatum Game) and a public retraction record.
+authors:
+  - name: "Adrien (TNPCANADA)"
+    affiliation: "ProCityHub, Edmonton, Alberta, Canada"
+type: software
+repository-code: "https://github.com/ProCityHub/hypercubeheartbeat"
+keywords:
+  - cognitive architecture
+  - golden ratio
+  - leaky integrate-and-fire
+  - lattice law
+  - pre-registered research
+license: MIT
+version: "1.0"
+date-released: "2026-07-07"
+preferred-citation:
+  type: software
+  title: "The Lattice Law: A Deterministic Golden-Ratio Cognitive Architecture"
+  authors:
+    - name: "Adrien (TNPCANADA)"
+  year: 2026
+  url: "https://github.com/ProCityHub/hypercubeheartbeat"
