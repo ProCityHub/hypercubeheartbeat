@@ -94,3 +94,13 @@ def test_emotions_function():
     assert isinstance(result, str)
     # Should contain binary digits and spaces
     assert all(c in '01 ' for c in result)
+
+
+def test_lattice_bridge_determinism():
+    """Test that lattice bridge score is deterministic across instances."""
+    from lattice_bridge import LatticeBrain
+
+    first = LatticeBrain().perceive("determinism check")
+    second = LatticeBrain().perceive("determinism check")
+
+    assert first["score"] == second["score"]
