@@ -1,0 +1,26 @@
+{
+  "id": "LL-01-OSF-001",
+  "title": "Forward-only OAB prediction of feedback-locked neural response",
+  "status": "exploratory_pre_registered_in_package",
+  "dataset": "OSF Ultimatum-game archive",
+  "target": "M3 feedback FRN = N2 - P2",
+  "unit_of_split": "participant",
+  "observer_O": "pre-feedback offer-locked neural salience from M2 EEG only",
+  "actor_A": "decision decisiveness based on accept/reject and offer extremity",
+  "bridge_B": "pre-feedback temporal integration: similarity of current M2 neural vector to participant's previous M2 trial",
+  "lattice_score": "O * A * B",
+  "phi_score": "phi * O * A * B",
+  "primary_test": "grouped held-out R2 comparison against baseline predictors",
+  "controls": [
+    "additive O+A+B",
+    "shuffled B within participant",
+    "constant substitutions for phi",
+    "ordinary raw-feature ridge model"
+  ],
+  "failure_conditions": [
+    "OAB does not improve held-out performance over simpler baselines",
+    "shuffled bridge performs similarly",
+    "phi scaling is non-identifiable or equivalent to arbitrary constants"
+  ],
+  "honesty_note": "This mapping is a proposed operationalization, not a discovery that the EEG variables inherently are Observer, Actor, or Bridge."
+}

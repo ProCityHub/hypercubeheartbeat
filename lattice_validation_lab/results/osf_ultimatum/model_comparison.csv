@@ -1,0 +1,8 @@
+,features,n,participants,r2,mae
+intercept_context,"['offer', 'accept']",21866,58,0.00021216860586081854,5.902127250860537
+raw_offer_eeg,"['offer', 'accept', 'P2', 'N2', 'P3a', 'P3b_offer', 'Theta']",21866,58,0.0013286376106884656,5.900977564895016
+oab_only,['OAB'],21866,58,-0.0010373253692574913,5.907801998014983
+additive_oab,"['O', 'A', 'B']",21866,58,-0.0016015688484438684,5.9098891551386
+context_plus_oab,"['offer', 'accept', 'OAB']",21866,58,0.0001725694131381461,5.902280872128296
+context_plus_additive,"['offer', 'accept', 'O', 'A', 'B']",21866,58,-0.0002917547710359347,5.904110207426329
+context_plus_shuffled_bridge,"['offer', 'accept', 'OAB_shuffled_B']",21866,58,5.210640108088693e-05,5.90243216167304

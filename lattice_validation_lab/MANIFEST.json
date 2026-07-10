@@ -1,0 +1,31 @@
+{
+  "created": "2026-07-09",
+  "author": "Adrien D. Thomas",
+  "source_archive": "osfstorage-archive.zip",
+  "experiment_completed": true,
+  "files": [
+    "LICENSE",
+    "README.md",
+    "THEORY_REGISTRY.md",
+    "datasets/osf_ultimatum/osfstorage-archive.zip",
+    "datasets/osf_ultimatum/source/M1_single.csv",
+    "datasets/osf_ultimatum/source/M2_export.csv",
+    "datasets/osf_ultimatum/source/M2_single.csv",
+    "datasets/osf_ultimatum/source/M3_single.csv",
+    "datasets/osf_ultimatum/source/Pre_Registration.docx",
+    "datasets/osf_ultimatum/source/Script.R",
+    "datasets/osf_ultimatum/source/Skript_Matlab.m",
+    "datasets/osf_ultimatum/source/Supplemental_Online_Material.pdf",
+    "datasets/osf_ultimatum/source/Task2_Export.csv",
+    "experiments/osf_ultimatum/run_experiment.py",
+    "hypotheses/LL-01-OSF-001.json",
+    "requirements.txt",
+    "results/osf_ultimatum/REPORT.md",
+    "results/osf_ultimatum/derived_trial_features.csv",
+    "results/osf_ultimatum/model_comparison.csv",
+    "results/osf_ultimatum/result.json",
+    "results/test_output.txt",
+    "tests/__pycache__/test_validation_lab.cpython-313.pyc",
+    "tests/test_validation_lab.py"
+  ]
+}

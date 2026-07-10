@@ -1,0 +1,116 @@
+{
+  "experiment": "LL-01-OSF-001",
+  "descriptives": {
+    "M1_rows": 6877,
+    "M2_rows": 22034,
+    "M3_rows": 22086,
+    "aligned_rows": 21866,
+    "participants_aligned": 58,
+    "M1_correct_rate": 0.5349716446124764,
+    "M3_accept_rate": 0.5684596577017115,
+    "M3_mean_feedback_FRN": -2.5912243729059132
+  },
+  "models": {
+    "intercept_context": {
+      "features": [
+        "offer",
+        "accept"
+      ],
+      "n": 21866,
+      "participants": 58,
+      "r2": 0.00021216860586081854,
+      "mae": 5.902127250860537
+    },
+    "raw_offer_eeg": {
+      "features": [
+        "offer",
+        "accept",
+        "P2",
+        "N2",
+        "P3a",
+        "P3b_offer",
+        "Theta"
+      ],
+      "n": 21866,
+      "participants": 58,
+      "r2": 0.0013286376106884656,
+      "mae": 5.900977564895016
+    },
+    "oab_only": {
+      "features": [
+        "OAB"
+      ],
+      "n": 21866,
+      "participants": 58,
+      "r2": -0.0010373253692574913,
+      "mae": 5.907801998014983
+    },
+    "additive_oab": {
+      "features": [
+        "O",
+        "A",
+        "B"
+      ],
+      "n": 21866,
+      "participants": 58,
+      "r2": -0.0016015688484438684,
+      "mae": 5.9098891551386
+    },
+    "context_plus_oab": {
+      "features": [
+        "offer",
+        "accept",
+        "OAB"
+      ],
+      "n": 21866,
+      "participants": 58,
+      "r2": 0.0001725694131381461,
+      "mae": 5.902280872128296
+    },
+    "context_plus_additive": {
+      "features": [
+        "offer",
+        "accept",
+        "O",
+        "A",
+        "B"
+      ],
+      "n": 21866,
+      "participants": 58,
+      "r2": -0.0002917547710359347,
+      "mae": 5.904110207426329
+    },
+    "context_plus_shuffled_bridge": {
+      "features": [
+        "offer",
+        "accept",
+        "OAB_shuffled_B"
+      ],
+      "n": 21866,
+      "participants": 58,
+      "r2": 5.210640108088693e-05,
+      "mae": 5.90243216167304
+    }
+  },
+  "phi_identifiability": {
+    "verdict": "INVALID_TEST",
+    "reason": "Multiplying one feature by a positive constant does not change its rank and is absorbed by a fitted linear coefficient or standardization.",
+    "constant_correlations_with_unscaled_OAB": {
+      "1.0": 1.0,
+      "1.5": 1.0,
+      "1.5707963267948966": 0.9999999999999999,
+      "1.618033988749895": 0.9999999999999998,
+      "2.0": 1.0
+    },
+    "required_future_test": "Phi must alter model structure or create a fixed, preregistered nonlinear prediction that competing constants do not reproduce."
+  },
+  "primary_verdict": "NOT_SUPPORTED",
+  "lattice_r2_gain_over_best_baseline": -0.0011560681975503195,
+  "bridge_shuffle_r2_gap": 0.00012046301205725918,
+  "limitations": [
+    "O, A, and B are exploratory operational definitions.",
+    "This analysis does not reproduce mixed-effects inferential statistics from the original R script.",
+    "Negative held-out R2 can occur when trial-level EEG is difficult to predict across unseen participants.",
+    "No consciousness claim follows from any result."
+  ]
+}
