@@ -1,0 +1,147 @@
+{
+  "criteria": {
+    "checked_reports": 5,
+    "failures": [],
+    "supported": true
+  },
+  "fixture_hash": "cc671ced93bcf74f0627995af50e301fceeff810f40f2de96324ecf8f8a0a547",
+  "locked": true,
+  "pilot_name": "Autonomy Directive Task 2 Frozen Pilot",
+  "reports": [
+    {
+      "input_id": "stable_settle_001",
+      "report": {
+        "action": "settle",
+        "actor": 0.78,
+        "bridge": 0.74,
+        "coherence_score": 0.81,
+        "cube_corner": "111",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 12,
+          "information_coupling": 0.76,
+          "integration_pressure": 0.79,
+          "timing_coherence": 0.72
+        },
+        "habit_signatures": {
+          "stable_111": 5
+        },
+        "heartbeat_phase": "act",
+        "limit_origin": "uncertain",
+        "limiting_constraint": "bridge",
+        "observer": 0.82,
+        "warnings": [
+          "mixed evidence: Bridge limit requires more history"
+        ]
+      },
+      "report_hash": "1f853ff62f15ed4dbfab6927f678777ea088469762753d3918e5afa046fc65e1"
+    },
+    {
+      "input_id": "formula_ceiling_001",
+      "report": {
+        "action": "bounce",
+        "actor": 0.84,
+        "bridge": 0.22,
+        "coherence_score": 0.43,
+        "cube_corner": "110",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 10,
+          "information_coupling": 0.82,
+          "integration_pressure": 0.77,
+          "timing_coherence": 0.14
+        },
+        "habit_signatures": {
+          "sparse_but_coupled": 5
+        },
+        "heartbeat_phase": "bridge_pause",
+        "limit_origin": "formula_made_possible",
+        "limiting_constraint": "bridge",
+        "observer": 0.91,
+        "warnings": [
+          "sparse timing detected, but coupling/integration remain strong; do not treat this as automatic Bridge failure"
+        ]
+      },
+      "report_hash": "f31af987310c340cbe1e5de8c9457e21e063e3570cdb9c68d54cfb97a18b20b7"
+    },
+    {
+      "input_id": "substrate_bridge_failure_001",
+      "report": {
+        "action": "bounce",
+        "actor": 0.81,
+        "bridge": 0.18,
+        "coherence_score": 0.28,
+        "cube_corner": "110",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 9,
+          "information_coupling": 0.19,
+          "integration_pressure": 0.24,
+          "timing_coherence": 0.21
+        },
+        "habit_signatures": {},
+        "heartbeat_phase": "bridge_pause",
+        "limit_origin": "substrate_made_possible",
+        "limiting_constraint": "bridge",
+        "observer": 0.88,
+        "warnings": []
+      },
+      "report_hash": "e5cbd7704408b9b50b31fc85d374da3d78ddb5b24f957d24c602453e0a05e915"
+    },
+    {
+      "input_id": "insufficient_history_001",
+      "report": {
+        "action": "bounce",
+        "actor": 0.75,
+        "bridge": 0.26,
+        "coherence_score": 0.36,
+        "cube_corner": "110",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 0,
+          "information_coupling": null,
+          "integration_pressure": null,
+          "timing_coherence": null
+        },
+        "habit_signatures": {},
+        "heartbeat_phase": "observe",
+        "limit_origin": "insufficient_evidence",
+        "limiting_constraint": "bridge",
+        "observer": 0.79,
+        "warnings": [
+          "insufficient evidence: no state history recorded yet",
+          "insufficient evidence: missing v5 bridge diagnostics"
+        ]
+      },
+      "report_hash": "549832cb162127f5d1053822053a994489dd0edf1f273d14d66c3911d0046072"
+    },
+    {
+      "input_id": "observer_limited_001",
+      "report": {
+        "action": "settle",
+        "actor": 0.83,
+        "bridge": 0.77,
+        "coherence_score": 0.59,
+        "cube_corner": "011",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 7,
+          "information_coupling": 0.68,
+          "integration_pressure": 0.71,
+          "timing_coherence": 0.62
+        },
+        "habit_signatures": {
+          "observer_low": 5
+        },
+        "heartbeat_phase": "observe",
+        "limit_origin": "not_bridge_limited",
+        "limiting_constraint": "observer",
+        "observer": 0.21,
+        "warnings": []
+      },
+      "report_hash": "8a6c9e264f5daa26321eab6d2f07f283dbbf398ae6dd4867845dd59774d38f34"
+    }
+  ],
+  "summary": "SUPPORTED",
+  "version": "1.0"
+}

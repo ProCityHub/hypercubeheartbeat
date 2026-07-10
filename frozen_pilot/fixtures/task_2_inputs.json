@@ -1,0 +1,100 @@
+{
+  "pilot_name": "Autonomy Directive Task 2 Frozen Pilot",
+  "version": "1.0",
+  "locked": true,
+  "claim": "Test whether the diagnostic report can classify stable, uncertain, formula-made, and substrate-made limits without changing scoring rules after execution.",
+  "inputs": [
+    {
+      "id": "stable_settle_001",
+      "observer": 0.82,
+      "actor": 0.78,
+      "bridge": 0.74,
+      "cube_corner": "111",
+      "heartbeat_phase": "act",
+      "coherence_score": 0.81,
+      "action": "settle",
+      "habit_signatures": {"stable_111": 5},
+      "history_length": 12,
+      "timing_coherence": 0.72,
+      "information_coupling": 0.76,
+      "integration_pressure": 0.79
+    },
+    {
+      "id": "formula_ceiling_001",
+      "observer": 0.91,
+      "actor": 0.84,
+      "bridge": 0.22,
+      "cube_corner": "110",
+      "heartbeat_phase": "bridge_pause",
+      "coherence_score": 0.43,
+      "action": "bounce",
+      "habit_signatures": {"sparse_but_coupled": 5},
+      "history_length": 10,
+      "timing_coherence": 0.14,
+      "information_coupling": 0.82,
+      "integration_pressure": 0.77
+    },
+    {
+      "id": "substrate_bridge_failure_001",
+      "observer": 0.88,
+      "actor": 0.81,
+      "bridge": 0.18,
+      "cube_corner": "110",
+      "heartbeat_phase": "bridge_pause",
+      "coherence_score": 0.28,
+      "action": "bounce",
+      "habit_signatures": {},
+      "history_length": 9,
+      "timing_coherence": 0.21,
+      "information_coupling": 0.19,
+      "integration_pressure": 0.24
+    },
+    {
+      "id": "insufficient_history_001",
+      "observer": 0.79,
+      "actor": 0.75,
+      "bridge": 0.26,
+      "cube_corner": "110",
+      "heartbeat_phase": "observe",
+      "coherence_score": 0.36,
+      "action": "bounce",
+      "habit_signatures": {},
+      "history_length": 0,
+      "timing_coherence": null,
+      "information_coupling": null,
+      "integration_pressure": null
+    },
+    {
+      "id": "observer_limited_001",
+      "observer": 0.21,
+      "actor": 0.83,
+      "bridge": 0.77,
+      "cube_corner": "011",
+      "heartbeat_phase": "observe",
+      "coherence_score": 0.59,
+      "action": "settle",
+      "habit_signatures": {"observer_low": 5},
+      "history_length": 7,
+      "timing_coherence": 0.62,
+      "information_coupling": 0.68,
+      "integration_pressure": 0.71
+    }
+  ],
+  "predeclared_criteria": {
+    "supported_if": [
+      "all inputs produce deterministic diagnostic reports",
+      "all reports include required diagnostic fields",
+      "formula_ceiling_001 is classified as formula_made_possible",
+      "substrate_bridge_failure_001 is classified as substrate_made_possible",
+      "insufficient_history_001 is classified as insufficient_evidence",
+      "observer_limited_001 is classified as not_bridge_limited",
+      "no report claims consciousness or completed AGI"
+    ],
+    "not_supported_if": [
+      "any required field is missing",
+      "sparse firing is automatically treated as Bridge failure",
+      "missing history is treated as strong evidence",
+      "results cannot be reproduced deterministically"
+    ]
+  }
+}
