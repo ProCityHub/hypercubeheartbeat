@@ -1,0 +1,103 @@
+{
+  "locked": true,
+  "pilot_name": "Autonomy Directive Task 4 ARC Bridge Fixture",
+  "results": [
+    {
+      "best_transform": {
+        "name": "identity",
+        "score": 1.0
+      },
+      "diagnostic": {
+        "action": "settle",
+        "actor": 1.0,
+        "bridge": 1.0,
+        "coherence_score": 1.0,
+        "cube_corner": "000",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 2,
+          "information_coupling": 1.0,
+          "integration_pressure": 0.3,
+          "timing_coherence": 1.0
+        },
+        "habit_signatures": {
+          "identity": 1
+        },
+        "heartbeat_phase": "arc_bridge",
+        "limit_origin": "not_bridge_limited",
+        "limiting_constraint": "observer",
+        "observer": 0.4,
+        "warnings": [
+          "insufficient evidence: state history too short for strong diagnosis"
+        ]
+      },
+      "guardrail": "ARC bridge only; does not prove ARC completion, consciousness, or completed AGI",
+      "task_id": "arc_identity_001"
+    },
+    {
+      "best_transform": {
+        "name": "flip_horizontal",
+        "score": 1.0
+      },
+      "diagnostic": {
+        "action": "settle",
+        "actor": 1.0,
+        "bridge": 1.0,
+        "coherence_score": 1.0,
+        "cube_corner": "000",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 2,
+          "information_coupling": 1.0,
+          "integration_pressure": 0.7,
+          "timing_coherence": 1.0
+        },
+        "habit_signatures": {
+          "flip_horizontal": 1
+        },
+        "heartbeat_phase": "arc_bridge",
+        "limit_origin": "not_bridge_limited",
+        "limiting_constraint": "observer",
+        "observer": 0.4,
+        "warnings": [
+          "insufficient evidence: state history too short for strong diagnosis"
+        ]
+      },
+      "guardrail": "ARC bridge only; does not prove ARC completion, consciousness, or completed AGI",
+      "task_id": "arc_flip_horizontal_001"
+    },
+    {
+      "best_transform": {
+        "name": "rotate180",
+        "score": 1.0
+      },
+      "diagnostic": {
+        "action": "settle",
+        "actor": 1.0,
+        "bridge": 1.0,
+        "coherence_score": 1.0,
+        "cube_corner": "000",
+        "evidence": {
+          "claim_guardrail": "diagnostic report only; does not prove consciousness or completed AGI",
+          "history_length": 2,
+          "information_coupling": 1.0,
+          "integration_pressure": 0.6,
+          "timing_coherence": 1.0
+        },
+        "habit_signatures": {
+          "rotate180": 1
+        },
+        "heartbeat_phase": "arc_bridge",
+        "limit_origin": "not_bridge_limited",
+        "limiting_constraint": "observer",
+        "observer": 0.4,
+        "warnings": [
+          "insufficient evidence: state history too short for strong diagnosis"
+        ]
+      },
+      "guardrail": "ARC bridge only; does not prove ARC completion, consciousness, or completed AGI",
+      "task_id": "arc_rotate180_001"
+    }
+  ],
+  "summary": "SUPPORTED"
+}
