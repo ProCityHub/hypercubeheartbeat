@@ -1,0 +1,124 @@
+{
+  "claims": [
+    {
+      "claim_id": "kubota_pilot_phi_exponent_advantage",
+      "plain_language_claim": "The phi-exponent scoring rule beats the flat-exponent baseline on the Kubota 20-row pilot.",
+      "scope": "Kubota 20-row pilot only",
+      "status": "negative_result",
+      "evidence_file": [
+        "PREREGISTRATION.md",
+        "data/KUBOTA_PREREGISTRATION_RUN.md"
+      ],
+      "evidence_commit": "1e37e427d925761d7324aa498c2153c452873999",
+      "allowed_public_language": [
+        "The Kubota 20-row pilot did not meet the preregistered margin.",
+        "The specific phi-exponent pilot did not beat the flat baseline by the declared margin.",
+        "This result applies to the declared Kubota pilot only."
+      ],
+      "forbidden_public_language": [
+        "Kubota supports the phi-exponent rule.",
+        "The Kubota pilot proves the Lattice Law.",
+        "The Kubota pilot proves consciousness.",
+        "The Kubota pilot proves AGI."
+      ],
+      "next_required_step": "Any future Kubota holdout or full-dataset test requires a new preregistration with power justification before scoring."
+    },
+    {
+      "claim_id": "heartbeat_guarded_workflow",
+      "plain_language_claim": "The repository contains a guarded empirical workflow for declarations, tests, outputs, and claim discipline.",
+      "scope": "Repository process and workflow only",
+      "status": "documented_workflow",
+      "evidence_file": [
+        ".github/scripts/guard_check.py",
+        "PREREGISTRATION.md",
+        "docs/HEARTBEAT_SELF_EVOLUTION_INTERVIEW.md",
+        "ai_infrastructure/README.md"
+      ],
+      "evidence_commit": "cdad6798c471a77f61b82b625d34784e11744117",
+      "allowed_public_language": [
+        "The repo contains a guarded empirical workflow.",
+        "The system uses declarations, guards, outcome logs, and infrastructure boundaries.",
+        "The workflow supports disciplined research practice."
+      ],
+      "forbidden_public_language": [
+        "The workflow proves AGI.",
+        "The workflow proves consciousness.",
+        "The workflow proves the Lattice Law.",
+        "The workflow is fully autonomous."
+      ],
+      "next_required_step": "Extend guard checks to validate new documents against this claims ledger."
+    },
+    {
+      "claim_id": "ai_infrastructure_skeleton",
+      "plain_language_claim": "The repository has a safe AI infrastructure folder structure for agent-assisted workflows.",
+      "scope": "File, prompt, manifest, report, and decision organization",
+      "status": "infrastructure_present",
+      "evidence_file": [
+        "ai_infrastructure/README.md",
+        "ai_infrastructure/inbox/README.md",
+        "ai_infrastructure/manifests/README.md",
+        "ai_infrastructure/prompts/README.md",
+        "ai_infrastructure/reports/README.md",
+        "ai_infrastructure/decisions/README.md"
+      ],
+      "evidence_commit": "cdad6798c471a77f61b82b625d34784e11744117",
+      "allowed_public_language": [
+        "The repo has safe folders for agent-assisted workflows.",
+        "The infrastructure separates inbox files, manifests, prompts, reports, and human decisions.",
+        "The infrastructure supports safer future AI collaboration."
+      ],
+      "forbidden_public_language": [
+        "Agents are fully autonomous.",
+        "Agents may merge empirical pull requests.",
+        "Agents may run tests without human directives.",
+        "The infrastructure proves intelligence."
+      ],
+      "next_required_step": "Create the first manifest template and decision template before accepting new external files."
+    },
+    {
+      "claim_id": "ibm_quantum_validation_2025",
+      "plain_language_claim": "IBM Quantum runs validated the phi/lattice interpretation.",
+      "scope": "All six histogram interpretations and detection statistics from the early quantum work",
+      "status": "retracted",
+      "evidence_file": [
+        "RETRACTIONS.md"
+      ],
+      "evidence_commit": "",
+      "allowed_public_language": [
+        "Early quantum runs contained encoding errors and their interpretations were withdrawn.",
+        "Corrected re-runs are specified as LL-06 and unrun.",
+        "The quantum interpretation is retracted until a corrected preregistered run exists."
+      ],
+      "forbidden_public_language": [
+        "quantum validated",
+        "80% phi-detection",
+        "p<0.0001",
+        "IBM Quantum proved the Lattice Law",
+        "IBM Quantum validated consciousness"
+      ],
+      "next_required_step": "Run only the corrected LL-06 protocol after a fresh declaration and guard-approved setup."
+    },
+    {
+      "claim_id": "osf_ultimatum_lab_analysis",
+      "plain_language_claim": "The OSF Ultimatum lab analysis supported the lattice model.",
+      "scope": "EEG-derived OAB formulation on that dataset only",
+      "status": "negative_result",
+      "evidence_file": [
+        "lattice_validation_lab/results/osf_ultimatum/REPORT.md"
+      ],
+      "evidence_commit": "",
+      "allowed_public_language": [
+        "That formulation did not outperform baselines.",
+        "The result applies to the OSF Ultimatum lab analysis only.",
+        "The analysis is a negative result for that formulation."
+      ],
+      "forbidden_public_language": [
+        "The analysis supports the lattice model.",
+        "The OSF Ultimatum lab validated the Lattice Law.",
+        "The OSF analysis proves consciousness.",
+        "The OSF analysis proves AGI."
+      ],
+      "next_required_step": "Do not reuse this as support. Any future Ultimatum work requires a separate declaration, power justification, and data mapping."
+    }
+  ]
+}
