@@ -405,6 +405,8 @@ def build_proposals(summaries: Sequence[dict[str, object]]) -> list[dict[str, ob
 def render_report(repo: Path, summaries: Sequence[dict[str, object]]) -> str:
     organs = detected_organs(summaries)
     proposals = build_proposals(summaries)
+    ai_evidence_paths = matching_paths(summaries, ["ai_infrastructure"], limit=6)
+    app_evidence_paths = matching_paths(summaries, ["app_infrastructure"], limit=6)
 
     lines: list[str] = []
     lines.append("# Hypercube Self-Design Proposal Report")
@@ -428,6 +430,16 @@ def render_report(repo: Path, summaries: Sequence[dict[str, object]]) -> str:
     lines.append(f"- Repository: `{repo}`")
     lines.append(f"- Committed safe files inspected: {len(summaries)}")
     lines.append("- Inspection mode: committed files only via `git ls-files`")
+    lines.append("")
+    lines.append("## Evidence Families")
+    lines.append("")
+    lines.append("### ai_infrastructure")
+    lines.append("")
+    lines.append(bullet_paths(ai_evidence_paths))
+    lines.append("")
+    lines.append("### app_infrastructure")
+    lines.append("")
+    lines.append(bullet_paths(app_evidence_paths))
     lines.append("")
     lines.append("## Detected Infrastructure Organs")
     lines.append("")

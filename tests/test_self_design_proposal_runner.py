@@ -124,6 +124,19 @@ class SelfDesignProposalRunnerTests(unittest.TestCase):
             self.assertNotIn("Traceback", result.stderr)
             self.assertFalse(output.exists())
 
+    def test_runbook_contains_no_copy_block_contamination(self):
+        runbook = REPO_ROOT / "app_infrastructure" / "interfaces" / "SELF_DESIGN_PROPOSAL_RUNNER_RUNBOOK.md"
+        text = runbook.read_text()
+        forbidden = [
+            "COPY BLOCK",
+            "cat > ai_infrastructure/decisions",
+            "RUN_DATE=",
+            "<<EOF",
+            "```bash id=",
+        ]
+        for item in forbidden:
+            self.assertNotIn(item, text)
+
     def test_source_contains_no_network_imports(self):
         source = SCRIPT_PATH.read_text()
         forbidden = [
