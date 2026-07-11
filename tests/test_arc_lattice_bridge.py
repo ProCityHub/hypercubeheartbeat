@@ -19,9 +19,9 @@ class TestArcLatticeBridge(unittest.TestCase):
         b = run_arc_bridge(fixture)
         self.assertEqual(a, b)
 
-    def test_arc_bridge_supported(self):
+    def test_arc_bridge_passed(self):
         result = run_arc_bridge(self.fixture())
-        self.assertEqual(result["summary"], "SUPPORTED")
+        self.assertEqual(result["summary"], "PASS")
 
     def test_expected_transforms(self):
         result = run_arc_bridge(self.fixture())

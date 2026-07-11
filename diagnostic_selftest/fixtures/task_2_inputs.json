@@ -1,5 +1,5 @@
 {
-  "pilot_name": "Autonomy Directive Task 2 Frozen Pilot",
+  "pilot_name": "Autonomy Directive Task 2 Diagnostic Self-Test",
   "version": "1.0",
   "locked": true,
   "claim": "Test whether the diagnostic report can classify stable, uncertain, formula-made, and substrate-made limits without changing scoring rules after execution.",
@@ -81,7 +81,7 @@
     }
   ],
   "predeclared_criteria": {
-    "supported_if": [
+    "passed_if": [
       "all inputs produce deterministic diagnostic reports",
       "all reports include required diagnostic fields",
       "formula_ceiling_001 is classified as formula_made_possible",
@@ -90,7 +90,7 @@
       "observer_limited_001 is classified as not_bridge_limited",
       "no report claims consciousness or completed AGI"
     ],
-    "not_supported_if": [
+    "not_passed_if": [
       "any required field is missing",
       "sparse firing is automatically treated as Bridge failure",
       "missing history is treated as strong evidence",

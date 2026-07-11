@@ -2,7 +2,7 @@
 
 Pilot: Autonomy Directive Task 4 ARC Bridge Fixture
 Locked: True
-Summary: **SUPPORTED**
+Summary: **PASS**
 
 ## Results
 
