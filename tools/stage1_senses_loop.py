@@ -249,6 +249,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.init_db:
         init_db(db_path)
         print(f"DB_READY {db_path}")
+        return 0
 
     if args.self_test:
         return self_test(db_path)
