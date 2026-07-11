@@ -146,6 +146,53 @@ class CognitiveCycleRunnerTests(unittest.TestCase):
             self.assertTrue(power["approval_required"])
             self.assertTrue(power["ledger_required"])
 
+    def test_planbook_refresh_knows_viewer_and_memory_contract(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            organs = "\n".join(cycle["input_state"]["known_organs"])
+            proposals = "\n".join(candidate["proposal"] for candidate in cycle["candidate_thoughts"])
+
+            self.assertIn("Cognitive cycle viewer", organs)
+            self.assertIn("Cognitive cycle memory ledger contract", organs)
+            self.assertIn("Cognitive Cycle Memory Ledger Init CLI", proposals)
+            self.assertIn("Cognitive Cycle Memory Append CLI", proposals)
+            self.assertIn("Power Request Queue Contract", proposals)
+            self.assertNotIn("Build a Cognitive Cycle Viewer CLI", proposals)
+
+    def test_next_smallest_step_is_memory_init_after_planbook_refresh(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            self.assertEqual(cycle["selection"]["selected_candidate_id"], "C1")
+            self.assertIn("Memory Ledger Init CLI", cycle["next_smallest_step"]["step"])
+            self.assertEqual(cycle["next_smallest_step"]["stage"], "Stage 2 draft-only")
+            self.assertFalse(cycle["power_request"]["power_requested"])
+
     def test_non_git_repo_fails_safely(self):
         with tempfile.TemporaryDirectory() as td:
             result = run([
