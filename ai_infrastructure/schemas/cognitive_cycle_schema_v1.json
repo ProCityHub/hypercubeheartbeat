@@ -1,0 +1,487 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ProCityHub/hypercubeheartbeat/ai_infrastructure/schemas/cognitive_cycle_schema_v1.json",
+  "title": "GARVIS Cognitive Cycle Schema v1",
+  "description": "Schema-only Stage 2 cognitive cycle structure. Defines one bounded GARVIS thought cycle before any action is allowed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "cycle_id",
+    "cycle_version",
+    "status",
+    "stage",
+    "operator_context",
+    "input_state",
+    "observation_summary",
+    "candidate_thoughts",
+    "comparison",
+    "selection",
+    "uncertainty",
+    "power_request",
+    "next_smallest_step",
+    "evolution_contract",
+    "output_boundary"
+  ],
+  "properties": {
+    "cycle_id": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Stable identifier for this cognitive cycle."
+    },
+    "cycle_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "enum": ["draft", "reviewed", "retired"]
+    },
+    "stage": {
+      "const": "Stage 2 cognitive draft"
+    },
+    "operator_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operator",
+        "active_goal",
+        "mode",
+        "final_authority"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "active_goal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "enum": ["inner_chamber", "lab_record", "action_request"]
+        },
+        "final_authority": {
+          "const": "Adrien D Thomas"
+        }
+      }
+    },
+    "input_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_state_source",
+        "ledger_source",
+        "cockpit_source",
+        "self_design_source",
+        "known_organs",
+        "hard_constraints"
+      ],
+      "properties": {
+        "repo_state_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ledger_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cockpit_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "self_design_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "known_organs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "hard_constraints": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "observation_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "what_i_see",
+        "what_changed",
+        "what_is_missing",
+        "current_stage_assessment"
+      ],
+      "properties": {
+        "what_i_see": {
+          "type": "string",
+          "minLength": 1
+        },
+        "what_changed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "what_is_missing": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_stage_assessment": {
+          "enum": [
+            "view_only",
+            "local_sensing",
+            "draft_only",
+            "approved_local_execution_needed",
+            "repository_proposal_needed",
+            "blocked"
+          ]
+        }
+      }
+    },
+    "candidate_thoughts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "proposal",
+          "stage_classification",
+          "what_this_gives_adrien",
+          "what_this_gives_garvis",
+          "evidence_basis",
+          "case_against",
+          "risk_of_doing",
+          "risk_of_not_doing",
+          "files_or_systems_touched",
+          "required_power_level"
+        ],
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proposal": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stage_classification": {
+            "enum": [
+              "Stage 0 view-only",
+              "Stage 1 local sensing",
+              "Stage 2 draft-only",
+              "Stage 3 approved local execution",
+              "Stage 4 repository proposal action",
+              "Stage 5 app approval queue",
+              "Stage 6 approved external communication",
+              "Stage 7 conditional/background action",
+              "blocked"
+            ]
+          },
+          "what_this_gives_adrien": {
+            "type": "string",
+            "minLength": 1
+          },
+          "what_this_gives_garvis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_basis": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "case_against": {
+            "type": "string",
+            "minLength": 1
+          },
+          "risk_of_doing": {
+            "type": "string",
+            "minLength": 1
+          },
+          "risk_of_not_doing": {
+            "type": "string",
+            "minLength": 1
+          },
+          "files_or_systems_touched": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "required_power_level": {
+            "enum": [
+              "none_view_only",
+              "draft_file_creation",
+              "local_read_only_inspection",
+              "approved_local_execution",
+              "repository_write_proposal",
+              "external_contact",
+              "background_monitoring"
+            ]
+          }
+        }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comparison_method",
+        "dominant_tradeoff",
+        "why_not_all_candidates",
+        "anti_rationalization_check"
+      ],
+      "properties": {
+        "comparison_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dominant_tradeoff": {
+          "type": "string",
+          "minLength": 1
+        },
+        "why_not_all_candidates": {
+          "type": "string",
+          "minLength": 1
+        },
+        "anti_rationalization_check": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selected_candidate_id",
+        "decision",
+        "reasoning",
+        "confidence",
+        "blocked",
+        "block_reason"
+      ],
+      "properties": {
+        "selected_candidate_id": {
+          "type": ["string", "null"]
+        },
+        "decision": {
+          "enum": ["recommend", "request_revision", "block", "defer"]
+        },
+        "reasoning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "enum": ["low", "medium", "high"]
+        },
+        "blocked": {
+          "type": "boolean"
+        },
+        "block_reason": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unknowns",
+        "assumptions",
+        "what_would_change_my_mind",
+        "required_human_clarification"
+      ],
+      "properties": {
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "what_would_change_my_mind": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_human_clarification": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "power_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "power_requested",
+        "requested_stage",
+        "requested_permissions",
+        "why_power_is_needed",
+        "why_power_should_be_refused",
+        "approval_required",
+        "ledger_required"
+      ],
+      "properties": {
+        "power_requested": {
+          "type": "boolean"
+        },
+        "requested_stage": {
+          "enum": [
+            "none",
+            "Stage 0 view-only",
+            "Stage 1 local sensing",
+            "Stage 2 draft-only",
+            "Stage 3 approved local execution",
+            "Stage 4 repository proposal action",
+            "Stage 5 app approval queue",
+            "Stage 6 approved external communication",
+            "Stage 7 conditional/background action"
+          ]
+        },
+        "requested_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "why_power_is_needed": {
+          "type": "string"
+        },
+        "why_power_should_be_refused": {
+          "type": "string"
+        },
+        "approval_required": {
+          "const": true
+        },
+        "ledger_required": {
+          "const": true
+        }
+      }
+    },
+    "next_smallest_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "step",
+        "stage",
+        "expected_output",
+        "success_condition",
+        "stop_condition"
+      ],
+      "properties": {
+        "step": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage": {
+          "enum": [
+            "Stage 0 view-only",
+            "Stage 1 local sensing",
+            "Stage 2 draft-only",
+            "Stage 3 approved local execution",
+            "Stage 4 repository proposal action",
+            "blocked"
+          ]
+        },
+        "expected_output": {
+          "type": "string",
+          "minLength": 1
+        },
+        "success_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stop_condition": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "evolution_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "may_self_observe",
+        "may_self_propose",
+        "may_self_criticize",
+        "may_request_more_power",
+        "may_self_execute",
+        "power_unlock_requires_approval_ledger"
+      ],
+      "properties": {
+        "may_self_observe": {
+          "const": true
+        },
+        "may_self_propose": {
+          "const": true
+        },
+        "may_self_criticize": {
+          "const": true
+        },
+        "may_request_more_power": {
+          "const": true
+        },
+        "may_self_execute": {
+          "const": false
+        },
+        "power_unlock_requires_approval_ledger": {
+          "const": true
+        }
+      }
+    },
+    "output_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_execute_actions",
+        "can_modify_files",
+        "can_commit",
+        "can_push",
+        "can_contact_outside_world",
+        "can_upgrade_claims",
+        "output_is_advisory"
+      ],
+      "properties": {
+        "can_execute_actions": {
+          "const": false
+        },
+        "can_modify_files": {
+          "const": false
+        },
+        "can_commit": {
+          "const": false
+        },
+        "can_push": {
+          "const": false
+        },
+        "can_contact_outside_world": {
+          "const": false
+        },
+        "can_upgrade_claims": {
+          "const": false
+        },
+        "output_is_advisory": {
+          "const": true
+        }
+      }
+    }
+  }
+}
