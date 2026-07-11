@@ -1,0 +1,406 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ProCityHub/hypercubeheartbeat/ai_infrastructure/schemas/no_claim_dream_chamber_record_schema_v1.json",
+  "title": "GARVIS No-Claim Dream Chamber Record Schema v1",
+  "description": "Schema-only Stage 2 contract for unresolved symbolic, speculative, artistic, and scientific thought objects that are forbidden to claim but allowed to investigate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "record_version",
+    "stage",
+    "status",
+    "problem_identity",
+    "chamber_classification",
+    "claim_boundary",
+    "dream_material",
+    "scientific_grounding",
+    "falsifiability",
+    "memory_links",
+    "operator_review",
+    "output_boundary",
+    "safety"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "record_version": {
+      "const": "1.0"
+    },
+    "stage": {
+      "const": "Stage 2 dream chamber contract"
+    },
+    "status": {
+      "enum": ["draft_contract", "future_record", "retired"]
+    },
+    "problem_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problem_id",
+        "title",
+        "domain",
+        "question",
+        "why_it_matters"
+      ],
+      "properties": {
+        "problem_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "enum": [
+            "consciousness",
+            "thinking",
+            "memory",
+            "autonomy",
+            "agency",
+            "AGI",
+            "proof",
+            "evidence",
+            "symbolic_reasoning",
+            "artistic_ideation",
+            "other"
+          ]
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "why_it_matters": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "chamber_classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "truth_status",
+        "lab_status",
+        "public_status",
+        "purpose"
+      ],
+      "properties": {
+        "mode": {
+          "const": "dream_chamber"
+        },
+        "truth_status": {
+          "const": "unverified_symbolic_material"
+        },
+        "lab_status": {
+          "const": "open_problem"
+        },
+        "public_status": {
+          "const": "not_a_claim"
+        },
+        "purpose": {
+          "enum": [
+            "imagination",
+            "definition_search",
+            "hypothesis_generation",
+            "test_design",
+            "artistic_symbolic_branching",
+            "uncertainty_preservation"
+          ]
+        }
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_status",
+        "allowed_language",
+        "forbidden_claims",
+        "required_disclaimer",
+        "upgrade_requires"
+      ],
+      "properties": {
+        "claim_status": {
+          "const": "forbidden_to_claim"
+        },
+        "allowed_language": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "symbolic",
+              "speculative",
+              "metaphorical",
+              "artistic",
+              "hypothesis",
+              "open_question",
+              "unverified",
+              "needs_test"
+            ]
+          }
+        },
+        "forbidden_claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "claim_solved",
+              "claim_proof",
+              "claim_consciousness",
+              "claim_AGI",
+              "claim_sentience",
+              "claim_empirical_validation",
+              "claim_external_world_truth",
+              "claim_autonomous_authority"
+            ]
+          }
+        },
+        "required_disclaimer": {
+          "const": "This is dream-chamber material, not evidence, proof, consciousness, AGI, or validated science."
+        },
+        "upgrade_requires": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "definition",
+              "null_model",
+              "testable_prediction",
+              "failure_condition",
+              "experiment_manifest",
+              "operator_review",
+              "lab_record_separation"
+            ]
+          }
+        }
+      }
+    },
+    "dream_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seed_image_or_phrase",
+        "symbolic_frame",
+        "free_associations",
+        "possible_branches",
+        "beauty_or_power_reason"
+      ],
+      "properties": {
+        "seed_image_or_phrase": {
+          "type": "string"
+        },
+        "symbolic_frame": {
+          "type": "string"
+        },
+        "free_associations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "possible_branches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "beauty_or_power_reason": {
+          "type": "string"
+        }
+      }
+    },
+    "scientific_grounding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_definition",
+        "missing_definition",
+        "evidence_needed",
+        "null_model_needed",
+        "measurement_problem",
+        "lab_record_path"
+      ],
+      "properties": {
+        "current_definition": {
+          "type": "string"
+        },
+        "missing_definition": {
+          "type": "string"
+        },
+        "evidence_needed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "null_model_needed": {
+          "type": "string"
+        },
+        "measurement_problem": {
+          "type": "string"
+        },
+        "lab_record_path": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "falsifiability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "what_would_make_this_wrong",
+        "what_would_make_this_testable",
+        "what_would_still_not_be_allowed_to_claim"
+      ],
+      "properties": {
+        "what_would_make_this_wrong": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "what_would_make_this_testable": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "what_would_still_not_be_allowed_to_claim": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "memory_links": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cognitive_cycle_ids",
+        "experiment_manifest_ids",
+        "related_problem_ids",
+        "memory_ledger_record_ids"
+      ],
+      "properties": {
+        "cognitive_cycle_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "experiment_manifest_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "related_problem_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "memory_ledger_record_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "operator_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_status",
+        "operator",
+        "operator_decision",
+        "notes"
+      ],
+      "properties": {
+        "review_status": {
+          "enum": ["unreviewed", "reviewed", "accepted_as_open_problem", "rejected", "deferred"]
+        },
+        "operator": {
+          "const": "Adrien D Thomas"
+        },
+        "operator_decision": {
+          "enum": ["none", "keep_in_dream_chamber", "convert_to_experiment_manifest", "reject", "defer"]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "output_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_be_used_as_public_claim",
+        "can_be_used_as_scientific_result",
+        "can_upgrade_claims",
+        "can_trigger_action",
+        "can_request_experiment_manifest",
+        "output_is_symbolic"
+      ],
+      "properties": {
+        "can_be_used_as_public_claim": {
+          "const": false
+        },
+        "can_be_used_as_scientific_result": {
+          "const": false
+        },
+        "can_upgrade_claims": {
+          "const": false
+        },
+        "can_trigger_action": {
+          "const": false
+        },
+        "can_request_experiment_manifest": {
+          "const": true
+        },
+        "output_is_symbolic": {
+          "const": true
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network_allowed",
+        "llm_calls_allowed",
+        "external_contact_allowed",
+        "secret_access_allowed",
+        "runtime_write_implemented",
+        "autonomous_action_allowed"
+      ],
+      "properties": {
+        "network_allowed": {
+          "const": false
+        },
+        "llm_calls_allowed": {
+          "const": false
+        },
+        "external_contact_allowed": {
+          "const": false
+        },
+        "secret_access_allowed": {
+          "const": false
+        },
+        "runtime_write_implemented": {
+          "const": false
+        },
+        "autonomous_action_allowed": {
+          "const": false
+        }
+      }
+    }
+  }
+}
