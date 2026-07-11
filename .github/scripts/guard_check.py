@@ -122,6 +122,30 @@ SCALAR_PHI_PATTERNS = [
 EMPIRICAL_SUPPORT_WORDS = re.compile(r"\b(SUPPORTED|NOT_SUPPORTED)\b")
 
 
+def is_claim_language_guard_path(path: str) -> bool:
+    """Return True for claim-controlled documents.
+
+    Reserved empirical verdict words are guarded in claims-ledger files
+    and claim/protocol documents. Charters, maps, and exploratory notes
+    may discuss vocabulary without being treated as empirical outcomes.
+    """
+    normalized = path.replace("\\", "/")
+    name = Path(normalized).name.lower()
+
+    if normalized.startswith("claims/"):
+        return True
+
+    if normalized.startswith("docs/") and (
+        "claim" in name
+        or "positive_result_protocol" in name
+        or "outcome" in name
+        or "success" in name
+    ):
+        return True
+
+    return False
+
+
 def is_text_path(path: str) -> bool:
     suffix = Path(path).suffix.lower()
     return suffix in {
@@ -166,12 +190,12 @@ def main() -> None:
                         f"{path}: retracted scalar-phi formula pattern added: {line}"
                     )
 
-        if path not in {"PREREGISTRATION.md", "CONSCIOUSNESS_OPERATIONAL.md", ".github/scripts/guard_check.py"}:
+        if is_claim_language_guard_path(path):
             for line in added:
                 if EMPIRICAL_SUPPORT_WORDS.search(line):
                     failures.append(
-                        f"{path}: empirical support language added outside "
-                        f"PREREGISTRATION.md: {line}"
+                        f"{path}: reserved empirical verdict language added "
+                        f"inside a claim-controlled document: {line}"
                     )
 
     if failures:
