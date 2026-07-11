@@ -10,7 +10,7 @@ No `data/ug_probe.csv` file was created.
 
 No `preregistration_test.py` execution was performed.
 
-No SUPPORTED or NOT_SUPPORTED verdict was produced.
+No empirical outcome label was produced.
 
 ## Raw file inspected
 
