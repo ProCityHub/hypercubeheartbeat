@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "garvis_message_schema_v1",
+  "title": "GARVIS Message Schema v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "message_id",
+    "message_type",
+    "created_utc",
+    "created_by",
+    "summary",
+    "allowed_actions",
+    "forbidden_actions",
+    "human_approval_required",
+    "claim_boundary",
+    "evidence_boundary",
+    "stop_conditions"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "garvis_message_schema_v1"
+    },
+    "message_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "status",
+        "intake",
+        "manifest",
+        "proposal",
+        "decision_request",
+        "action_directive",
+        "report",
+        "refusal"
+      ]
+    },
+    "created_utc": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "destination_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "related_prs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "allowed_actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "forbidden_actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "human_approval_required": {
+      "type": "boolean"
+    },
+    "claim_boundary": {
+      "type": "string",
+      "enum": [
+        "no_claim_change",
+        "claims_ledger_reference_required",
+        "unapproved_claim_language_stop"
+      ]
+    },
+    "evidence_boundary": {
+      "type": "string",
+      "enum": [
+        "not_evidence",
+        "sandbox_only",
+        "exploratory_only",
+        "registered_analysis_required",
+        "manifest_only"
+      ]
+    },
+    "stop_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "notes": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}
