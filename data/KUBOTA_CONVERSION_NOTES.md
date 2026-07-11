@@ -126,3 +126,24 @@ This conversion does not prove consciousness.
 This conversion does not prove AGI.
 
 The only purpose of this file is to document the reproducible data conversion before the single preregistered run.
+
+## Phase 4 Step 2b-2A pilot lineage
+
+After conversion, the full Kubota output previously committed as `data/ug_probe.csv` was renamed to:
+
+- `data/kubota_full.csv`
+
+The rename preserves the full converted dataset before pilot selection.
+
+- Former full-output path: `data/ug_probe.csv`
+- Former full-output sha256: `96cfd31b7bff9ea765fc24825b59787d90fea999c28e6a9524614bd1f95ea92d`
+- Preserved full-output path: `data/kubota_full.csv`
+- Preserved full-output sha256: `96cfd31b7bff9ea765fc24825b59787d90fea999c28e6a9524614bd1f95ea92d`
+
+A new pilot probe was then created from the first 20 data rows of `data/kubota_full.csv` in committed order.
+
+- Pilot path: `data/ug_probe.csv`
+- Pilot sha256: `64b69f868ce74981805f92a8bdb8a3cffbeaeb04a895a2579f1d81d60f8a7e44`
+
+No scoring was performed during this lineage update.
+
