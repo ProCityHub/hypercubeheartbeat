@@ -10,3 +10,7 @@ results/arc_bridge/task_4_arc_bridge_results.json
 results/arc_bridge/TASK_4_ARC_BRIDGE_SUMMARY.md
 snapshots/2026-07-09-lattice-law-program/INDEX.md
 snapshots/2026-07-09-lattice-law-program/lattice_v1_complete.zip
+
+# Phase 0 Task 3 operational consciousness definitions.
+# Sections A, B, and D freeze after registration.
+CONSCIOUSNESS_OPERATIONAL.md
