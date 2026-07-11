@@ -1,0 +1,46 @@
+name: Heartbeat
+
+on:
+  schedule:
+    - cron: "17 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  heartbeat:
+    name: Daily heartbeat report PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run smoke tests
+        run: |
+          python -m unittest \
+            tests/test_lattice_diagnostic_report.py \
+            tests/test_diagnostic_selftest_runner.py \
+            tests/test_arc_lattice_bridge.py
+
+      - name: Write heartbeat report
+        run: |
+          python .github/scripts/write_heartbeat_report.py
+
+      - name: Open heartbeat report PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Add daily heartbeat report"
+          title: "Daily heartbeat report"
+          body: "Automated daily heartbeat report. Opens a PR only; does not push directly to main."
+          branch: automated/heartbeat-report
+          delete-branch: true

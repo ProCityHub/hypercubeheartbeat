@@ -1,0 +1,12 @@
+# Frozen evidence and locked self-test artifacts.
+# Do not change these except through an explicit audit PR.
+
+diagnostic_selftest/fixtures/task_2_inputs.json
+results/diagnostic_selftest/task_2_results.json
+results/diagnostic_selftest/TASK_2_SUMMARY.md
+
+arc_bridge/fixtures/task_4_arc_inputs.json
+results/arc_bridge/task_4_arc_bridge_results.json
+results/arc_bridge/TASK_4_ARC_BRIDGE_SUMMARY.md
+snapshots/2026-07-09-lattice-law-program/INDEX.md
+snapshots/2026-07-09-lattice-law-program/lattice_v1_complete.zip

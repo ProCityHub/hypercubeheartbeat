@@ -1,0 +1,46 @@
+name: Coherence Report
+
+on:
+  schedule:
+    - cron: "41 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  coherence-report:
+    name: Weekly coherence report PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run smoke tests
+        run: |
+          python -m unittest \
+            tests/test_lattice_diagnostic_report.py \
+            tests/test_diagnostic_selftest_runner.py \
+            tests/test_arc_lattice_bridge.py
+
+      - name: Write coherence report
+        run: |
+          python .github/scripts/write_coherence_report.py
+
+      - name: Open coherence report PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Add weekly coherence report"
+          title: "Weekly coherence report"
+          body: "Automated weekly coherence report. Opens a PR only; does not push directly to main."
+          branch: automated/coherence-report
+          delete-branch: true

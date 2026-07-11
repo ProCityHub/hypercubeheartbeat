@@ -1,0 +1,36 @@
+name: Guard
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    name: Smoke tests and repository guard
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run smoke tests
+        run: |
+          python -m unittest \
+            tests/test_lattice_diagnostic_report.py \
+            tests/test_diagnostic_selftest_runner.py \
+            tests/test_arc_lattice_bridge.py
+
+      - name: Run repository guard
+        run: |
+          python .github/scripts/guard_check.py
