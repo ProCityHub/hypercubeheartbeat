@@ -174,7 +174,7 @@ def arc_task_to_diagnostic(task: dict[str, Any]) -> dict[str, Any]:
 def run_arc_bridge(fixture: dict[str, Any]) -> dict[str, Any]:
     results = [arc_task_to_diagnostic(task) for task in fixture["tasks"]]
 
-    supported = all(
+    passed = all(
         "diagnostic" in row
         and "best_transform" in row
         and "does not prove" in row["guardrail"]
@@ -185,7 +185,7 @@ def run_arc_bridge(fixture: dict[str, Any]) -> dict[str, Any]:
         "pilot_name": fixture["pilot_name"],
         "locked": fixture["locked"],
         "results": results,
-        "summary": "SUPPORTED" if supported else "NOT_SUPPORTED",
+        "summary": "PASS" if passed else "NOT_PASS",
     }
 
 

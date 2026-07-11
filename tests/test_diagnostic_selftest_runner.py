@@ -1,6 +1,6 @@
 import unittest
 
-from frozen_pilot_runner import load_fixture, run_pilot, stable_hash
+from diagnostic_selftest_runner import load_fixture, run_pilot, stable_hash
 
 
 class TestFrozenPilotRunner(unittest.TestCase):
@@ -14,11 +14,11 @@ class TestFrozenPilotRunner(unittest.TestCase):
         b = run_pilot(fixture)
         self.assertEqual(stable_hash(a), stable_hash(b))
 
-    def test_pilot_supported(self):
+    def test_pilot_passed(self):
         fixture = load_fixture()
         result = run_pilot(fixture)
-        self.assertEqual(result["summary"], "SUPPORTED")
-        self.assertTrue(result["criteria"]["supported"])
+        self.assertEqual(result["summary"], "PASS")
+        self.assertTrue(result["criteria"]["passed"])
         self.assertEqual(result["criteria"]["failures"], [])
 
     def test_expected_limit_origins(self):

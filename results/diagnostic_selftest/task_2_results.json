@@ -2,11 +2,11 @@
   "criteria": {
     "checked_reports": 5,
     "failures": [],
-    "supported": true
+    "passed": true
   },
-  "fixture_hash": "cc671ced93bcf74f0627995af50e301fceeff810f40f2de96324ecf8f8a0a547",
+  "fixture_hash": "ceb1034e5be68114b2a54db11ff8624e6406082114f975e6f88fe96494e9ce06",
   "locked": true,
-  "pilot_name": "Autonomy Directive Task 2 Frozen Pilot",
+  "pilot_name": "Autonomy Directive Task 2 Diagnostic Self-Test",
   "reports": [
     {
       "input_id": "stable_settle_001",
@@ -142,6 +142,6 @@
       "report_hash": "8a6c9e264f5daa26321eab6d2f07f283dbbf398ae6dd4867845dd59774d38f34"
     }
   ],
-  "summary": "SUPPORTED",
+  "summary": "PASS",
   "version": "1.0"
 }

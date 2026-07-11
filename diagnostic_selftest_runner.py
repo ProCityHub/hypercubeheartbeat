@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Frozen Pilot Runner
+Diagnostic Self-Test Runner
 
 Autonomy Directive Task 2.
 
@@ -18,8 +18,8 @@ from typing import Any
 from lattice_diagnostic_report import REQUIRED_FIELDS, build_diagnostic_report
 
 
-FIXTURE_PATH = Path("frozen_pilot/fixtures/task_2_inputs.json")
-RESULTS_DIR = Path("results/frozen_pilot")
+FIXTURE_PATH = Path("diagnostic_selftest/fixtures/task_2_inputs.json")
+RESULTS_DIR = Path("results/diagnostic_selftest")
 RESULTS_JSON = RESULTS_DIR / "task_2_results.json"
 SUMMARY_MD = RESULTS_DIR / "TASK_2_SUMMARY.md"
 
@@ -70,7 +70,7 @@ def run_pilot(fixture: dict[str, Any]) -> dict[str, Any]:
         "fixture_hash": stable_hash(fixture),
         "reports": reports,
         "criteria": criteria,
-        "summary": "SUPPORTED" if criteria["supported"] else "NOT_SUPPORTED",
+        "summary": "PASS" if criteria["passed"] else "NOT_PASS",
     }
 
 
@@ -114,7 +114,7 @@ def evaluate_criteria(reports: list[dict[str, Any]]) -> dict[str, Any]:
         )
 
     return {
-        "supported": len(failures) == 0,
+        "passed": len(failures) == 0,
         "failures": failures,
         "checked_reports": len(reports),
     }
@@ -126,7 +126,7 @@ def write_results(result: dict[str, Any]) -> None:
     RESULTS_JSON.write_text(json.dumps(result, indent=2, sort_keys=True))
 
     lines = [
-        "# Autonomy Directive Task 2 — Frozen Pilot Summary",
+        "# Autonomy Directive Task 2 — Diagnostic Self-Test Summary",
         "",
         f"Pilot: {result['pilot_name']}",
         f"Version: {result['version']}",
@@ -136,7 +136,7 @@ def write_results(result: dict[str, Any]) -> None:
         "",
         "## Criteria",
         "",
-        f"Supported: `{result['criteria']['supported']}`",
+        f"Passed: `{result['criteria']['passed']}`",
         f"Checked reports: `{result['criteria']['checked_reports']}`",
         "",
         "## Failures",
@@ -181,7 +181,7 @@ def main() -> None:
     print(json.dumps(
         {
             "summary": result["summary"],
-            "supported": result["criteria"]["supported"],
+            "passed": result["criteria"]["passed"],
             "failures": result["criteria"]["failures"],
             "results_json": str(RESULTS_JSON),
             "summary_md": str(SUMMARY_MD),

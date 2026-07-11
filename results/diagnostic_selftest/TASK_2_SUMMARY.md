@@ -1,14 +1,14 @@
-# Autonomy Directive Task 2 — Frozen Pilot Summary
+# Autonomy Directive Task 2 — Diagnostic Self-Test Summary
 
-Pilot: Autonomy Directive Task 2 Frozen Pilot
+Pilot: Autonomy Directive Task 2 Diagnostic Self-Test
 Version: 1.0
 Locked fixture: True
-Fixture hash: `cc671ced93bcf74f0627995af50e301fceeff810f40f2de96324ecf8f8a0a547`
-Summary: **SUPPORTED**
+Fixture hash: `ceb1034e5be68114b2a54db11ff8624e6406082114f975e6f88fe96494e9ce06`
+Summary: **PASS**
 
 ## Criteria
 
-Supported: `True`
+Passed: `True`
 Checked reports: `5`
 
 ## Failures
