@@ -37,7 +37,7 @@ def run(cmd: list[str], *, check: bool = True) -> str:
     return result.stdout
 
 
-def diff_base_range() -> str:
+def diff_base_ref() -> str:
     base = f"origin/{BASE_REF}"
     run(["git", "fetch", "origin", BASE_REF, "--depth=100"], check=False)
 
@@ -48,15 +48,15 @@ def diff_base_range() -> str:
         stderr=subprocess.PIPE,
     )
 
-    if probe.returncode == 0:
-        return f"{base}...HEAD"
+    if probe.returncode == 0 and probe.stdout.strip():
+        return probe.stdout.strip()
 
-    print(f"WARN: no merge base for {base}...HEAD; using {base}..HEAD")
-    return f"{base}..HEAD"
+    print(f"WARN: no merge base for {base}; using {base} directly")
+    return base
 
 
 def changed_files() -> list[str]:
-    output = run(["git", "diff", "--name-only", diff_base_range()])
+    output = run(["git", "diff", "--name-only", diff_base_ref(), "HEAD"])
     return [line.strip() for line in output.splitlines() if line.strip()]
 
 
@@ -90,7 +90,7 @@ def read_base_frozen_files() -> set[str]:
 
 
 def added_lines_for(path: str) -> list[str]:
-    diff = run(["git", "diff", "-U0", diff_base_range(), "--", path])
+    diff = run(["git", "diff", "-U0", diff_base_ref(), "HEAD", "--", path])
     lines = []
     for line in diff.splitlines():
         if line.startswith("+++") or line.startswith("---"):
