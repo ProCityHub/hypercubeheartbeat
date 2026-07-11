@@ -70,4 +70,5 @@ falsifiable.
 
 | Date | Result | Commit |
 |---|---|---|
+| 2026-07-10 | NOT_SUPPORTED — OSF Ultimatum lab result. Different formulation from the pre-registered AUC pilot; the AUC pilot remains open and has not been run. | Recorded per Phase 0 Task 1. |
 | _pending_ | | |
