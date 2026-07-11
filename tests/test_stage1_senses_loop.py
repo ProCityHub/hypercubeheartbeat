@@ -62,6 +62,27 @@ class Stage1SensesLoopTests(unittest.TestCase):
                 with self.assertRaises(sqlite3.DatabaseError):
                     con.execute("DELETE FROM decision_ledger WHERE id=1")
 
+    def test_init_db_cli_exits_without_looping(self):
+        with tempfile.TemporaryDirectory() as td:
+            db = Path(td) / "ledger.sqlite3"
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    str(MODULE_PATH),
+                    "--init-db",
+                    "--db",
+                    str(db),
+                ],
+                text=True,
+                capture_output=True,
+                timeout=10,
+                check=False,
+            )
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            self.assertIn("DB_READY", proc.stdout)
+            self.assertNotIn("Stage 1 loop starting", proc.stdout)
+            self.assertTrue(db.exists())
+
     def test_self_test_cli(self):
         with tempfile.TemporaryDirectory() as td:
             db = Path(td) / "ledger.sqlite3"
