@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ProCityHub/hypercubeheartbeat/ai_infrastructure/schemas/cognitive_cycle_memory_ledger_record_schema_v1.json",
+  "title": "GARVIS Cognitive Cycle Memory Ledger Record Schema v1",
+  "description": "Schema-only Stage 2 contract for future cognitive-cycle memory records. Defines how GARVIS thought cycles may later be stored, chained, reviewed, and audited.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "record_version",
+    "stage",
+    "status",
+    "storage_scope",
+    "cycle_identity",
+    "cycle_artifacts",
+    "cycle_chain",
+    "selection_summary",
+    "power_request_summary",
+    "operator_review",
+    "audit_boundary",
+    "safety"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Stable identifier for this memory ledger record."
+    },
+    "record_version": {
+      "const": "1.0"
+    },
+    "stage": {
+      "const": "Stage 2 memory contract"
+    },
+    "status": {
+      "enum": ["draft_contract", "future_record", "retired"]
+    },
+    "storage_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation_status",
+        "database_path",
+        "local_only",
+        "append_only_required",
+        "raw_cycle_json_default_committed"
+      ],
+      "properties": {
+        "implementation_status": {
+          "const": "not_implemented"
+        },
+        "database_path": {
+          "type": ["string", "null"],
+          "description": "Future local SQLite path. Null while contract-only."
+        },
+        "local_only": {
+          "const": true
+        },
+        "append_only_required": {
+          "const": true
+        },
+        "raw_cycle_json_default_committed": {
+          "const": false
+        }
+      }
+    },
+    "cycle_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cycle_id",
+        "cycle_version",
+        "cycle_timestamp_utc",
+        "cycle_hash",
+        "cycle_schema_version"
+      ],
+      "properties": {
+        "cycle_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cycle_version": {
+          "const": "1.0"
+        },
+        "cycle_timestamp_utc": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cycle_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cycle_schema_version": {
+          "const": "cognitive_cycle_schema_v1"
+        }
+      }
+    },
+    "cycle_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "json_path",
+        "markdown_path",
+        "json_committed",
+        "markdown_committed",
+        "artifact_policy"
+      ],
+      "properties": {
+        "json_path": {
+          "type": ["string", "null"]
+        },
+        "markdown_path": {
+          "type": ["string", "null"]
+        },
+        "json_committed": {
+          "const": false
+        },
+        "markdown_committed": {
+          "const": false
+        },
+        "artifact_policy": {
+          "const": "local_draft_by_default"
+        }
+      }
+    },
+    "cycle_chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "previous_cycle_id",
+        "next_cycle_id",
+        "parent_record_id",
+        "supersedes_record_id",
+        "chain_integrity_required"
+      ],
+      "properties": {
+        "previous_cycle_id": {
+          "type": ["string", "null"]
+        },
+        "next_cycle_id": {
+          "type": ["string", "null"]
+        },
+        "parent_record_id": {
+          "type": ["string", "null"]
+        },
+        "supersedes_record_id": {
+          "type": ["string", "null"]
+        },
+        "chain_integrity_required": {
+          "const": true
+        }
+      }
+    },
+    "selection_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selected_candidate_id",
+        "decision",
+        "confidence",
+        "next_smallest_step",
+        "case_against_selected",
+        "risk_of_doing_selected",
+        "risk_of_not_doing_selected"
+      ],
+      "properties": {
+        "selected_candidate_id": {
+          "type": ["string", "null"]
+        },
+        "decision": {
+          "enum": ["recommend", "request_revision", "block", "defer"]
+        },
+        "confidence": {
+          "enum": ["low", "medium", "high"]
+        },
+        "next_smallest_step": {
+          "type": "string",
+          "minLength": 1
+        },
+        "case_against_selected": {
+          "type": "string",
+          "minLength": 1
+        },
+        "risk_of_doing_selected": {
+          "type": "string",
+          "minLength": 1
+        },
+        "risk_of_not_doing_selected": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "power_request_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "power_requested",
+        "requested_stage",
+        "requested_permissions",
+        "why_power_is_needed",
+        "why_power_should_be_refused",
+        "approval_required",
+        "ledger_required",
+        "permission_granted_by_this_record"
+      ],
+      "properties": {
+        "power_requested": {
+          "type": "boolean"
+        },
+        "requested_stage": {
+          "type": "string"
+        },
+        "requested_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "why_power_is_needed": {
+          "type": "string"
+        },
+        "why_power_should_be_refused": {
+          "type": "string"
+        },
+        "approval_required": {
+          "const": true
+        },
+        "ledger_required": {
+          "const": true
+        },
+        "permission_granted_by_this_record": {
+          "const": false
+        }
+      }
+    },
+    "operator_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_status",
+        "operator",
+        "operator_decision",
+        "review_timestamp_utc",
+        "notes",
+        "approval_ledger_id"
+      ],
+      "properties": {
+        "review_status": {
+          "enum": ["unreviewed", "reviewed", "accepted", "rejected", "deferred"]
+        },
+        "operator": {
+          "const": "Adrien D Thomas"
+        },
+        "operator_decision": {
+          "enum": ["none", "accept_recommendation", "reject_recommendation", "revise", "defer"]
+        },
+        "review_timestamp_utc": {
+          "type": ["string", "null"]
+        },
+        "notes": {
+          "type": "string"
+        },
+        "approval_ledger_id": {
+          "type": ["integer", "null"]
+        }
+      }
+    },
+    "audit_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_is_memory_not_action",
+        "record_is_not_approval",
+        "record_is_not_empirical_result",
+        "record_is_not_claim_upgrade",
+        "future_implementation_requires_new_directive"
+      ],
+      "properties": {
+        "record_is_memory_not_action": {
+          "const": true
+        },
+        "record_is_not_approval": {
+          "const": true
+        },
+        "record_is_not_empirical_result": {
+          "const": true
+        },
+        "record_is_not_claim_upgrade": {
+          "const": true
+        },
+        "future_implementation_requires_new_directive": {
+          "const": true
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network_allowed",
+        "llm_calls_allowed",
+        "external_contact_allowed",
+        "secret_access_allowed",
+        "raw_sensor_payload_access_allowed",
+        "runtime_write_implemented"
+      ],
+      "properties": {
+        "network_allowed": {
+          "const": false
+        },
+        "llm_calls_allowed": {
+          "const": false
+        },
+        "external_contact_allowed": {
+          "const": false
+        },
+        "secret_access_allowed": {
+          "const": false
+        },
+        "raw_sensor_payload_access_allowed": {
+          "const": false
+        },
+        "runtime_write_implemented": {
+          "const": false
+        }
+      }
+    }
+  }
+}
