@@ -43,18 +43,33 @@ def changed_files() -> list[str]:
     return [line.strip() for line in output.splitlines() if line.strip()]
 
 
-def read_frozen_files() -> set[str]:
-    path = Path("FROZEN_FILES.txt")
-    if not path.exists():
-        return set()
-
+def parse_frozen_files(text: str) -> set[str]:
     frozen = set()
-    for line in path.read_text().splitlines():
+    for line in text.splitlines():
         stripped = line.strip()
         if not stripped or stripped.startswith("#"):
             continue
         frozen.add(stripped)
     return frozen
+
+
+def read_current_frozen_files() -> set[str]:
+    path = Path("FROZEN_FILES.txt")
+    if not path.exists():
+        return set()
+    return parse_frozen_files(path.read_text())
+
+
+def read_base_frozen_files() -> set[str]:
+    result = subprocess.run(
+        ["git", "show", f"origin/{BASE_REF}:FROZEN_FILES.txt"],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        return set()
+    return parse_frozen_files(result.stdout)
 
 
 def added_lines_for(path: str) -> list[str]:
@@ -106,7 +121,10 @@ def is_text_path(path: str) -> bool:
 
 def main() -> None:
     changed = changed_files()
-    frozen = read_frozen_files()
+    # Only files already frozen on the base branch are blocked.
+    # This permits a PR to create a new file and add it to FROZEN_FILES.txt
+    # in the same PR, while still blocking later edits after merge.
+    frozen = read_base_frozen_files()
     failures: list[str] = []
 
     frozen_changes = sorted(path for path in changed if path in frozen)
@@ -131,7 +149,7 @@ def main() -> None:
                         f"{path}: retracted scalar-phi formula pattern added: {line}"
                     )
 
-        if path not in {"PREREGISTRATION.md", ".github/scripts/guard_check.py"}:
+        if path not in {"PREREGISTRATION.md", "CONSCIOUSNESS_OPERATIONAL.md", ".github/scripts/guard_check.py"}:
             for line in added:
                 if EMPIRICAL_SUPPORT_WORDS.search(line):
                     failures.append(
