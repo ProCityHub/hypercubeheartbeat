@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ProCityHub/hypercubeheartbeat/ai_infrastructure/schemas/experiment_manifest_schema_v1.json",
+  "title": "GARVIS Experiment Manifest Schema v1",
+  "description": "Schema-only Stage 2 scientific method manifest. Defines pre-registered experiment thinking before any execution is allowed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_id",
+    "manifest_version",
+    "status",
+    "stage",
+    "pre_registration",
+    "hypothesis",
+    "prediction",
+    "counter_prediction",
+    "null_model",
+    "data_needed",
+    "method",
+    "failure_conditions",
+    "claim_boundary",
+    "dry_run_boundary",
+    "approval",
+    "ledger_chain",
+    "safety"
+  ],
+  "properties": {
+    "manifest_id": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Stable identifier for this experiment manifest."
+    },
+    "manifest_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "enum": ["draft", "pre_registered", "retired"]
+    },
+    "stage": {
+      "const": "Stage 2 draft-only"
+    },
+    "pre_registration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_sha_status",
+        "manifest_commit_sha",
+        "result_must_cite_manifest_sha",
+        "manifest_must_predate_run",
+        "result_invalid_if_manifest_postdates_run"
+      ],
+      "properties": {
+        "manifest_sha_status": {
+          "enum": ["pending_commit", "locked"]
+        },
+        "manifest_commit_sha": {
+          "type": ["string", "null"],
+          "description": "Commit SHA containing the manifest. Must be locked before any execution-stage run."
+        },
+        "result_must_cite_manifest_sha": {
+          "const": true
+        },
+        "manifest_must_predate_run": {
+          "const": true
+        },
+        "result_invalid_if_manifest_postdates_run": {
+          "const": true
+        }
+      }
+    },
+    "hypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement", "rationale", "scope"],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "prediction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement", "measurable_signal", "success_threshold"],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "measurable_signal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "success_threshold": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "counter_prediction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement", "falsifying_signal", "expected_if_wrong"],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "falsifying_signal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_if_wrong": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "null_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "expected_noise_behavior",
+        "false_positive_risk",
+        "comparison_method",
+        "sample_size_or_trials"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_noise_behavior": {
+          "type": "string",
+          "minLength": 1
+        },
+        "false_positive_risk": {
+          "type": "string",
+          "minLength": 1
+        },
+        "comparison_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_size_or_trials": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "data_needed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inputs", "exclusions", "provenance_requirement"],
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "exclusions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "provenance_requirement": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method_summary", "would_run_command", "parameters", "outputs"],
+      "properties": {
+        "method_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "would_run_command": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Command tokens that a future Stage 3 run may execute only after approval. Stage 2 tools may display this but must not execute it."
+        },
+        "parameters": {
+          "type": "object"
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "failure_conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["would_weaken_hypothesis", "would_invalidate_run", "known_failure_modes"],
+      "properties": {
+        "would_weaken_hypothesis": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "would_invalidate_run": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "known_failure_modes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_result_grades",
+        "maximum_claim_grade_without_new_manifest",
+        "forbidden_claims",
+        "upgrade_requires_new_manifest"
+      ],
+      "properties": {
+        "allowed_result_grades": {
+          "type": "array",
+          "items": {
+            "enum": ["exploratory", "suggestive", "supported", "retracted"]
+          },
+          "uniqueItems": true,
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "maximum_claim_grade_without_new_manifest": {
+          "enum": ["exploratory", "suggestive", "supported", "retracted"]
+        },
+        "forbidden_claims": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "upgrade_requires_new_manifest": {
+          "const": true
+        }
+      }
+    },
+    "dry_run_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_execute_method_script",
+        "prints_would_run_command_only",
+        "execution_stage_required",
+        "approval_required_before_execution"
+      ],
+      "properties": {
+        "can_execute_method_script": {
+          "const": false
+        },
+        "prints_would_run_command_only": {
+          "const": true
+        },
+        "execution_stage_required": {
+          "const": "Stage 3 approved execution"
+        },
+        "approval_required_before_execution": {
+          "const": true
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator", "approval_status", "approval_ledger_id"],
+      "properties": {
+        "operator": {
+          "type": "string"
+        },
+        "approval_status": {
+          "enum": ["not_requested", "requested", "approved", "rejected"]
+        },
+        "approval_ledger_id": {
+          "type": ["integer", "null"]
+        }
+      }
+    },
+    "ledger_chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_commit_sha",
+        "approval_ledger_id",
+        "run_id",
+        "result_id",
+        "claim_record_id"
+      ],
+      "properties": {
+        "manifest_commit_sha": {
+          "type": ["string", "null"]
+        },
+        "approval_ledger_id": {
+          "type": ["integer", "null"]
+        },
+        "run_id": {
+          "type": ["string", "null"]
+        },
+        "result_id": {
+          "type": ["string", "null"]
+        },
+        "claim_record_id": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network_allowed",
+        "llm_calls_allowed",
+        "external_contact_allowed",
+        "secret_access_allowed",
+        "raw_sensor_payload_access_allowed"
+      ],
+      "properties": {
+        "network_allowed": {
+          "const": false
+        },
+        "llm_calls_allowed": {
+          "const": false
+        },
+        "external_contact_allowed": {
+          "const": false
+        },
+        "secret_access_allowed": {
+          "const": false
+        },
+        "raw_sensor_payload_access_allowed": {
+          "const": false
+        }
+      }
+    }
+  }
+}
