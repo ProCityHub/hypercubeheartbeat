@@ -71,4 +71,5 @@ falsifiable.
 | Date | Result | Commit |
 |---|---|---|
 | 2026-07-10 | NOT_SUPPORTED — OSF Ultimatum lab result. Different formulation from the pre-registered AUC pilot; the AUC pilot remains open and has not been run. | Recorded per Phase 0 Task 1. |
+| 2026-07-10 | NOT_SUPPORTED — Kubota 20-row pilot produced FAIL under the preregistered criterion. Data commit `131930035567928ef74b07ad919605010761c484`; `data/ug_probe.csv` sha256 `64b69f868ce74981805f92a8bdb8a3cffbeaeb04a895a2579f1d81d60f8a7e44`; `data/kubota_full.csv` sha256 `96cfd31b7bff9ea765fc24825b59787d90fea999c28e6a9524614bd1f95ea92d`; selection rule `data/PILOT_SELECTION.md`; run output `data/KUBOTA_PREREGISTRATION_RUN.md`. | `131930035567928ef74b07ad919605010761c484` |
 | _pending_ | | |
