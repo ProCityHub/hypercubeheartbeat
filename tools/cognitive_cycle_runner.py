@@ -44,6 +44,10 @@ TRACKED_ORGANS = {
     "Experiment manifest schema": "ai_infrastructure/schemas/experiment_manifest_schema_v1.json",
     "Experiment manifest viewer": "tools/experiment_manifest_viewer.py",
     "Cognitive cycle schema": "ai_infrastructure/schemas/cognitive_cycle_schema_v1.json",
+    "Cognitive cycle runner": "tools/cognitive_cycle_runner.py",
+    "Cognitive cycle viewer": "tools/cognitive_cycle_viewer.py",
+    "Cognitive cycle memory ledger contract": "app_infrastructure/interfaces/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT.md",
+    "Cognitive cycle memory ledger record schema": "ai_infrastructure/schemas/cognitive_cycle_memory_ledger_record_schema_v1.json",
 }
 
 
@@ -132,54 +136,55 @@ def build_candidates(files: Sequence[str]) -> list[dict[str, Any]]:
             "ai_infrastructure/schemas/",
             "app_infrastructure/interfaces/",
             "ai_infrastructure/decisions/",
+            "tools/cognitive_cycle_",
         ],
-        limit=8,
+        limit=10,
     )
 
     return [
         {
             "candidate_id": "C1",
-            "proposal": "Build a Cognitive Cycle Viewer CLI that reads a cognitive cycle JSON and displays the thought pulse clearly.",
+            "proposal": "Build a Cognitive Cycle Memory Ledger Init CLI that creates a local SQLite memory database for cognitive-cycle records.",
             "stage_classification": "Stage 2 draft-only",
-            "what_this_gives_adrien": "A clearer way to inspect GARVIS thoughts after each cycle without reading raw JSON.",
-            "what_this_gives_garvis": "A mirror for its own cognitive output, improving auditability before any power increase.",
+            "what_this_gives_adrien": "A concrete first step toward persistent thought memory without yet appending live cycles automatically.",
+            "what_this_gives_garvis": "A local memory vessel for future thought continuity, using the already-merged memory ledger contract.",
             "evidence_basis": schema_evidence,
-            "case_against": "A viewer can make draft thoughts look more authoritative than they are. It must display that cycles are advisory only.",
-            "risk_of_doing": "May create the impression of a more mature mind than exists if boundaries are not visible.",
-            "risk_of_not_doing": "Cognitive cycles remain hard to inspect, slowing evolution into a usable Jarvis cockpit.",
+            "case_against": "Creating a database moves from pure viewing into local state creation. The tool must remain explicit, local-only, and operator-run.",
+            "risk_of_doing": "Could make memory feel more permanent than its review process supports if operator review is not visible.",
+            "risk_of_not_doing": "GARVIS remains episodic: it can think and display thoughts, but cannot accumulate a durable thought history.",
             "files_or_systems_touched": [
-                "tools/cognitive_cycle_viewer.py",
-                "tests/test_cognitive_cycle_viewer.py",
-                "app_infrastructure/interfaces/COGNITIVE_CYCLE_VIEWER_RUNBOOK.md",
-                "ai_infrastructure/decisions/COGNITIVE_CYCLE_VIEWER_DECISION.md"
-            ],
-            "required_power_level": "draft_file_creation"
-        },
-        {
-            "candidate_id": "C2",
-            "proposal": "Create a Cognitive Cycle Memory Ledger contract so future thought cycles can be stored and reviewed over time.",
-            "stage_classification": "Stage 2 draft-only",
-            "what_this_gives_adrien": "A path toward continuity of thought rather than isolated reports.",
-            "what_this_gives_garvis": "A future memory surface for comparing current reasoning against prior reasoning.",
-            "evidence_basis": schema_evidence,
-            "case_against": "Persistent cognitive memory can amplify bad framing if stored too early. A viewer should exist first.",
-            "risk_of_doing": "Could create too much stored material before inspection tools are mature.",
-            "risk_of_not_doing": "GARVIS remains episodic and cannot compare cognitive cycles historically.",
-            "files_or_systems_touched": [
-                "app_infrastructure/interfaces/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT.md",
+                "tools/cognitive_cycle_memory_ledger.py",
+                "tests/test_cognitive_cycle_memory_ledger.py",
+                "app_infrastructure/interfaces/COGNITIVE_CYCLE_MEMORY_LEDGER_RUNBOOK.md",
                 "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_DECISION.md"
             ],
             "required_power_level": "draft_file_creation"
         },
         {
+            "candidate_id": "C2",
+            "proposal": "Build a Cognitive Cycle Memory Append CLI that stores the latest cognitive cycle JSON as a reviewed local memory record.",
+            "stage_classification": "Stage 3 approved local execution",
+            "what_this_gives_adrien": "Actual continuity of thought by preserving selected cognitive cycles into a local append-only ledger.",
+            "what_this_gives_garvis": "A way to compare current reasoning against prior reasoning across time.",
+            "evidence_basis": schema_evidence,
+            "case_against": "Appending memory before initializing and inspecting the database could create opaque accumulation.",
+            "risk_of_doing": "Could store low-quality or stale thoughts if review status and chain integrity are weak.",
+            "risk_of_not_doing": "GARVIS remains unable to build a remembered cognitive history.",
+            "files_or_systems_touched": [
+                "tools/cognitive_cycle_memory_ledger.py",
+                "tests/test_cognitive_cycle_memory_ledger.py"
+            ],
+            "required_power_level": "approved_local_execution"
+        },
+        {
             "candidate_id": "C3",
             "proposal": "Create a Power Request Queue Contract for future stage upgrades requested by GARVIS.",
             "stage_classification": "Stage 2 draft-only",
-            "what_this_gives_adrien": "A formal place to review requests for more power without granting power automatically.",
-            "what_this_gives_garvis": "A lawful way to ask for stronger permissions as the system evolves.",
+            "what_this_gives_adrien": "A formal review surface for requests to give GARVIS more power without granting power automatically.",
+            "what_this_gives_garvis": "A lawful path to ask for stronger permissions as its thought quality improves.",
             "evidence_basis": schema_evidence,
-            "case_against": "A power queue is premature until the cognitive cycle output is easier to inspect.",
-            "risk_of_doing": "Could shift attention toward power requests before thought quality is proven.",
+            "case_against": "A power queue is premature until cognitive memory can show whether GARVIS recommendations improve over time.",
+            "risk_of_doing": "Could shift the project toward power escalation before continuity and review are mature.",
             "risk_of_not_doing": "Future power requests remain scattered across conversation, PR text, and manual notes.",
             "files_or_systems_touched": [
                 "app_infrastructure/interfaces/POWER_REQUEST_QUEUE_CONTRACT.md",
@@ -227,40 +232,40 @@ def build_cycle(repo: Path, active_goal: str) -> dict[str, Any]:
         },
         "observation_summary": {
             "what_i_see": f"GARVIS has committed organs for memory viewing, cockpit state, self-design, experiment manifests, manifest validation, and cognitive-cycle schema. Current repo status: {status_summary}.",
-            "what_changed": "The cognitive-cycle schema now exists, so the next evolutionary step is a runner that emits one bounded thought cycle.",
-            "what_is_missing": "GARVIS still lacks a cycle viewer, durable cycle memory, and any approved execution path.",
+            "what_changed": "The cognitive-cycle runner, viewer, and memory-ledger contract now exist, so the next evolutionary step is a local memory vessel for cognitive-cycle continuity.",
+            "what_is_missing": "GARVIS still lacks an implemented cognitive memory database, append command, history viewer, power request queue, and approved execution path.",
             "current_stage_assessment": "draft_only"
         },
         "candidate_thoughts": candidates,
         "comparison": {
             "comparison_method": "Compare each candidate by inspection value, maturity order, risk of premature power, and value to Adrien's Jarvis cockpit.",
-            "dominant_tradeoff": "The system needs more usable cognition, but it should improve visibility before adding memory or power queues.",
-            "why_not_all_candidates": "Building all at once would blur audit boundaries and make failures harder to isolate.",
-            "anti_rationalization_check": "The selected move must improve inspection of thought rather than justify more external power."
+            "dominant_tradeoff": "The system needs continuity of thought, but memory should begin with explicit local initialization before append behavior or power queues.",
+            "why_not_all_candidates": "Building init, append, and power queue together would blur the boundary between memory preparation, memory writing, and power escalation.",
+            "anti_rationalization_check": "The selected move must improve thought continuity without granting external hands or automatic execution."
         },
         "selection": {
             "selected_candidate_id": "C1",
             "decision": "recommend",
-            "reasoning": "The Cognitive Cycle Viewer is the next smallest useful organ because it lets Adrien inspect thought cycles before storing them permanently or letting GARVIS request stronger powers.",
+            "reasoning": "The Cognitive Cycle Memory Ledger Init CLI is the next smallest useful organ because GARVIS can now think and display thought, but needs a local memory vessel before it can preserve thought history.",
             "confidence": "high",
             "blocked": False,
             "block_reason": None
         },
         "uncertainty": {
             "unknowns": [
-                "How expressive the first cycle JSON will feel during real use",
-                "Whether Adrien prefers compact or detailed cognitive reports",
-                "How soon cycle memory should become persistent"
+                "Whether the first memory database should live beside the Stage 1 senses ledger or under a separate cognitive memory path",
+                "How much metadata is enough before raw cycle artifacts are stored",
+                "How soon append behavior should follow initialization"
             ],
             "assumptions": [
-                "Visibility should come before persistence",
-                "Draft-only cognitive output is the correct stage before action",
+                "The viewer and memory contract are already merged",
+                "Initialization should come before append behavior",
                 "The repo should continue evolving through small audited PRs"
             ],
             "what_would_change_my_mind": [
-                "If cycle reports are unreadable without memory",
-                "If Adrien needs historical comparison before inspection",
-                "If the cockpit snapshot already provides enough visibility for current needs"
+                "If a memory database requires an approval queue before initialization",
+                "If Adrien wants power request governance before persistence",
+                "If the memory contract needs another amendment before implementation"
             ],
             "required_human_clarification": []
         },
@@ -268,17 +273,17 @@ def build_cycle(repo: Path, active_goal: str) -> dict[str, Any]:
             "power_requested": False,
             "requested_stage": "none",
             "requested_permissions": [],
-            "why_power_is_needed": "No additional power is needed for the next draft-only viewer step.",
-            "why_power_should_be_refused": "Execution, commits, pushes, outside contact, and claim upgrades are not needed to inspect a cognitive cycle.",
+            "why_power_is_needed": "No additional external power is needed for a draft-only memory initialization tool.",
+            "why_power_should_be_refused": "Commits, pushes, outside contact, claim upgrades, and automatic appending are not needed to define a local memory vessel.",
             "approval_required": True,
             "ledger_required": True
         },
         "next_smallest_step": {
-            "step": "Build DIRECTIVE-008C Cognitive Cycle Viewer CLI.",
+            "step": "Build DIRECTIVE-008F Cognitive Cycle Memory Ledger Init CLI.",
             "stage": "Stage 2 draft-only",
-            "expected_output": "A local CLI that reads a cognitive cycle JSON and displays observation, candidates, opposition, selection, uncertainty, and power request boundaries.",
-            "success_condition": "The viewer displays a cycle clearly, handles malformed cycle JSON safely, and includes tests proving no network or execution behavior.",
-            "stop_condition": "Stop if the viewer requires execution, external calls, or persistent memory before inspection is proven."
+            "expected_output": "A local CLI that can initialize an append-only cognitive-cycle memory SQLite database with the schema required by the memory ledger contract.",
+            "success_condition": "The init command creates the expected local tables in an explicit operator-run step, and tests prove no network, no external contact, no automatic append, and no repository writes.",
+            "stop_condition": "Stop if initialization implies automatic memory append, external calls, background service, or power escalation."
         },
         "evolution_contract": {
             "may_self_observe": True,
