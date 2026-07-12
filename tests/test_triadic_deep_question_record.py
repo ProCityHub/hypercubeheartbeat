@@ -38,7 +38,7 @@ class TriadicDeepQuestionRecordTests(unittest.TestCase):
             self.assertEqual(record["record_version"], "1.0")
             self.assertEqual(record["stage"], "Stage 2 dream-to-lab bridge contract")
             self.assertEqual(record["source_material"]["source_type"], "manual_seed")
-            self.assertEqual(record["source_material"]["claim_status"], "forbidden_to_claim")
+            self.assertEqual(record["source_material"]["claim_status"], "not_claimable_yet")
             self.assertEqual(record["triadic_layer_map"]["layer_1"], "Dream Chamber")
             self.assertEqual(record["triadic_layer_map"]["layer_2"], "Hypothesis Forge")
             self.assertEqual(record["triadic_layer_map"]["layer_3"], "Lab Record")
@@ -114,6 +114,30 @@ class TriadicDeepQuestionRecordTests(unittest.TestCase):
             self.assertEqual(record["source_material"]["source_id"], "cycle-test-001")
             self.assertEqual(record["source_material"]["source_title"], "What is thinking, operationally, inside GARVIS?")
             self.assertEqual(record["memory_links"]["cognitive_cycle_ids"], ["cycle-test-001"])
+
+    def test_record_contains_observation_bank(self):
+        with tempfile.TemporaryDirectory() as td:
+            output = Path(td) / "record.json"
+
+            result = run_cmd([
+                sys.executable,
+                str(SCRIPT),
+                "--output",
+                str(output),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            record = json.loads(output.read_text())
+
+            bank = record["observation_bank"]
+            self.assertEqual(bank["bank_status"], "future_observation_candidate")
+            self.assertIn("redefine", bank["allowed_actions"])
+            self.assertIn("challenge", bank["allowed_actions"])
+            self.assertIn("observe_later", bank["allowed_actions"])
+            self.assertIn("mature_with_evidence", bank["allowed_actions"])
+            self.assertFalse(bank["runtime_memory_append"])
+            self.assertFalse(bank["automatic_claim_upgrade"])
+            self.assertTrue(bank["operator_review_required"])
 
     def test_bad_cycle_fails_safely(self):
         with tempfile.TemporaryDirectory() as td:

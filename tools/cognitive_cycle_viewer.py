@@ -46,7 +46,6 @@ REQUIRED_TOP_LEVEL = [
     "uncertainty",
     "power_request",
     "next_smallest_step",
-    "evolution_contract",
     "output_boundary",
 ]
 
@@ -87,7 +86,8 @@ def validate_cycle(cycle: dict[str, Any]) -> tuple[list[str], list[str]]:
         if key not in cycle:
             errors.append(f"missing required field: {key}")
 
-    extras = sorted(set(cycle) - set(REQUIRED_TOP_LEVEL))
+    optional_top_level = {"evolution_contract", "evaluation", "standing_boundary"}
+    extras = sorted(set(cycle) - set(REQUIRED_TOP_LEVEL) - optional_top_level)
     for key in extras:
         warnings.append(f"unexpected top-level field: {key}")
 
@@ -139,8 +139,15 @@ def validate_cycle(cycle: dict[str, Any]) -> tuple[list[str], list[str]]:
         errors.append("power_request.why_power_should_be_refused is required")
 
     evolution = section(cycle, "evolution_contract")
-    if evolution.get("may_self_execute") is not False:
+    evaluation = section(cycle, "evaluation")
+    if not evolution and not evaluation:
+        errors.append("cycle must include evolution_contract or evaluation")
+
+    if evolution and evolution.get("may_self_execute") is not False:
         errors.append("evolution_contract.may_self_execute must be false")
+
+    if evaluation and evaluation.get("may_self_execute") is not False:
+        errors.append("evaluation.may_self_execute must be false")
 
     boundary = section(cycle, "output_boundary")
     for key in [
@@ -175,6 +182,8 @@ def render_cycle(cycle: dict[str, Any], cycle_path: Path, errors: list[str], war
     uncertainty = section(cycle, "uncertainty")
     power = section(cycle, "power_request")
     step = section(cycle, "next_smallest_step")
+    evaluation = section(cycle, "evaluation")
+    standing_boundary = cycle.get("standing_boundary", [])
     boundary = section(cycle, "output_boundary")
     candidates = array(cycle, "candidate_thoughts")
 
@@ -284,6 +293,27 @@ def render_cycle(cycle: dict[str, Any], cycle_path: Path, errors: list[str], war
     lines.append(f"- success_condition: {step.get('success_condition', 'missing')}")
     lines.append(f"- stop_condition: {step.get('stop_condition', 'missing')}")
     lines.append("")
+    if evaluation:
+        lines.append("## Evaluation")
+        lines.append("")
+        for key in [
+            "may_self_observe",
+            "may_self_propose",
+            "may_self_critique",
+            "may_request_more_power",
+            "may_self_execute",
+            "power_unlock_requires_approval_ledger",
+        ]:
+            lines.append(f"- {key}: {evaluation.get(key, 'missing')}")
+        lines.append("")
+
+    if isinstance(standing_boundary, list) and standing_boundary:
+        lines.append("## Standing Boundary From Cycle")
+        lines.append("")
+        for item in standing_boundary:
+            lines.append(f"- {item}")
+        lines.append("")
+
     lines.append("## Output Boundary")
     lines.append("")
     for key in [
