@@ -112,7 +112,7 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
                 "The unresolved question is held as symbolic material first. "
                 "It may inspire definitions, variables, and tests, but it is not evidence."
             ),
-            "claim_status": "forbidden_to_claim"
+            "claim_status": "not_claimable_yet"
         },
         "translation_workbench": {
             "translation_goal": "Translate the deep question into operational terms that can later support a preregistered experiment manifest.",
@@ -140,12 +140,18 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
                 "proof of mind",
                 "subjective experience"
             ],
-            "bridge_notes": "The bridge may translate symbolic material into testable structure. It may not convert symbolic material into truth claims."
+            "bridge_notes": "The bridge may translate symbolic material into testable structure. It may not convert symbolic material into truth claims.",
+            "review_actions": [
+                "redefine",
+                "challenge",
+                "observe_later",
+                "mature_with_evidence"
+            ]
         },
         "definition_workbench": {
             "candidate_definitions": [
                 "Operational thinking inside GARVIS means producing a bounded cognitive cycle: observe, propose, oppose, compare, select, state uncertainty, and name the next smallest step.",
-                "Operational imagination inside GARVIS means generating unverified symbolic candidates while preserving forbidden-claim labels.",
+                "Operational imagination inside GARVIS means generating unverified symbolic candidates while preserving claim-maturity labels.",
                 "Operational self-modeling inside GARVIS means detecting current organs, missing organs, stale recommendations, and correction needs without claiming subjective selfhood."
             ],
             "terms_requiring_definition": [
@@ -170,11 +176,11 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
                 "presence of comparison_method",
                 "presence of selected_candidate_id",
                 "presence of uncertainty.unknowns",
-                "presence of forbidden_claims"
+                "presence of unsupported_claim_boundaries"
             ],
             "parameters": [
                 "candidate_count",
-                "forbidden_claim_count",
+                "unsupported_claim_boundary_count",
                 "baseline_method",
                 "review_status",
                 "operator_decision"
@@ -201,7 +207,7 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
             {
                 "hypothesis_id": "H1",
                 "hypothesis": "If GARVIS deep-question cycles are translated into triadic bridge records, later decisions will be easier to audit and compare than unstructured conversation notes.",
-                "prediction": "Reviewed records will show clearer definitions, forbidden claims, null models, and next-step boundaries than raw deep-question outputs alone.",
+                "prediction": "Reviewed records will show clearer definitions, unsupported claim boundaries, null models, and next-step boundaries than raw deep-question outputs alone.",
                 "counter_prediction": "Triadic bridge records will not improve auditability compared with raw cognitive cycle JSON or manual notes.",
                 "claim_boundary": "exploratory_only_until_experiment_manifest_and_result",
                 "bridge_confidence": "medium"
@@ -224,7 +230,7 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
         },
         "measurement_plan": {
             "measurement_target": "Auditability and decision traceability of deep-question reasoning.",
-            "measurement_method": "Score records using a preregistered rubric for definitions, variables, controls, null model, forbidden claims, and next-step clarity.",
+            "measurement_method": "Score records using a preregistered rubric for definitions, variables, controls, null model, unsupported claim boundaries, and next-step clarity.",
             "data_needed": [
                 "triadic bridge records",
                 "source cognitive cycle records",
@@ -244,7 +250,7 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
             "failure_conditions": [
                 "The record cannot identify observables.",
                 "The record cannot define controls.",
-                "The record cannot name forbidden claims.",
+                "The record cannot name unsupported claim boundaries.",
                 "The record cannot suggest a null model.",
                 "The record adds poetic language without improving testability."
             ],
@@ -284,6 +290,19 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
             "experiment_manifest_ids": [],
             "lab_record_ids": [],
             "grok_source_ids": []
+        },
+        "observation_bank": {
+            "bank_status": "future_observation_candidate",
+            "purpose": "Hold unproven or not-yet-claimable ideas for later redefinition, challenge, observation, or evidence maturation.",
+            "allowed_actions": [
+                "redefine",
+                "challenge",
+                "observe_later",
+                "mature_with_evidence"
+            ],
+            "runtime_memory_append": False,
+            "automatic_claim_upgrade": False,
+            "operator_review_required": True
         },
         "operator_review": {
             "review_status": "unreviewed",
@@ -339,6 +358,7 @@ def apply_candidate_specialization(record: dict[str, Any], candidate: dict[str, 
         record["measurement_plan"]["minimum_viable_test"] = str(candidate["lab_record"])
 
     if candidate.get("claim_maturity"):
+        record["source_material"]["claim_status"] = str(candidate["claim_maturity"])
         record["claim_maturity"] = {
             "status": candidate["claim_maturity"],
             "ladder": candidate.get("claim_maturity_ladder", []),
@@ -366,6 +386,7 @@ def validate_record(record: dict[str, Any]) -> None:
         "falsifiability",
         "manifest_gate",
         "memory_links",
+        "observation_bank",
         "operator_review",
         "output_boundary",
         "safety",
@@ -378,8 +399,16 @@ def validate_record(record: dict[str, Any]) -> None:
         raise DeepQuestionRecordError("record_version must be 1.0")
     if record["stage"] != "Stage 2 dream-to-lab bridge contract":
         raise DeepQuestionRecordError("invalid stage")
-    if record["source_material"]["claim_status"] != "forbidden_to_claim":
-        raise DeepQuestionRecordError("source material must remain forbidden_to_claim")
+    allowed_claim_statuses = {
+        "raw_speculation",
+        "not_claimable_yet",
+        "mathematical_candidate",
+        "testable_hypothesis",
+        "provisional_operational_claim",
+        "rejected",
+    }
+    if record["source_material"]["claim_status"] not in allowed_claim_statuses:
+        raise DeepQuestionRecordError("source material claim_status must be evidence-based")
     if record["null_model_design"]["null_model_required"] is not True:
         raise DeepQuestionRecordError("null model must be required")
     if record["manifest_gate"]["bridge_can_emit_claim"] is not False:
@@ -467,7 +496,7 @@ status: {record['status']}
 
 {record['measurement_plan']['minimum_viable_test']}
 
-## Forbidden Claims
+## Unsupported Claims / Not Claimable Yet
 
 {forbidden}
 
