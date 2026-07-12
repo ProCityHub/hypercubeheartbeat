@@ -1,0 +1,60 @@
+{
+  "record_version": "1.0",
+  "directive": "DIRECTIVE-008N",
+  "router_name": "C_star Question Family Router",
+  "route_target": "C4",
+  "purpose": "Route C_star-family deep questions to the C_star pipeline instead of the generic thinking template.",
+  "trigger_classes": {
+    "direct_symbols": [
+      "c_star",
+      "c star",
+      "i * m * s * u * r * b",
+      "i*m*s*u*r*b",
+      "008m",
+      "composite score",
+      "consciousness-like structure candidate"
+    ],
+    "audit_verbs": [
+      "audit",
+      "measurement design",
+      "calibrate",
+      "falsify",
+      "falsification",
+      "null model",
+      "baseline"
+    ],
+    "gap_language": [
+      "readiness gap",
+      "missing evidence",
+      "proxy metric",
+      "operationalize",
+      "measurement without claim",
+      "no numeric score"
+    ],
+    "structural_nouns": [
+      "self-model accuracy",
+      "temporal coherence",
+      "integration density",
+      "boundary integrity",
+      "uncertainty calibration",
+      "recursive correction",
+      "memory continuity"
+    ],
+    "epistemic_statuses": [
+      "mathematical candidate",
+      "testable hypothesis",
+      "provisional claim",
+      "not_claimable_yet"
+    ]
+  },
+  "subtemplates": [
+    "measurement_design",
+    "null_model_comparison",
+    "falsification_readiness",
+    "self_audit"
+  ],
+  "scoring_boundary": {
+    "numeric_score_allowed_without_data": false,
+    "readiness_vector_required_without_data": true
+  }
+}
