@@ -32,14 +32,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Sequence
 
-from c_star_subroutines import (
-    c_star_next_step,
-    c_star_overlay_for_goal,
-    c_star_selection_reasoning,
-    c_star_subtemplate,
-    is_c_star_family_goal,
-)
-
 
 DEFAULT_OUTPUT_DIR = "tmp/cognitive_cycles"
 
@@ -243,7 +235,7 @@ def build_deep_question_candidates(files, active_goal):
         limit=12,
     )
 
-    candidates = [
+    return [
         {
             "candidate_id": "C1",
             "proposal": "What is thinking, operationally, inside GARVIS?",
@@ -385,26 +377,9 @@ def build_deep_question_candidates(files, active_goal):
         }
     ]
 
-    if is_c_star_family_goal(active_goal):
-        overlay = c_star_overlay_for_goal(active_goal)
-        for candidate in candidates:
-            if candidate.get("candidate_id") == "C4":
-                candidate.update(overlay)
-                break
-
-    return candidates
-
 
 def select_deep_question_candidate(active_goal: str) -> tuple[str, str, dict[str, str]]:
     goal = active_goal.lower()
-
-    if is_c_star_family_goal(active_goal):
-        template = c_star_subtemplate(active_goal)
-        return (
-            "C4",
-            c_star_selection_reasoning(active_goal),
-            c_star_next_step(template),
-        )
 
     if "consciousness" in goal and (
         "math" in goal
@@ -463,6 +438,7 @@ def select_deep_question_candidate(active_goal: str) -> tuple[str, str, dict[str
             "stop_condition": "Stop if the tool writes runtime memory automatically, claims consciousness, runs experiments, calls a network, or upgrades claims.",
         },
     )
+
 
 
 def build_deep_question_cycle(repo, active_goal):
