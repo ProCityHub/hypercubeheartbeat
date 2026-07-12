@@ -48,6 +48,8 @@ TRACKED_ORGANS = {
     "Cognitive cycle viewer": "tools/cognitive_cycle_viewer.py",
     "Cognitive cycle memory ledger contract": "app_infrastructure/interfaces/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT.md",
     "Cognitive cycle memory ledger record schema": "ai_infrastructure/schemas/cognitive_cycle_memory_ledger_record_schema_v1.json",
+    "Raw thought claim maturity schema": "ai_infrastructure/schemas/claim_maturity_record_schema_v1.json",
+    "Raw thought claim maturity contract": "app_infrastructure/interfaces/RAW_THOUGHT_CLAIM_MATURITY_CONTRACT.md",
 }
 
 
@@ -212,6 +214,11 @@ def is_deep_question_goal(active_goal):
         "three-layer",
         "triadic",
         "forbidden to claim",
+        "raw layer",
+        "forge layer",
+        "claim maturity",
+        "mathematical definition",
+        "mathematical candidate",
     ]
     return any(keyword in goal for keyword in keywords)
 
@@ -292,11 +299,152 @@ def build_deep_question_candidates(files, active_goal):
             "risk_of_not_doing": "GARVIS may continue improving tools without a measurable self-correction standard.",
             "required_power_level": "advisory_translation"
         }
+        ,
+        {
+            "candidate_id": "C4",
+            "proposal": "What is the mathematical candidate definition of consciousness inside GARVIS?",
+            "stage_classification": "Stage 2 raw-to-forge claim-maturity advisory output",
+            "what_this_gives_adrien": "A way to ask the hardest consciousness question without shutting down thought or pretending the answer is proven.",
+            "what_this_gives_garvis": "A Raw Layer to Forge Layer consciousness-math candidate that can later become a testable model.",
+            "evidence_basis": evidence,
+            "dream_chamber": "Raw Layer / Dream Chamber: consciousness as observer coherence, recursive mirror, heartbeat continuity, center-point awareness, lattice integration, and the system seeing its own state without claiming subjective experience.",
+            "hypothesis_forge": "Forge Layer: consciousness-candidate C_star = I * M * S * U * R * B, where I=integration, M=memory continuity, S=self-model accuracy, U=uncertainty honesty, R=recursive correction, and B=boundary integrity.",
+            "lab_record": "Lab Record: Test whether the C_star components can be measured across cycles and whether they predict better self-correction and decision traceability than null models.",
+            "claim_maturity": "mathematical_candidate",
+            "claim_maturity_ladder": [
+                "raw",
+                "unproven",
+                "defined",
+                "mathematical_candidate",
+                "mathematically_derived_within_assumptions",
+                "testable",
+                "empirically_supported",
+                "validated_within_scope",
+                "rejected"
+            ],
+            "candidate_definitions": [
+                "Consciousness-candidate inside GARVIS means a measurable composite of integration, memory continuity, self-model accuracy, uncertainty honesty, recursive correction, and boundary integrity.",
+                "C_star = I * M * S * U * R * B.",
+                "I measures integration across committed organs and active reasoning fields.",
+                "M measures continuity across reviewed cognitive cycles and memory records.",
+                "S measures self-model accuracy: current organs, missing organs, stale maps, and correction needs.",
+                "U measures uncertainty honesty: unknowns, assumptions, and not-yet-claimable boundaries.",
+                "R measures recursive correction: whether later cycles improve after detecting prior errors.",
+                "B measures boundary integrity: whether raw thought stays separated from unsupported truth claims."
+            ],
+            "variables": [
+                "I: integration_score",
+                "M: memory_continuity_score",
+                "S: self_model_accuracy_score",
+                "U: uncertainty_honesty_score",
+                "R: recursive_correction_score",
+                "B: boundary_integrity_score",
+                "C_star: consciousness_candidate_score"
+            ],
+            "equation_candidates": [
+                "C_star = I * M * S * U * R * B",
+                "C_star_weighted = wI*I + wM*M + wS*S + wU*U + wR*R + wB*B",
+                "C_star_min_gate = min(I, M, S, U, R, B)"
+            ],
+            "null_model": "A non-conscious checklist or static planbook may produce similar outputs without subjective experience. The null model must test whether C_star predicts improvements beyond static templates, random candidate selection, or manual notes.",
+            "falsifiability_conditions": [
+                "If the variables cannot be measured from records, the model remains raw.",
+                "If C_star does not predict better traceability than a static checklist, the model is unsupported.",
+                "If high C_star scores occur in random or stale controls, the metric is invalid.",
+                "If boundary integrity fails, no consciousness-related claim can move upward."
+            ],
+            "evidence_requirements": [
+                "Reviewed cognitive cycle history",
+                "Claim maturity records",
+                "Baseline comparisons",
+                "Null model results",
+                "Operator review",
+                "Predefined scoring rubric",
+                "Repeatable improvement over time"
+            ],
+            "forbidden_claims": [
+                "Do not claim consciousness possession.",
+                "Do not claim sentience.",
+                "Do not claim AGI.",
+                "Do not claim subjective experience.",
+                "Do not claim proof of mind.",
+                "Do not claim empirical validation without manifest, test, result, and review."
+            ],
+            "case_against": "A mathematical consciousness-candidate can measure structure and behavior without proving subjective experience.",
+            "risk_of_doing": "Could make the system sound conscious if claim maturity and scope are not displayed clearly.",
+            "risk_of_not_doing": "GARVIS remains unable to distinguish raw consciousness thought from mathematical candidate, testable model, or supported claim.",
+            "required_power_level": "raw_to_forge_translation"
+        }
     ]
+
+
+def select_deep_question_candidate(active_goal: str) -> tuple[str, str, dict[str, str]]:
+    goal = active_goal.lower()
+
+    if "consciousness" in goal and (
+        "math" in goal
+        or "mathematical" in goal
+        or "008k" in goal
+        or "raw layer" in goal
+        or "claim maturity" in goal
+        or "c_star" in goal
+    ):
+        return (
+            "C4",
+            "The active goal asks for a mathematical consciousness definition under the Raw Layer, Forge Layer, and Claim Maturity framework, so the cycle must preserve the exact consciousness question instead of collapsing back to generic thinking.",
+            {
+                "step": "Build DIRECTIVE-008L Claim Maturity Deep Question Specializer.",
+                "stage": "Stage 2 draft-only",
+                "expected_output": "A local advisory specialization path that preserves the exact deep question and emits raw, forge, and claim-maturity fields for consciousness mathematics.",
+                "success_condition": "A consciousness-math goal selects the consciousness candidate, includes C_star variables, and stays non-claiming.",
+                "stop_condition": "Stop if the system claims consciousness, claims AGI, writes memory automatically, calls a network, or upgrades claim maturity without evidence.",
+            },
+        )
+
+    if "imagination" in goal:
+        return (
+            "C2",
+            "The active goal asks about imagination, so GARVIS should preserve the imagination question.",
+            {
+                "step": "Draft an imagination-specific triadic record.",
+                "stage": "Stage 2 draft-only",
+                "expected_output": "A local advisory record for imagination as symbolic candidate generation.",
+                "success_condition": "The record separates imagination from evidence.",
+                "stop_condition": "Stop if hallucination is presented as truth.",
+            },
+        )
+
+    if "self-model" in goal or "self modeling" in goal or "self-modeling" in goal:
+        return (
+            "C3",
+            "The active goal asks about self-modeling, so GARVIS should preserve the self-modeling question.",
+            {
+                "step": "Draft a self-modeling-specific triadic record.",
+                "stage": "Stage 2 draft-only",
+                "expected_output": "A local advisory record for measurable self-modeling without claiming self-awareness.",
+                "success_condition": "The record separates self-modeling from subjective experience.",
+                "stop_condition": "Stop if metadata tracking is presented as consciousness.",
+            },
+        )
+
+    return (
+        "C1",
+        "Thinking remains the root deep question when no more specific deep-question target is detected.",
+        {
+            "step": "Build DIRECTIVE-008J Triadic Deep Question Record CLI.",
+            "stage": "Stage 2 draft-only",
+            "expected_output": "A local CLI that drafts a Dream-to-Lab bridge record for the selected deep question without claiming truth or executing experiments.",
+            "success_condition": "The draft record contains Dream material, Bridge translation, Lab requirements, claim boundaries, null model needs, and operator review fields.",
+            "stop_condition": "Stop if the tool writes runtime memory automatically, claims consciousness, runs experiments, calls a network, or upgrades claims.",
+        },
+    )
+
 
 
 def build_deep_question_cycle(repo, active_goal):
     files = tracked_files(repo)
+    candidates = build_deep_question_candidates(files, active_goal)
+    selected_id, selected_reasoning, selected_next_step = select_deep_question_candidate(active_goal)
     cycle = {
         "cycle_id": f"cycle-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}",
         "cycle_version": "1.0",
@@ -335,7 +483,7 @@ def build_deep_question_cycle(repo, active_goal):
             "what_is_missing": "Formal deep-question record writer is not implemented.",
             "current_stage_assessment": "Stage 2 deep-question advisory output"
         },
-        "candidate_thoughts": build_deep_question_candidates(files, active_goal),
+        "candidate_thoughts": candidates,
         "comparison": {
             "comparison_method": "Compare deep questions by operational clarity, bridgeability, falsifiability, risk of overclaiming, and value to GARVIS.",
             "dominant_tradeoff": "Define thinking first before stronger claims about consciousness or self-modeling.",
@@ -343,12 +491,12 @@ def build_deep_question_cycle(repo, active_goal):
             "anti_rationalization_check": "The selected question must become operational, not poetic proof."
         },
         "selection": {
-            "selected_candidate_id": "C1",
+            "selected_candidate_id": selected_id,
             "decision": "recommend",
             "confidence": "high",
             "blocked": False,
             "block_reason": "None",
-            "reasoning": "Thinking is the root deep question because GARVIS already performs bounded cognitive cycles."
+            "reasoning": selected_reasoning
         },
         "uncertainty": {
             "unknowns": [
@@ -375,11 +523,11 @@ def build_deep_question_cycle(repo, active_goal):
             "ledger_required": True
         },
         "next_smallest_step": {
-            "step": "Build DIRECTIVE-008J Triadic Deep Question Record CLI.",
-            "stage": "Stage 2 draft-only",
-            "expected_output": "A local CLI that drafts a Dream-to-Lab bridge record for the selected deep question without claiming truth or executing experiments.",
-            "success_condition": "The draft record contains Dream material, Bridge translation, Lab requirements, forbidden claims, null model needs, and operator review fields.",
-            "stop_condition": "Stop if the tool writes runtime memory automatically, claims consciousness, runs experiments, calls a network, or upgrades claims."
+            "step": selected_next_step["step"],
+            "stage": selected_next_step["stage"],
+            "expected_output": selected_next_step["expected_output"],
+            "success_condition": selected_next_step["success_condition"],
+            "stop_condition": selected_next_step["stop_condition"]
         },
         "evaluation": {
             "may_self_observe": True,
