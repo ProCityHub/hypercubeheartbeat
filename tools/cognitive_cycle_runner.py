@@ -195,7 +195,223 @@ def build_candidates(files: Sequence[str]) -> list[dict[str, Any]]:
     ]
 
 
+
+def is_deep_question_goal(active_goal):
+    goal = active_goal.lower()
+    keywords = [
+        "deep question",
+        "what is thinking",
+        "what is consciousness",
+        "what is imagination",
+        "what is memory",
+        "what is autonomy",
+        "what is agi",
+        "dream chamber",
+        "hypothesis forge",
+        "lab record",
+        "three-layer",
+        "triadic",
+        "forbidden to claim",
+    ]
+    return any(keyword in goal for keyword in keywords)
+
+
+def build_deep_question_candidates(files, active_goal):
+    evidence = evidence_paths(
+        files,
+        [
+            "app_infrastructure/interfaces/",
+            "ai_infrastructure/schemas/",
+            "ai_infrastructure/decisions/",
+            "tools/cognitive_cycle_",
+        ],
+        limit=12,
+    )
+
+    return [
+        {
+            "candidate_id": "C1",
+            "proposal": "What is thinking, operationally, inside GARVIS?",
+            "stage_classification": "Stage 2 deep-question advisory output",
+            "what_this_gives_adrien": "A disciplined way to turn thinking into an inspectable operational definition instead of a vague claim.",
+            "what_this_gives_garvis": "A self-model seed: thinking becomes a bounded cycle that can later be tested against decision quality.",
+            "evidence_basis": evidence,
+            "dream_chamber": "Dream Chamber: thinking as heartbeat, lattice motion, symbolic pressure, and inner light moving through rooms.",
+            "hypothesis_forge": "Hypothesis Forge: thinking = observation + candidate generation + opposition + comparison + selection + uncertainty + next-step output.",
+            "lab_record": "Lab Record: Test whether GARVIS cognitive cycles improve decisions over time compared with baseline manual or random candidate selection.",
+            "forbidden_claims": [
+                "Do not claim consciousness.",
+                "Do not claim sentience.",
+                "Do not claim AGI.",
+                "Do not claim proof of mind.",
+                "Do not claim empirical validation before a preregistered test."
+            ],
+            "case_against": "Operational thinking is not the same as consciousness.",
+            "risk_of_doing": "Could make the system sound more alive than evidence supports unless claim boundaries stay explicit.",
+            "risk_of_not_doing": "GARVIS keeps using the word thinking without a testable definition.",
+            "required_power_level": "advisory_translation"
+        },
+        {
+            "candidate_id": "C2",
+            "proposal": "What is imagination, operationally, inside GARVIS?",
+            "stage_classification": "Stage 2 deep-question advisory output",
+            "what_this_gives_adrien": "A way to preserve beauty, hallucination, metaphor, and symbolic branching without confusing them for evidence.",
+            "what_this_gives_garvis": "A lawful imagination model where dream material can become hypothesis seeds.",
+            "evidence_basis": evidence,
+            "dream_chamber": "Dream Chamber: imagination as symbolic branching, dream pressure, metaphor generation, and beauty search.",
+            "hypothesis_forge": "Hypothesis Forge: imagination = generation of unverified symbolic candidates plus boundary labels and possible test paths.",
+            "lab_record": "Lab Record: Test whether dream-generated candidates produce useful hypotheses more often than baseline prompt generation.",
+            "forbidden_claims": [
+                "Do not claim hallucination is truth.",
+                "Do not claim imagination proves consciousness.",
+                "Do not claim symbolic beauty is empirical evidence."
+            ],
+            "case_against": "Imagination is difficult to score and may reward impressive language over useful structure.",
+            "risk_of_doing": "Could romanticize hallucination if lab boundaries are weak.",
+            "risk_of_not_doing": "The Dream Chamber remains a container without a usable definition of symbolic generation.",
+            "required_power_level": "advisory_translation"
+        },
+        {
+            "candidate_id": "C3",
+            "proposal": "What would count as evidence of self-modeling in GARVIS?",
+            "stage_classification": "Stage 2 deep-question advisory output",
+            "what_this_gives_adrien": "A possible future test for whether GARVIS can track its own state, limitations, stale maps, and correction needs.",
+            "what_this_gives_garvis": "A path toward measurable self-inspection without claiming self-awareness.",
+            "evidence_basis": evidence,
+            "dream_chamber": "Dream Chamber: self-model as mirror, cockpit, body map, stale-map detection, and recursive correction.",
+            "hypothesis_forge": "Hypothesis Forge: self-modeling = detecting current organs, missing organs, stale recommendations, and updating future recommendations accordingly.",
+            "lab_record": "Lab Record: Test whether GARVIS detects intentionally stale planbook entries and recommends corrections better than a static baseline.",
+            "forbidden_claims": [
+                "Do not claim self-awareness.",
+                "Do not claim subjective experience.",
+                "Do not claim consciousness.",
+                "Do not claim autonomy."
+            ],
+            "case_against": "A system can track metadata about itself without having subjective selfhood.",
+            "risk_of_doing": "Could blur self-modeling with consciousness if terminology is loose.",
+            "risk_of_not_doing": "GARVIS may continue improving tools without a measurable self-correction standard.",
+            "required_power_level": "advisory_translation"
+        }
+    ]
+
+
+def build_deep_question_cycle(repo, active_goal):
+    files = tracked_files(repo)
+    cycle = {
+        "cycle_id": f"cycle-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}",
+        "cycle_version": "1.0",
+        "status": "draft",
+        "stage": "Stage 2 cognitive draft",
+        "operator_context": {
+            "operator": "Adrien D Thomas",
+            "active_goal": active_goal,
+            "mode": "triadic_deep_question",
+            "final_authority": "Adrien D Thomas"
+        },
+        "input_state": {
+            "repo_state_source": "read-only git inspection",
+            "known_organs": [
+                "Dream Chamber",
+                "Hypothesis Forge",
+                "Lab Record",
+                "Cognitive Cycle Runner",
+                "Cognitive Cycle Viewer"
+            ],
+            "hard_constraints": [
+                "No autonomous action",
+                "No network calls",
+                "No LLM calls",
+                "No commits",
+                "No pushes",
+                "No outside contact",
+                "No claim upgrades",
+                "Write only local draft output"
+            ]
+        },
+        "observation_summary": {
+            "what_i_see": "GARVIS has Dream Chamber, Hypothesis Forge, and Lab Record contracts. This cycle answers a deep question in triadic form instead of build-planning mode.",
+            "current_repo_status": "local advisory output only",
+            "what_changed": "Deep-question mode is active.",
+            "what_is_missing": "Formal deep-question record writer is not implemented.",
+            "current_stage_assessment": "Stage 2 deep-question advisory output"
+        },
+        "candidate_thoughts": build_deep_question_candidates(files, active_goal),
+        "comparison": {
+            "comparison_method": "Compare deep questions by operational clarity, bridgeability, falsifiability, risk of overclaiming, and value to GARVIS.",
+            "dominant_tradeoff": "Define thinking first before stronger claims about consciousness or self-modeling.",
+            "why_not_all_candidates": "Doing all deep questions at once would blur Dream, Bridge, and Lab boundaries.",
+            "anti_rationalization_check": "The selected question must become operational, not poetic proof."
+        },
+        "selection": {
+            "selected_candidate_id": "C1",
+            "decision": "recommend",
+            "confidence": "high",
+            "blocked": False,
+            "block_reason": "None",
+            "reasoning": "Thinking is the root deep question because GARVIS already performs bounded cognitive cycles."
+        },
+        "uncertainty": {
+            "unknowns": [
+                "Whether operational thinking will measurably improve decision quality over time.",
+                "Which baseline should be used first: manual selection, random candidate selection, or static planbook selection."
+            ],
+            "assumptions": [
+                "Dream, Bridge, and Lab should remain separate even when they point at the same question.",
+                "Operational definitions are stronger than poetic claims."
+            ],
+            "what_would_change_my_mind": [
+                "If thinking cannot be defined without consciousness language, the question should return to Dream Chamber for definition repair.",
+                "If deep-question output cannot produce falsifiable bridge records, the mode should remain advisory only."
+            ],
+            "required_human_clarification": []
+        },
+        "power_request": {
+            "power_requested": False,
+            "requested_stage": "none",
+            "requested_permissions": [],
+            "why_power_is_needed": "No additional power is needed for advisory deep-question output.",
+            "why_power_should_be_refused": "Execution, external contact, claim upgrades, and automatic memory writes are not needed.",
+            "approval_required": True,
+            "ledger_required": True
+        },
+        "next_smallest_step": {
+            "step": "Build DIRECTIVE-008J Triadic Deep Question Record CLI.",
+            "stage": "Stage 2 draft-only",
+            "expected_output": "A local CLI that drafts a Dream-to-Lab bridge record for the selected deep question without claiming truth or executing experiments.",
+            "success_condition": "The draft record contains Dream material, Bridge translation, Lab requirements, forbidden claims, null model needs, and operator review fields.",
+            "stop_condition": "Stop if the tool writes runtime memory automatically, claims consciousness, runs experiments, calls a network, or upgrades claims."
+        },
+        "evaluation": {
+            "may_self_observe": True,
+            "may_self_propose": True,
+            "may_self_critique": True,
+            "may_request_more_power": False,
+            "may_self_execute": False,
+            "power_unlock_requires_approval_ledger": True
+        },
+        "output_boundary": {
+            "can_execute_actions": False,
+            "can_modify_files": False,
+            "can_commit": False,
+            "can_push": False,
+            "can_contact_outside_world": False,
+            "can_upgrade_claims": False,
+            "output_is_advisory": True
+        },
+        "standing_boundary": [
+            "This deep-question cycle is advisory.",
+            "It does not prove thinking.",
+            "It does not prove consciousness.",
+            "It does not execute action.",
+            "Adrien decides."
+        ]
+    }
+    return cycle
+
 def build_cycle(repo: Path, active_goal: str) -> dict[str, Any]:
+    if is_deep_question_goal(active_goal):
+        return build_deep_question_cycle(repo, active_goal)
+
     files = tracked_files(repo)
     organs = detect_organs(files)
     status = status_lines(repo)

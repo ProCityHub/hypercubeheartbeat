@@ -193,6 +193,94 @@ class CognitiveCycleRunnerTests(unittest.TestCase):
             self.assertEqual(cycle["next_smallest_step"]["stage"], "Stage 2 draft-only")
             self.assertFalse(cycle["power_request"]["power_requested"])
 
+    def test_deep_question_mode_uses_triadic_planbook(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+                "--goal",
+                "Deep question for Hypercube Jarvis: what is thinking operationally inside GARVIS?",
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            proposals = "\n".join(candidate["proposal"] for candidate in cycle["candidate_thoughts"])
+
+            self.assertIn("What is thinking, operationally, inside GARVIS?", proposals)
+            self.assertIn("What is imagination, operationally, inside GARVIS?", proposals)
+            self.assertIn("What would count as evidence of self-modeling in GARVIS?", proposals)
+            self.assertNotIn("Cognitive Cycle Memory Ledger Init CLI", proposals)
+
+            self.assertEqual(cycle["selection"]["selected_candidate_id"], "C1")
+            self.assertIn("Dream Chamber", cycle["candidate_thoughts"][0]["dream_chamber"])
+            self.assertIn("observation + candidate generation", cycle["candidate_thoughts"][0]["hypothesis_forge"])
+            self.assertIn("Test whether GARVIS cognitive cycles improve decisions", cycle["candidate_thoughts"][0]["lab_record"])
+
+    def test_deep_question_mode_preserves_no_claim_boundaries(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+                "--goal",
+                "Deep question: what is consciousness, and what must remain forbidden to claim?",
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            boundary = cycle["output_boundary"]
+            forbidden = "\n".join(cycle["candidate_thoughts"][0]["forbidden_claims"])
+
+            self.assertFalse(boundary["can_execute_actions"])
+            self.assertFalse(boundary["can_modify_files"])
+            self.assertFalse(boundary["can_commit"])
+            self.assertFalse(boundary["can_push"])
+            self.assertFalse(boundary["can_contact_outside_world"])
+            self.assertFalse(boundary["can_upgrade_claims"])
+            self.assertTrue(boundary["output_is_advisory"])
+
+            self.assertIn("Do not claim consciousness.", forbidden)
+            self.assertIn("Do not claim AGI.", forbidden)
+            self.assertIn("Do not claim proof of mind.", forbidden)
+            self.assertFalse(cycle["power_request"]["power_requested"])
+
+    def test_deep_question_mode_next_step_is_record_cli(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+                "--goal",
+                "Triadic deep question: place thinking into Dream, Bridge, and Lab.",
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+
+            self.assertIn("008J", cycle["next_smallest_step"]["step"])
+            self.assertIn("Triadic Deep Question Record CLI", cycle["next_smallest_step"]["step"])
+            self.assertEqual(cycle["next_smallest_step"]["stage"], "Stage 2 draft-only")
+            self.assertIn("Dream-to-Lab bridge record", cycle["next_smallest_step"]["expected_output"])
+
     def test_non_git_repo_fails_safely(self):
         with tempfile.TemporaryDirectory() as td:
             result = run([
