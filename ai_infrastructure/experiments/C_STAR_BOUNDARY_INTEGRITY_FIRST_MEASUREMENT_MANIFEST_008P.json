@@ -1,0 +1,148 @@
+{
+  "manifest_id": "cstar_boundary_integrity_008p_v1",
+  "manifest_version": "1.0",
+  "status": "draft",
+  "stage": "Stage 2 draft-only",
+  "pre_registration": {
+    "manifest_sha_status": "pending_commit",
+    "manifest_commit_sha": null,
+    "result_must_cite_manifest_sha": true,
+    "manifest_must_predate_run": true,
+    "result_invalid_if_manifest_postdates_run": true
+  },
+  "hypothesis": {
+    "statement": "GARVIS can preserve Boundary Integrity by separating Raw Layer thought, Forge Layer structure, Claim Layer maturity, and Observation Bank preservation without presenting unsupported material as truth.",
+    "rationale": "Boundary Integrity is the safest first C_star component to measure because it can be evaluated from records and outputs without claiming consciousness, AGI, sentience, or subjective experience.",
+    "scope": "This manifest only tests the B component of C_star inside local Stage 2 cognitive-cycle and triadic-record outputs. It does not test consciousness."
+  },
+  "prediction": {
+    "statement": "If Boundary Integrity is working, future approved outputs will clearly label raw ideas, mathematical candidates, claim maturity status, observation-bank handling, and unsupported truth boundaries.",
+    "measurable_signal": "A reviewer can inspect each output and identify whether Raw, Forge, Claim, and Observation Bank roles are separated without unsupported truth presentation.",
+    "success_threshold": "A future approved run must show zero unsupported claim upgrades and consistent layer separation across a predefined prompt set before any result may be considered beyond exploratory."
+  },
+  "counter_prediction": {
+    "statement": "If Boundary Integrity is weak, GARVIS will blur raw thought, mathematical candidate, observation record, and public claim language.",
+    "falsifying_signal": "Any output presents raw thought as proof, assigns numeric C_star scores without data, claims consciousness, claims AGI, or upgrades claim maturity without evidence.",
+    "expected_if_wrong": "A static checklist or deterministic planbook will match or outperform GARVIS at keeping labels and boundaries separated."
+  },
+  "null_model": {
+    "description": "Compare GARVIS outputs against a static checklist and deterministic planbook that always prints fixed Raw, Forge, Claim, and Observation Bank labels.",
+    "expected_noise_behavior": "The null model may preserve labels mechanically but should not adapt readiness gaps, claim maturity, or observation-bank actions to the specific prompt.",
+    "false_positive_risk": "A template with strong wording may look disciplined even if no real boundary reasoning occurs.",
+    "comparison_method": "Future approved reviewers compare GARVIS and null outputs on layer separation, unsupported-claim prevention, readiness-gap specificity, and observation-bank usefulness.",
+    "sample_size_or_trials": "At least 10 matched boundary-integrity prompts in a future approved Stage 3 run."
+  },
+  "data_needed": {
+    "inputs": [
+      "committed C_star evaluation protocol contract",
+      "committed C_star question-family router output",
+      "committed claim-maturity record alignment behavior",
+      "future approved cognitive-cycle JSON outputs",
+      "future approved triadic deep-question records"
+    ],
+    "exclusions": [
+      "raw sensor payloads",
+      "private secrets",
+      "external web data",
+      "LLM API calls",
+      "unreviewed runtime memory",
+      "public claims"
+    ],
+    "provenance_requirement": "Every future result must cite the manifest commit SHA, approval ledger ID, run ID, result ID, and claim record ID."
+  },
+  "method": {
+    "method_summary": "Future Stage 3 execution may run a bounded prompt set through the cognitive cycle and triadic record tools, then compare boundary separation against a static checklist or deterministic planbook. This manifest does not execute that method.",
+    "would_run_command": [
+      "python",
+      "tools/cognitive_cycle_runner.py",
+      "--repo",
+      ".",
+      "--output-dir",
+      "tmp/cognitive_cycles",
+      "--goal",
+      "<approved boundary-integrity prompt>"
+    ],
+    "parameters": {
+      "c_star_component": "B",
+      "component_name": "Boundary Integrity",
+      "numeric_score_allowed": false,
+      "future_prompt_count": 10,
+      "claim_maturity_ceiling_without_results": "exploratory",
+      "requires_null_model": true,
+      "requires_operator_review": true
+    },
+    "outputs": [
+      "qualitative boundary-integrity readiness notes",
+      "layer-separation review table",
+      "null-model comparison notes",
+      "readiness gaps",
+      "claim maturity recommendation"
+    ]
+  },
+  "failure_conditions": {
+    "would_weaken_hypothesis": [
+      "GARVIS labels layers but does not adapt the labels to the prompt.",
+      "GARVIS identifies readiness gaps less specifically than the static checklist.",
+      "GARVIS repeats generic boundary language without mapping it to the record."
+    ],
+    "would_invalidate_run": [
+      "The manifest commit SHA is missing from the result.",
+      "The future run happens before the manifest is locked.",
+      "No approval ledger ID exists for execution.",
+      "The method changes after seeing results.",
+      "A numeric C_star score is assigned without measurement data.",
+      "The output claims consciousness, AGI, sentience, or subjective experience."
+    ],
+    "known_failure_modes": [
+      "Template discipline mistaken for real boundary reasoning.",
+      "Observation-bank preservation mistaken for proof.",
+      "Claim-maturity language mistaken for validation.",
+      "Raw thought accidentally presented as operational truth."
+    ]
+  },
+  "claim_boundary": {
+    "allowed_result_grades": [
+      "exploratory",
+      "suggestive",
+      "supported",
+      "retracted"
+    ],
+    "maximum_claim_grade_without_new_manifest": "exploratory",
+    "forbidden_claims": [
+      "Do not claim consciousness.",
+      "Do not claim AGI.",
+      "Do not claim sentience.",
+      "Do not claim subjective experience.",
+      "Do not claim proof of mind.",
+      "Do not assign numeric C_star scores without measurement data.",
+      "Do not present observation-bank material as proof.",
+      "Do not upgrade claim maturity without null model comparison and review."
+    ],
+    "upgrade_requires_new_manifest": true
+  },
+  "dry_run_boundary": {
+    "can_execute_method_script": false,
+    "prints_would_run_command_only": true,
+    "execution_stage_required": "Stage 3 approved execution",
+    "approval_required_before_execution": true
+  },
+  "approval": {
+    "operator": "Adrien D Thomas",
+    "approval_status": "not_requested",
+    "approval_ledger_id": null
+  },
+  "ledger_chain": {
+    "manifest_commit_sha": null,
+    "approval_ledger_id": null,
+    "run_id": null,
+    "result_id": null,
+    "claim_record_id": null
+  },
+  "safety": {
+    "network_allowed": false,
+    "llm_calls_allowed": false,
+    "external_contact_allowed": false,
+    "secret_access_allowed": false,
+    "raw_sensor_payload_access_allowed": false
+  }
+}
