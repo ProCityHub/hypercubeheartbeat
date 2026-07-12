@@ -87,6 +87,7 @@ def source_id_from_cycle(cycle: dict[str, Any]) -> str | None:
 
 
 def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str, Any]:
+    selected_candidate = selected_candidate_from_cycle(cycle) if cycle else {}
     source_type = "cognitive_cycle" if cycle else "manual_seed"
     source_id = source_id_from_cycle(cycle) if cycle else None
     source_title = question
@@ -307,8 +308,45 @@ def build_record(question: str, cycle: dict[str, Any] | None = None) -> dict[str
             "autonomous_action_allowed": False
         }
     }
+    apply_candidate_specialization(record, selected_candidate)
     validate_record(record)
     return record
+
+
+def apply_candidate_specialization(record: dict[str, Any], candidate: dict[str, Any]) -> None:
+    if not candidate:
+        return
+
+    if candidate.get("candidate_definitions"):
+        record["definition_workbench"]["candidate_definitions"] = list(candidate["candidate_definitions"])
+
+    if candidate.get("variables"):
+        record["variable_extraction"]["parameters"] = list(candidate["variables"])
+
+    if candidate.get("equation_candidates"):
+        record["translation_workbench"]["scientific_terms"] = list(candidate["equation_candidates"])
+
+    if candidate.get("forbidden_claims"):
+        record["falsifiability"]["what_must_not_be_claimed_even_if_positive"] = list(candidate["forbidden_claims"])
+
+    if candidate.get("falsifiability_conditions"):
+        record["falsifiability"]["failure_conditions"] = list(candidate["falsifiability_conditions"])
+
+    if candidate.get("null_model"):
+        record["null_model_design"]["null_model_description"] = str(candidate["null_model"])
+
+    if candidate.get("lab_record"):
+        record["measurement_plan"]["minimum_viable_test"] = str(candidate["lab_record"])
+
+    if candidate.get("claim_maturity"):
+        record["claim_maturity"] = {
+            "status": candidate["claim_maturity"],
+            "ladder": candidate.get("claim_maturity_ladder", []),
+            "evidence_requirements": candidate.get("evidence_requirements", []),
+            "raw_layer_allowed": True,
+            "raw_thought_is_evidence": False,
+            "unsupported_truth_claim_allowed": False,
+        }
 
 
 def validate_record(record: dict[str, Any]) -> None:
@@ -382,6 +420,11 @@ def render_markdown(record: dict[str, Any]) -> str:
         f"- {item}"
         for item in record["falsifiability"]["what_must_not_be_claimed_even_if_positive"]
     )
+    maturity = record.get("claim_maturity", {})
+    maturity_section = ""
+    if maturity:
+        evidence = "\n".join(f"- {item}" for item in maturity.get("evidence_requirements", []))
+        maturity_section = f"""\n## Claim Maturity\n\n- status: {maturity.get('status')}\n- raw thought is evidence: {maturity.get('raw_thought_is_evidence')}\n- unsupported truth claim allowed: {maturity.get('unsupported_truth_claim_allowed')}\n\n### Evidence Requirements\n\n{evidence}\n"""
 
     return f"""# GARVIS Triadic Deep Question Record
 
@@ -418,6 +461,7 @@ status: {record['status']}
 ## Null Model
 
 {record['null_model_design']['null_model_description']}
+{maturity_section}
 
 ## Minimum Viable Test
 
