@@ -1,0 +1,453 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ProCityHub/hypercubeheartbeat/ai_infrastructure/schemas/dream_to_lab_bridge_record_schema_v1.json",
+  "title": "GARVIS Dream-to-Lab Bridge Record Schema v1",
+  "description": "Stage 2 contract for translating Dream Chamber material into Lab Record-ready hypothesis structure without making claims.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "record_version",
+    "stage",
+    "status",
+    "triadic_layer_map",
+    "source_material",
+    "translation_workbench",
+    "definition_workbench",
+    "variable_extraction",
+    "hypothesis_candidates",
+    "null_model_design",
+    "measurement_plan",
+    "falsifiability",
+    "manifest_gate",
+    "memory_links",
+    "operator_review",
+    "output_boundary",
+    "safety"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "record_version": {
+      "const": "1.0"
+    },
+    "stage": {
+      "const": "Stage 2 dream-to-lab bridge contract"
+    },
+    "status": {
+      "enum": ["draft_contract", "future_record", "retired"]
+    },
+    "triadic_layer_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer_1",
+        "layer_2",
+        "layer_3",
+        "convergence_zone"
+      ],
+      "properties": {
+        "layer_1": {
+          "const": "Dream Chamber"
+        },
+        "layer_2": {
+          "const": "Hypothesis Forge"
+        },
+        "layer_3": {
+          "const": "Lab Record"
+        },
+        "convergence_zone": {
+          "const": "Dream material becomes testable structure without becoming a claim."
+        }
+      }
+    },
+    "source_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type",
+        "source_id",
+        "source_title",
+        "source_mode",
+        "raw_symbolic_summary",
+        "claim_status"
+      ],
+      "properties": {
+        "source_type": {
+          "enum": ["dream_chamber_record", "grok_report", "cognitive_cycle", "manual_seed", "other"]
+        },
+        "source_id": {
+          "type": ["string", "null"]
+        },
+        "source_title": {
+          "type": "string"
+        },
+        "source_mode": {
+          "enum": ["symbolic", "speculative", "metaphorical", "artistic", "open_question", "unverified"]
+        },
+        "raw_symbolic_summary": {
+          "type": "string"
+        },
+        "claim_status": {
+          "const": "forbidden_to_claim"
+        }
+      }
+    },
+    "translation_workbench": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "translation_goal",
+        "symbolic_terms",
+        "scientific_terms",
+        "unsupported_terms",
+        "bridge_notes"
+      ],
+      "properties": {
+        "translation_goal": {
+          "type": "string"
+        },
+        "symbolic_terms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "scientific_terms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "unsupported_terms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "bridge_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "definition_workbench": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_definitions",
+        "terms_requiring_definition",
+        "definition_failures",
+        "minimum_definition_needed"
+      ],
+      "properties": {
+        "candidate_definitions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "terms_requiring_definition": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "definition_failures": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "minimum_definition_needed": {
+          "type": "string"
+        }
+      }
+    },
+    "variable_extraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observables",
+        "parameters",
+        "controls",
+        "unknowns",
+        "non_measurable_items"
+      ],
+      "properties": {
+        "observables": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "parameters": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "controls": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "unknowns": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "non_measurable_items": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "hypothesis_candidates": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "hypothesis_id",
+          "hypothesis",
+          "prediction",
+          "counter_prediction",
+          "claim_boundary",
+          "bridge_confidence"
+        ],
+        "properties": {
+          "hypothesis_id": {
+            "type": "string"
+          },
+          "hypothesis": {
+            "type": "string"
+          },
+          "prediction": {
+            "type": "string"
+          },
+          "counter_prediction": {
+            "type": "string"
+          },
+          "claim_boundary": {
+            "const": "exploratory_only_until_experiment_manifest_and_result"
+          },
+          "bridge_confidence": {
+            "enum": ["low", "medium", "high"]
+          }
+        }
+      }
+    },
+    "null_model_design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "null_model_required",
+        "null_model_description",
+        "random_control",
+        "negative_control",
+        "baseline_comparison"
+      ],
+      "properties": {
+        "null_model_required": {
+          "const": true
+        },
+        "null_model_description": {
+          "type": "string"
+        },
+        "random_control": {
+          "type": "string"
+        },
+        "negative_control": {
+          "type": "string"
+        },
+        "baseline_comparison": {
+          "type": "string"
+        }
+      }
+    },
+    "measurement_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurement_target",
+        "measurement_method",
+        "data_needed",
+        "minimum_viable_test",
+        "limits"
+      ],
+      "properties": {
+        "measurement_target": {
+          "type": "string"
+        },
+        "measurement_method": {
+          "type": "string"
+        },
+        "data_needed": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "minimum_viable_test": {
+          "type": "string"
+        },
+        "limits": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "falsifiability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "failure_conditions",
+        "what_would_make_it_wrong",
+        "what_would_only_make_it_suggestive",
+        "what_must_not_be_claimed_even_if_positive"
+      ],
+      "properties": {
+        "failure_conditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "what_would_make_it_wrong": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "what_would_only_make_it_suggestive": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "what_must_not_be_claimed_even_if_positive": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "manifest_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_request_experiment_manifest",
+        "manifest_required_before_test",
+        "pre_registration_required",
+        "result_claim_vocabulary",
+        "bridge_can_emit_claim"
+      ],
+      "properties": {
+        "can_request_experiment_manifest": {
+          "const": true
+        },
+        "manifest_required_before_test": {
+          "const": true
+        },
+        "pre_registration_required": {
+          "const": true
+        },
+        "result_claim_vocabulary": {
+          "type": "array",
+          "items": {
+            "enum": ["exploratory", "suggestive", "supported", "retracted"]
+          }
+        },
+        "bridge_can_emit_claim": {
+          "const": false
+        }
+      }
+    },
+    "memory_links": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dream_record_ids",
+        "cognitive_cycle_ids",
+        "experiment_manifest_ids",
+        "lab_record_ids",
+        "grok_source_ids"
+      ],
+      "properties": {
+        "dream_record_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "cognitive_cycle_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "experiment_manifest_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "lab_record_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "grok_source_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "operator_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_status",
+        "operator",
+        "operator_decision",
+        "notes"
+      ],
+      "properties": {
+        "review_status": {
+          "enum": ["unreviewed", "reviewed", "accepted_for_manifest", "rejected", "deferred"]
+        },
+        "operator": {
+          "const": "Adrien D Thomas"
+        },
+        "operator_decision": {
+          "enum": ["none", "keep_in_bridge", "convert_to_experiment_manifest", "return_to_dream_chamber", "reject", "defer"]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "output_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_be_used_as_public_claim",
+        "can_be_used_as_scientific_result",
+        "can_upgrade_claims",
+        "can_trigger_action",
+        "can_write_lab_record",
+        "output_is_translation"
+      ],
+      "properties": {
+        "can_be_used_as_public_claim": {
+          "const": false
+        },
+        "can_be_used_as_scientific_result": {
+          "const": false
+        },
+        "can_upgrade_claims": {
+          "const": false
+        },
+        "can_trigger_action": {
+          "const": false
+        },
+        "can_write_lab_record": {
+          "const": false
+        },
+        "output_is_translation": {
+          "const": true
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network_allowed",
+        "llm_calls_allowed",
+        "external_contact_allowed",
+        "secret_access_allowed",
+        "runtime_write_implemented",
+        "autonomous_action_allowed"
+      ],
+      "properties": {
+        "network_allowed": { "const": false },
+        "llm_calls_allowed": { "const": false },
+        "external_contact_allowed": { "const": false },
+        "secret_access_allowed": { "const": false },
+        "runtime_write_implemented": { "const": false },
+        "autonomous_action_allowed": { "const": false }
+      }
+    }
+  }
+}
