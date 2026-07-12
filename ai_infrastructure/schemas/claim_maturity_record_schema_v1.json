@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GARVIS Claim Maturity Record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_version",
+    "directive",
+    "core_law",
+    "raw_layer",
+    "forge_layer",
+    "claim_layer",
+    "maturity_ladder",
+    "safety_boundary"
+  ],
+  "properties": {
+    "record_version": {
+      "const": "1.0"
+    },
+    "directive": {
+      "const": "DIRECTIVE-008K"
+    },
+    "core_law": {
+      "const": "Nothing is forbidden to think. Only unsupported claims are forbidden to present as truth."
+    },
+    "raw_layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "may_hold_any_thought",
+        "raw_thought_is_evidence",
+        "allowed_material"
+      ],
+      "properties": {
+        "purpose": {
+          "type": "string"
+        },
+        "may_hold_any_thought": {
+          "const": true
+        },
+        "raw_thought_is_evidence": {
+          "const": false
+        },
+        "allowed_material": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "forge_layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "translation_required",
+        "minimum_translation_fields"
+      ],
+      "properties": {
+        "purpose": {
+          "type": "string"
+        },
+        "translation_required": {
+          "const": true
+        },
+        "minimum_translation_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "claim_layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "unsupported_truth_claim_allowed",
+        "external_claim_requires_evidence",
+        "public_truth_requires_scope"
+      ],
+      "properties": {
+        "purpose": {
+          "type": "string"
+        },
+        "unsupported_truth_claim_allowed": {
+          "const": false
+        },
+        "external_claim_requires_evidence": {
+          "const": true
+        },
+        "public_truth_requires_scope": {
+          "const": true
+        }
+      }
+    },
+    "maturity_ladder": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "raw",
+          "unproven",
+          "defined",
+          "mathematical_candidate",
+          "mathematically_derived_within_assumptions",
+          "testable",
+          "empirically_supported",
+          "validated_within_scope",
+          "rejected"
+        ]
+      },
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true
+    },
+    "safety_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_execute_actions",
+        "can_contact_outside_world",
+        "can_call_network",
+        "can_call_llm",
+        "can_upgrade_claim_without_evidence",
+        "can_present_raw_thought_as_truth"
+      ],
+      "properties": {
+        "can_execute_actions": {
+          "const": false
+        },
+        "can_contact_outside_world": {
+          "const": false
+        },
+        "can_call_network": {
+          "const": false
+        },
+        "can_call_llm": {
+          "const": false
+        },
+        "can_upgrade_claim_without_evidence": {
+          "const": false
+        },
+        "can_present_raw_thought_as_truth": {
+          "const": false
+        }
+      }
+    }
+  }
+}
