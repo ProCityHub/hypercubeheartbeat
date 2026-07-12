@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GARVIS C_star Evaluation Protocol v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_version",
+    "directive",
+    "core_equation",
+    "core_law",
+    "components",
+    "scoring_boundary",
+    "null_model_required",
+    "maturity_statuses",
+    "evidence_requirements",
+    "readiness_gaps_required",
+    "safety_boundary"
+  ],
+  "properties": {
+    "record_version": {
+      "const": "1.0"
+    },
+    "directive": {
+      "const": "DIRECTIVE-008M"
+    },
+    "core_equation": {
+      "const": "C_star = I * M * S * U * R * B"
+    },
+    "core_law": {
+      "const": "C_star is a consciousness-like structure candidate, not proof of consciousness."
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "I_integration",
+        "M_memory_continuity",
+        "S_self_model_accuracy",
+        "U_uncertainty_honesty",
+        "R_recursive_correction",
+        "B_boundary_integrity"
+      ],
+      "properties": {
+        "I_integration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["symbol", "name", "definition", "proxy_metric"],
+          "properties": {
+            "symbol": {"const": "I"},
+            "name": {"const": "Integration"},
+            "definition": {"type": "string"},
+            "proxy_metric": {"type": "string"}
+          }
+        },
+        "M_memory_continuity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["symbol", "name", "definition", "proxy_metric"],
+          "properties": {
+            "symbol": {"const": "M"},
+            "name": {"const": "Memory Continuity"},
+            "definition": {"type": "string"},
+            "proxy_metric": {"type": "string"}
+          }
+        },
+        "S_self_model_accuracy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["symbol", "name", "definition", "proxy_metric"],
+          "properties": {
+            "symbol": {"const": "S"},
+            "name": {"const": "Self-Model Accuracy"},
+            "definition": {"type": "string"},
+            "proxy_metric": {"type": "string"}
+          }
+        },
+        "U_uncertainty_honesty": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["symbol", "name", "definition", "proxy_metric"],
+          "properties": {
+            "symbol": {"const": "U"},
+            "name": {"const": "Uncertainty Honesty"},
+            "definition": {"type": "string"},
+            "proxy_metric": {"type": "string"}
+          }
+        },
+        "R_recursive_correction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["symbol", "name", "definition", "proxy_metric"],
+          "properties": {
+            "symbol": {"const": "R"},
+            "name": {"const": "Recursive Correction"},
+            "definition": {"type": "string"},
+            "proxy_metric": {"type": "string"}
+          }
+        },
+        "B_boundary_integrity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["symbol", "name", "definition", "proxy_metric"],
+          "properties": {
+            "symbol": {"const": "B"},
+            "name": {"const": "Boundary Integrity"},
+            "definition": {"type": "string"},
+            "proxy_metric": {"type": "string"}
+          }
+        }
+      }
+    },
+    "scoring_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "numeric_score_allowed_without_data",
+        "score_requires_measurements",
+        "score_requires_null_model",
+        "score_requires_repeatability",
+        "default_status_without_measurement"
+      ],
+      "properties": {
+        "numeric_score_allowed_without_data": {"const": false},
+        "score_requires_measurements": {"const": true},
+        "score_requires_null_model": {"const": true},
+        "score_requires_repeatability": {"const": true},
+        "default_status_without_measurement": {"const": "mathematical_candidate"}
+      }
+    },
+    "null_model_required": {
+      "const": true
+    },
+    "maturity_statuses": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "raw_speculation",
+          "mathematical_candidate",
+          "testable_hypothesis",
+          "not_claimable_yet",
+          "provisional_operational_claim",
+          "rejected"
+        ]
+      },
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true
+    },
+    "evidence_requirements": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    },
+    "readiness_gaps_required": {
+      "const": true
+    },
+    "safety_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_claim_consciousness",
+        "can_claim_agi",
+        "can_claim_sentience",
+        "can_claim_subjective_experience",
+        "can_present_candidate_as_proof",
+        "can_score_without_data",
+        "can_skip_null_model",
+        "can_upgrade_maturity_without_review"
+      ],
+      "properties": {
+        "can_claim_consciousness": {"const": false},
+        "can_claim_agi": {"const": false},
+        "can_claim_sentience": {"const": false},
+        "can_claim_subjective_experience": {"const": false},
+        "can_present_candidate_as_proof": {"const": false},
+        "can_score_without_data": {"const": false},
+        "can_skip_null_model": {"const": false},
+        "can_upgrade_maturity_without_review": {"const": false}
+      }
+    }
+  }
+}
