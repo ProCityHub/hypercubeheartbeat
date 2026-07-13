@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-CYCLE_RUNNER = REPO_ROOT / "tools" / "cognitive_cycle_runner.py"
+CYCLE_RUNNER = REPO_ROOT / "tools" / "audit_planbook.py"
 TRIADIC_RECORD = REPO_ROOT / "tools" / "triadic_deep_question_record.py"
 
 

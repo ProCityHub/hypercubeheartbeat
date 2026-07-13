@@ -31,7 +31,7 @@ def sample_cycle():
             "ledger_source": "local ledger if present",
             "cockpit_source": "tools/scientific_cockpit_snapshot.py",
             "self_design_source": "tools/self_design_proposal_runner.py",
-            "known_organs": ["Cognitive cycle runner: tools/cognitive_cycle_runner.py"],
+            "known_organs": ["Audit planbook: tools/audit_planbook.py"],
             "hard_constraints": ["No autonomous action", "No network calls"]
         },
         "observation_summary": {
@@ -47,7 +47,7 @@ def sample_cycle():
                 "stage_classification": "Stage 2 draft-only",
                 "what_this_gives_adrien": "Clearer inspection of thought cycles.",
                 "what_this_gives_garvis": "A mirror for its own cognitive output.",
-                "evidence_basis": ["tools/cognitive_cycle_runner.py"],
+                "evidence_basis": ["tools/audit_planbook.py"],
                 "case_against": "A viewer could make draft thought look too authoritative.",
                 "risk_of_doing": "Could overstate maturity.",
                 "risk_of_not_doing": "Thought cycles remain hard to inspect.",

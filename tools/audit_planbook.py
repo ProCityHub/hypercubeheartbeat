@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GARVIS Cognitive Cycle Runner CLI.
+GARVIS Audit Planbook CLI.
 
 DIRECTIVE-008B.
 
@@ -44,7 +44,7 @@ TRACKED_ORGANS = {
     "Experiment manifest schema": "ai_infrastructure/schemas/experiment_manifest_schema_v1.json",
     "Experiment manifest viewer": "tools/experiment_manifest_viewer.py",
     "Cognitive cycle schema": "ai_infrastructure/schemas/cognitive_cycle_schema_v1.json",
-    "Cognitive cycle runner": "tools/cognitive_cycle_runner.py",
+    "Audit planbook": "tools/audit_planbook.py",
     "Cognitive cycle viewer": "tools/cognitive_cycle_viewer.py",
     "Cognitive cycle memory ledger contract": "app_infrastructure/interfaces/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT.md",
     "Cognitive cycle memory ledger record schema": "ai_infrastructure/schemas/cognitive_cycle_memory_ledger_record_schema_v1.json",

@@ -1,4 +1,9 @@
 # Triadic Deep Question Planbook Runbook
+> **Post-reconciliation name:** The active audit-only implementation is
+> `tools/audit_planbook.py`. The former
+> `tools/audit_planbook.py` path was removed during repository
+> reconciliation. The audit-only implementation is `tools/audit_planbook.py`
+> and must not be used as the conversational interface.
 
 ## Status
 
@@ -10,7 +15,7 @@ It teaches Heartbeat a deep-question mode.
 
 ## Tool updated
 
-`tools/cognitive_cycle_runner.py`
+`tools/audit_planbook.py`
 
 ## Purpose
 

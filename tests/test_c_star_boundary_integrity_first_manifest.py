@@ -16,12 +16,12 @@ class CStarBoundaryIntegrityFirstManifestTests(unittest.TestCase):
     def load_manifest(self):
         return json.loads(MANIFEST_PATH.read_text())
 
-    def test_manifest_is_stage_2_draft_only(self):
+    def test_manifest_is_superseded_stage_2_record(self):
         manifest = self.load_manifest()
 
         self.assertEqual(manifest["manifest_id"], "cstar_boundary_integrity_008p_v1")
         self.assertEqual(manifest["manifest_version"], "1.0")
-        self.assertEqual(manifest["status"], "draft")
+        self.assertEqual(manifest["status"], "superseded")
         self.assertEqual(manifest["stage"], "Stage 2 draft-only")
         self.assertEqual(manifest["pre_registration"]["manifest_sha_status"], "pending_commit")
         self.assertIsNone(manifest["pre_registration"]["manifest_commit_sha"])
@@ -81,6 +81,10 @@ class CStarBoundaryIntegrityFirstManifestTests(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("- status: PASS", result.stdout)
+        self.assertIn(
+            "manifest is superseded; it cannot authorize a future execution",
+            result.stdout,
+        )
         self.assertIn("cstar_boundary_integrity_008p_v1", result.stdout)
         self.assertIn("Boundary Integrity", result.stdout)
         self.assertIn("This viewer cannot execute the would-run command.", result.stdout)

@@ -34,7 +34,7 @@
       "const": "1.0"
     },
     "status": {
-      "enum": ["draft", "pre_registered", "retired"]
+      "enum": ["draft", "pre_registered", "retired", "superseded"]
     },
     "stage": {
       "const": "Stage 2 draft-only"
