@@ -119,8 +119,20 @@ def validate_manifest(manifest: dict[str, Any]) -> tuple[list[str], list[str]]:
     if manifest.get("stage") != "Stage 2 draft-only":
         errors.append("stage must be Stage 2 draft-only")
 
-    if manifest.get("status") not in {"draft", "pre_registered", "retired"}:
-        errors.append("status must be draft, pre_registered, or retired")
+    if manifest.get("status") not in {
+        "draft",
+        "pre_registered",
+        "retired",
+        "superseded",
+    }:
+        errors.append(
+            "status must be draft, pre_registered, retired, or superseded"
+        )
+
+    if manifest.get("status") == "superseded":
+        warnings.append(
+            "manifest is superseded; it cannot authorize a future execution"
+        )
 
     pre = require_object(manifest, "pre_registration")
     if pre.get("result_must_cite_manifest_sha") is not True:

@@ -1,7 +1,7 @@
 {
   "manifest_id": "cstar_boundary_integrity_008p_v1",
   "manifest_version": "1.0",
-  "status": "draft",
+  "status": "superseded",
   "stage": "Stage 2 draft-only",
   "pre_registration": {
     "manifest_sha_status": "pending_commit",

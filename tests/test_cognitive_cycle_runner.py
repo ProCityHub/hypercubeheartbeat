@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SCRIPT_PATH = REPO_ROOT / "tools" / "cognitive_cycle_runner.py"
+SCRIPT_PATH = REPO_ROOT / "tools" / "audit_planbook.py"
 SCHEMA_PATH = REPO_ROOT / "ai_infrastructure" / "schemas" / "cognitive_cycle_schema_v1.json"
 
 

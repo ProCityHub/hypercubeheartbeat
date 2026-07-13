@@ -1,0 +1,15 @@
+# Intentional future, template, or proposal-only references.
+# These entries do not assert that the referenced files currently exist.
+ai_infrastructure/decisions/COGNITIVE_CYCLE_PLANBOOK_REFRESH_DECISION.md:tools/cognitive_cycle_runner.py
+ai_infrastructure/decisions/COGNITIVE_CYCLE_RUNNER_DECISION.md:tools/cognitive_cycle_runner.py
+ai_infrastructure/decisions/TRIADIC_DEEP_QUESTION_PLANBOOK_DECISION.md:tools/cognitive_cycle_runner.py
+ai_infrastructure/experiments/C_STAR_BOUNDARY_INTEGRITY_FIRST_MEASUREMENT_MANIFEST_008P.json:tools/cognitive_cycle_runner.py
+ai_infrastructure/manifests/LL07_RATINGS_MANIFEST_TEMPLATE.md:ai_infrastructure/inbox/ll07_ratings/ll07_ratings_raw.csv
+docs/DIRECTIVE_RECONCILIATION.md:ai_infrastructure/manifests/008P_BOUNDARY_INTEGRITY_MANIFEST.md
+docs/DIRECTIVE_RECONCILIATION.md:tools/cognitive_cycle_runner.py
+docs/ORIGINAL_UNIFIED_BUILD_DIRECTIVE.md:tools/cognitive_cycle_runner.py
+tests/test_experiment_manifest_viewer.py:tools/future_experiment.py
+tools/audit_planbook.py:ai_infrastructure/decisions/POWER_REQUEST_QUEUE_CONTRACT_DECISION.md
+tools/audit_planbook.py:app_infrastructure/interfaces/POWER_REQUEST_QUEUE_CONTRACT.md
+tools/self_design_proposal_runner.py:tools/experiment_repro_harness.py
+tools/self_design_proposal_runner.py:tools/proposal_comparison_matrix.py

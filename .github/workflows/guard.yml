@@ -32,6 +32,10 @@ jobs:
             tests/test_arc_lattice_bridge.py \
             tests/test_qasm_thesis_reviewer.py
 
+      - name: Check dependency integrity
+        run: |
+          python tools/check_dependencies.py
+
       - name: Run repository guard
         run: |
           python .github/scripts/guard_check.py

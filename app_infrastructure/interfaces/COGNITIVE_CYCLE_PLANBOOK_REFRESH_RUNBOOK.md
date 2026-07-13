@@ -1,4 +1,9 @@
 # Cognitive Cycle Planbook Refresh Runbook
+> **Post-reconciliation name:** The active audit-only implementation is
+> `tools/audit_planbook.py`. The former
+> `tools/audit_planbook.py` path was removed during repository
+> reconciliation. The audit-only implementation is `tools/audit_planbook.py`
+> and must not be used as the conversational interface.
 
 ## Status
 
@@ -12,7 +17,7 @@ It is not a memory database implementation.
 
 ## Tool updated
 
-`tools/cognitive_cycle_runner.py`
+`tools/audit_planbook.py`
 
 ## Purpose
 
