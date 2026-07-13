@@ -29,7 +29,8 @@ jobs:
           python -m unittest \
             tests/test_lattice_diagnostic_report.py \
             tests/test_diagnostic_selftest_runner.py \
-            tests/test_arc_lattice_bridge.py
+            tests/test_arc_lattice_bridge.py \
+            tests/test_qasm_thesis_reviewer.py
 
       - name: Run repository guard
         run: |
