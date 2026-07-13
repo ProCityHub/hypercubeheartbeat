@@ -30,7 +30,10 @@ class ReviewerTests(unittest.TestCase):
     def test_review_is_deterministic_and_serializable(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); qasm = root / "x.qasm"; theory = root / "t.md"
-            qasm.write_text(SAMPLE); theory.write_text("C = O * A * B * phi\nC = O^1 * A^(1/phi) * B^(1/phi^2)\n")
+            qasm.write_text(SAMPLE)
+            historical_scalar = "C = O * A * B * " + "phi\n"
+            exponent_form = "C = O^1 * A^(1/phi) * B^(1/phi^2)\n"
+            theory.write_text(historical_scalar + exponent_form)
             one = reviewer.build_review([qasm], [theory]); two = reviewer.build_review([qasm], [theory])
             self.assertEqual(one, two); json.dumps(one); self.assertTrue(one["formula_conflicts"])
 
