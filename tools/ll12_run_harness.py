@@ -81,7 +81,7 @@ def main():
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
             f.flush(); os.fsync(f.fileno())
         print(f"    logged ({len(answer)} chars).")
-        time.sleep(20)  # respect the TPM budget
+        time.sleep(45)  # slow cadence for drained TPM bucket
     print(f"RUN COMPLETE: {RUNLOG} — do not edit. Scoring is next, in the open.")
 
 if __name__ == "__main__":
