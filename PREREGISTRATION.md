@@ -73,3 +73,16 @@ falsifiable.
 | 2026-07-10 | NOT_SUPPORTED — OSF Ultimatum lab result. Different formulation from the pre-registered AUC pilot; the AUC pilot remains open and has not been run. | Recorded per Phase 0 Task 1. |
 | 2026-07-10 | NOT_SUPPORTED — Kubota 20-row pilot produced FAIL under the preregistered criterion. Data commit `131930035567928ef74b07ad919605010761c484`; `data/ug_probe.csv` sha256 `64b69f868ce74981805f92a8bdb8a3cffbeaeb04a895a2579f1d81d60f8a7e44`; `data/kubota_full.csv` sha256 `96cfd31b7bff9ea765fc24825b59787d90fea999c28e6a9524614bd1f95ea92d`; selection rule `data/PILOT_SELECTION.md`; run output `data/KUBOTA_PREREGISTRATION_RUN.md`. | `131930035567928ef74b07ad919605010761c484` |
 | _pending_ | | |
+
+## Post-pilot ruling (2026-07-18)
+The pilot (O-001) returned NO SIGNAL. Ruling by operator Adrien D.
+Thomas: the campaign PROCEEDS to the N>=200 pre-registered test.
+Rationale: at n=20 the two models reordered zero decision pairs — the
+pilot was underpowered to distinguish them, and the kill criteria
+require BOTH pilot and N>=200 to fail before the phi hypothesis is
+retired. Constraint: the N>=200 test must be registered as a new
+frozen document BEFORE any new data is touched, with its own null
+model and success criterion. If it also returns NO SIGNAL, the
+phi-exponent hypothesis is retired to RETRACTIONS.md per the kill
+criteria, and the architecture continues as a general coherence-cost
+model without phi claims.
