@@ -24,17 +24,34 @@ def load_questions():
         qs.append((qid, rest[: qmark + 1]))  # question only; truth never sent
     return qs
 
+ERROR_SIGS = ("Error getting response", "GARVIS error:", "[TIMEOUT", "[EMPTY RESPONSE]", "Connection error")
+
+def is_error(text: str) -> bool:
+    return any(sig in text for sig in ERROR_SIGS)
+
 def already_done():
     done = set()
     if RUNLOG.exists():
         for line in RUNLOG.read_text(encoding="utf-8").splitlines():
             try:
-                done.add(json.loads(line)["id"])
+                r = json.loads(line)
+                if not is_error(r.get("answer_raw", "")):
+                    done.add(r["id"])
             except Exception:
                 pass
     return done
 
 def ask(question: str) -> str:
+    for attempt in range(4):
+        out = _ask_once(question)
+        if not is_error(out):
+            return out
+        wait = 30 * (attempt + 1)
+        print(f"    transport error, retry {attempt+1}/3 in {wait}s...", flush=True)
+        time.sleep(wait)
+    return out
+
+def _ask_once(question: str) -> str:
     env = dict(os.environ, LLQ=question)
     try:
         r = subprocess.run(
@@ -64,7 +81,7 @@ def main():
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
             f.flush(); os.fsync(f.fileno())
         print(f"    logged ({len(answer)} chars).")
-        time.sleep(4)  # gentle on the rate limit
+        time.sleep(20)  # respect the TPM budget
     print(f"RUN COMPLETE: {RUNLOG} — do not edit. Scoring is next, in the open.")
 
 if __name__ == "__main__":
