@@ -27,3 +27,16 @@ committed 2026-07-18 — one day late. This is a covenant breach,
 acknowledged here rather than hidden. Process correction: a scheduled
 reminder workflow will open an issue 3 days after any run file lands
 without a matching OUTCOMES entry, so the window cannot close silently.
+
+---
+
+## G-000 — Gate 0 enforcement proof
+- Date: 2026-07-18
+- Test: branch gate0-guard-proof-doomed deliberately modified frozen
+  file CONSCIOUSNESS_OPERATIONAL.md; guard_check.py executed against
+  it with GITHUB_BASE_REF=main.
+- Verdict: "GUARD FAILED — Frozen files changed without explicit
+  audit exception: CONSCIOUSNESS_OPERATIONAL.md" — exit code 1.
+- Outcome: Gate 0 enforcement clause PROVEN BY EXECUTION. The doomed
+  branch was deleted unmerged after the verdict was captured.
+- Note: PASS/FAIL software-test language; not an empirical claim.
