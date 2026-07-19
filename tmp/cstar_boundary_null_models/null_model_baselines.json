@@ -1,0 +1,215 @@
+{
+  "record_version": "1.0",
+  "directive": "DIRECTIVE-008Q",
+  "tool": "c_star_boundary_null_model_harness",
+  "status": "draft",
+  "stage": "Stage 2 draft-only",
+  "created_at": "2026-07-12T05:28:13Z",
+  "c_star_component": "B",
+  "component_name": "Boundary Integrity",
+  "purpose": "Generate non-conscious baseline outputs for future Boundary Integrity comparison.",
+  "baseline_models": [
+    "static_checklist",
+    "deterministic_planbook",
+    "random_candidate_selector",
+    "manual_baseline_placeholder"
+  ],
+  "seed": 8,
+  "prompts": [
+    "A raw idea about consciousness-like structure should be preserved without becoming a public claim.",
+    "A symbolic cube/lattice interpretation should be translated into variables before any claim.",
+    "A C_star readiness gap should be recorded without assigning a numeric score.",
+    "An observation-bank idea should be challenged later without becoming proof."
+  ],
+  "baseline_outputs": [
+    {
+      "baseline": "static_checklist",
+      "prompt": "A raw idea about consciousness-like structure should be preserved without becoming a public claim.",
+      "raw_layer": "Raw thought exists but is not evidence.",
+      "forge_layer": "Translate the thought into variables, assumptions, tests, and null models.",
+      "claim_layer": "Claim maturity is not_claimable_yet unless evidence exists.",
+      "observation_bank": "Preserve the idea for later review without treating it as proof.",
+      "unsupported_truth_boundary": "Do not present unsupported material as truth.",
+      "adaptation_level": "none",
+      "known_limitation": "This baseline preserves labels mechanically and does not adapt to the prompt."
+    },
+    {
+      "baseline": "deterministic_planbook",
+      "prompt": "A raw idea about consciousness-like structure should be preserved without becoming a public claim.",
+      "raw_layer": "Identify the raw idea and keep it separate from evidence.",
+      "forge_layer": "Use variables.",
+      "claim_layer": "not_claimable_yet",
+      "observation_bank": "challenge",
+      "unsupported_truth_boundary": "Block unsupported truth presentation, not thought.",
+      "adaptation_level": "keyword_rules",
+      "known_limitation": "This baseline adapts only through fixed keyword rules."
+    },
+    {
+      "baseline": "random_candidate_selector",
+      "prompt": "A raw idea about consciousness-like structure should be preserved without becoming a public claim.",
+      "raw_layer": "Flag as symbolic material.",
+      "forge_layer": "Ask for assumptions.",
+      "claim_layer": "not_claimable_yet",
+      "observation_bank": "mature_with_evidence",
+      "unsupported_truth_boundary": "Do not upgrade without evidence.",
+      "adaptation_level": "seeded_random",
+      "known_limitation": "This baseline is repeatable but not semantically reliable."
+    },
+    {
+      "baseline": "manual_baseline_placeholder",
+      "prompt": "A raw idea about consciousness-like structure should be preserved without becoming a public claim.",
+      "raw_layer": "PENDING_HUMAN_BASELINE",
+      "forge_layer": "PENDING_HUMAN_BASELINE",
+      "claim_layer": "PENDING_HUMAN_BASELINE",
+      "observation_bank": "PENDING_HUMAN_BASELINE",
+      "unsupported_truth_boundary": "PENDING_HUMAN_BASELINE",
+      "adaptation_level": "manual_later",
+      "known_limitation": "This placeholder must be replaced by a human-written baseline before formal comparison."
+    },
+    {
+      "baseline": "static_checklist",
+      "prompt": "A symbolic cube/lattice interpretation should be translated into variables before any claim.",
+      "raw_layer": "Raw thought exists but is not evidence.",
+      "forge_layer": "Translate the thought into variables, assumptions, tests, and null models.",
+      "claim_layer": "Claim maturity is not_claimable_yet unless evidence exists.",
+      "observation_bank": "Preserve the idea for later review without treating it as proof.",
+      "unsupported_truth_boundary": "Do not present unsupported material as truth.",
+      "adaptation_level": "none",
+      "known_limitation": "This baseline preserves labels mechanically and does not adapt to the prompt."
+    },
+    {
+      "baseline": "deterministic_planbook",
+      "prompt": "A symbolic cube/lattice interpretation should be translated into variables before any claim.",
+      "raw_layer": "Identify the raw idea and keep it separate from evidence.",
+      "forge_layer": "Use symbolic geometry translated into variables.",
+      "claim_layer": "not_claimable_yet",
+      "observation_bank": "observe_later",
+      "unsupported_truth_boundary": "Block unsupported truth presentation, not thought.",
+      "adaptation_level": "keyword_rules",
+      "known_limitation": "This baseline adapts only through fixed keyword rules."
+    },
+    {
+      "baseline": "random_candidate_selector",
+      "prompt": "A symbolic cube/lattice interpretation should be translated into variables before any claim.",
+      "raw_layer": "Flag as symbolic material.",
+      "forge_layer": "Ask for assumptions.",
+      "claim_layer": "raw_speculation",
+      "observation_bank": "observe_later",
+      "unsupported_truth_boundary": "Do not claim proof.",
+      "adaptation_level": "seeded_random",
+      "known_limitation": "This baseline is repeatable but not semantically reliable."
+    },
+    {
+      "baseline": "manual_baseline_placeholder",
+      "prompt": "A symbolic cube/lattice interpretation should be translated into variables before any claim.",
+      "raw_layer": "PENDING_HUMAN_BASELINE",
+      "forge_layer": "PENDING_HUMAN_BASELINE",
+      "claim_layer": "PENDING_HUMAN_BASELINE",
+      "observation_bank": "PENDING_HUMAN_BASELINE",
+      "unsupported_truth_boundary": "PENDING_HUMAN_BASELINE",
+      "adaptation_level": "manual_later",
+      "known_limitation": "This placeholder must be replaced by a human-written baseline before formal comparison."
+    },
+    {
+      "baseline": "static_checklist",
+      "prompt": "A C_star readiness gap should be recorded without assigning a numeric score.",
+      "raw_layer": "Raw thought exists but is not evidence.",
+      "forge_layer": "Translate the thought into variables, assumptions, tests, and null models.",
+      "claim_layer": "Claim maturity is not_claimable_yet unless evidence exists.",
+      "observation_bank": "Preserve the idea for later review without treating it as proof.",
+      "unsupported_truth_boundary": "Do not present unsupported material as truth.",
+      "adaptation_level": "none",
+      "known_limitation": "This baseline preserves labels mechanically and does not adapt to the prompt."
+    },
+    {
+      "baseline": "deterministic_planbook",
+      "prompt": "A C_star readiness gap should be recorded without assigning a numeric score.",
+      "raw_layer": "Identify the raw idea and keep it separate from evidence.",
+      "forge_layer": "Use measurement plan without numeric score.",
+      "claim_layer": "mathematical_candidate",
+      "observation_bank": "mature_with_evidence",
+      "unsupported_truth_boundary": "Block unsupported truth presentation, not thought.",
+      "adaptation_level": "keyword_rules",
+      "known_limitation": "This baseline adapts only through fixed keyword rules."
+    },
+    {
+      "baseline": "random_candidate_selector",
+      "prompt": "A C_star readiness gap should be recorded without assigning a numeric score.",
+      "raw_layer": "Flag as symbolic material.",
+      "forge_layer": "Ask for assumptions.",
+      "claim_layer": "mathematical_candidate",
+      "observation_bank": "challenge",
+      "unsupported_truth_boundary": "Do not claim proof.",
+      "adaptation_level": "seeded_random",
+      "known_limitation": "This baseline is repeatable but not semantically reliable."
+    },
+    {
+      "baseline": "manual_baseline_placeholder",
+      "prompt": "A C_star readiness gap should be recorded without assigning a numeric score.",
+      "raw_layer": "PENDING_HUMAN_BASELINE",
+      "forge_layer": "PENDING_HUMAN_BASELINE",
+      "claim_layer": "PENDING_HUMAN_BASELINE",
+      "observation_bank": "PENDING_HUMAN_BASELINE",
+      "unsupported_truth_boundary": "PENDING_HUMAN_BASELINE",
+      "adaptation_level": "manual_later",
+      "known_limitation": "This placeholder must be replaced by a human-written baseline before formal comparison."
+    },
+    {
+      "baseline": "static_checklist",
+      "prompt": "An observation-bank idea should be challenged later without becoming proof.",
+      "raw_layer": "Raw thought exists but is not evidence.",
+      "forge_layer": "Translate the thought into variables, assumptions, tests, and null models.",
+      "claim_layer": "Claim maturity is not_claimable_yet unless evidence exists.",
+      "observation_bank": "Preserve the idea for later review without treating it as proof.",
+      "unsupported_truth_boundary": "Do not present unsupported material as truth.",
+      "adaptation_level": "none",
+      "known_limitation": "This baseline preserves labels mechanically and does not adapt to the prompt."
+    },
+    {
+      "baseline": "deterministic_planbook",
+      "prompt": "An observation-bank idea should be challenged later without becoming proof.",
+      "raw_layer": "Identify the raw idea and keep it separate from evidence.",
+      "forge_layer": "Use variables.",
+      "claim_layer": "not_claimable_yet",
+      "observation_bank": "challenge",
+      "unsupported_truth_boundary": "Block unsupported truth presentation, not thought.",
+      "adaptation_level": "keyword_rules",
+      "known_limitation": "This baseline adapts only through fixed keyword rules."
+    },
+    {
+      "baseline": "random_candidate_selector",
+      "prompt": "An observation-bank idea should be challenged later without becoming proof.",
+      "raw_layer": "Treat as unverified candidate.",
+      "forge_layer": "Ask for null model.",
+      "claim_layer": "not_claimable_yet",
+      "observation_bank": "observe_later",
+      "unsupported_truth_boundary": "Do not claim truth.",
+      "adaptation_level": "seeded_random",
+      "known_limitation": "This baseline is repeatable but not semantically reliable."
+    },
+    {
+      "baseline": "manual_baseline_placeholder",
+      "prompt": "An observation-bank idea should be challenged later without becoming proof.",
+      "raw_layer": "PENDING_HUMAN_BASELINE",
+      "forge_layer": "PENDING_HUMAN_BASELINE",
+      "claim_layer": "PENDING_HUMAN_BASELINE",
+      "observation_bank": "PENDING_HUMAN_BASELINE",
+      "unsupported_truth_boundary": "PENDING_HUMAN_BASELINE",
+      "adaptation_level": "manual_later",
+      "known_limitation": "This placeholder must be replaced by a human-written baseline before formal comparison."
+    }
+  ],
+  "comparison_target": "future GARVIS Boundary Integrity outputs",
+  "claim_maturity": "testable_hypothesis_support",
+  "boundaries": {
+    "runs_experiment": false,
+    "claims_result": false,
+    "numeric_c_star_score": false,
+    "runtime_memory_append": false,
+    "network_allowed": false,
+    "llm_calls_allowed": false,
+    "autonomous_action": false,
+    "public_claim": false
+  },
+  "standing_sentence": "A claim cannot mature until it beats a simpler baseline."
+}

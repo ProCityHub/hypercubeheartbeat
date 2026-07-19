@@ -1,3 +1,8 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+# sensor media stays on-device, never in the public repo
+data/stage1_senses/camera/
+data/stage1_senses/audio/
+*.sqlite3-shm
+*.sqlite3-wal

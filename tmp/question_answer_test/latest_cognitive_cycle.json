@@ -1,0 +1,200 @@
+{
+  "candidate_thoughts": [
+    {
+      "candidate_id": "C1",
+      "case_against": "Creating a database moves from pure viewing into local state creation. The tool must remain explicit, local-only, and operator-run.",
+      "evidence_basis": [
+        "ai_infrastructure/decisions/APP_INFRASTRUCTURE_SKELETON_DECISION.md",
+        "ai_infrastructure/decisions/APP_LEDGER_VIEWER_CLI_DECISION.md",
+        "ai_infrastructure/decisions/APP_LEDGER_VIEWER_CONTRACT_DECISION.md",
+        "ai_infrastructure/decisions/CLAIM_MATURITY_DEEP_QUESTION_SPECIALIZER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_PLANBOOK_REFRESH_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_RUNNER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_SCHEMA_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_VIEWER_DECISION.md"
+      ],
+      "files_or_systems_touched": [
+        "tools/cognitive_cycle_memory_ledger.py",
+        "tests/test_cognitive_cycle_memory_ledger.py",
+        "app_infrastructure/interfaces/COGNITIVE_CYCLE_MEMORY_LEDGER_RUNBOOK.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_DECISION.md"
+      ],
+      "proposal": "Build a Cognitive Cycle Memory Ledger Init CLI that creates a local SQLite memory database for cognitive-cycle records.",
+      "required_power_level": "draft_file_creation",
+      "risk_of_doing": "Could make memory feel more permanent than its review process supports if operator review is not visible.",
+      "risk_of_not_doing": "GARVIS remains episodic: it can think and display thoughts, but cannot accumulate a durable thought history.",
+      "stage_classification": "Stage 2 draft-only",
+      "what_this_gives_adrien": "A concrete first step toward persistent thought memory without yet appending live cycles automatically.",
+      "what_this_gives_garvis": "A local memory vessel for future thought continuity, using the already-merged memory ledger contract."
+    },
+    {
+      "candidate_id": "C2",
+      "case_against": "Appending memory before initializing and inspecting the database could create opaque accumulation.",
+      "evidence_basis": [
+        "ai_infrastructure/decisions/APP_INFRASTRUCTURE_SKELETON_DECISION.md",
+        "ai_infrastructure/decisions/APP_LEDGER_VIEWER_CLI_DECISION.md",
+        "ai_infrastructure/decisions/APP_LEDGER_VIEWER_CONTRACT_DECISION.md",
+        "ai_infrastructure/decisions/CLAIM_MATURITY_DEEP_QUESTION_SPECIALIZER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_PLANBOOK_REFRESH_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_RUNNER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_SCHEMA_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_VIEWER_DECISION.md"
+      ],
+      "files_or_systems_touched": [
+        "tools/cognitive_cycle_memory_ledger.py",
+        "tests/test_cognitive_cycle_memory_ledger.py"
+      ],
+      "proposal": "Build a Cognitive Cycle Memory Append CLI that stores the latest cognitive cycle JSON as a reviewed local memory record.",
+      "required_power_level": "approved_local_execution",
+      "risk_of_doing": "Could store low-quality or stale thoughts if review status and chain integrity are weak.",
+      "risk_of_not_doing": "GARVIS remains unable to build a remembered cognitive history.",
+      "stage_classification": "Stage 3 approved local execution",
+      "what_this_gives_adrien": "Actual continuity of thought by preserving selected cognitive cycles into a local append-only ledger.",
+      "what_this_gives_garvis": "A way to compare current reasoning against prior reasoning across time."
+    },
+    {
+      "candidate_id": "C3",
+      "case_against": "A power queue is premature until cognitive memory can show whether GARVIS recommendations improve over time.",
+      "evidence_basis": [
+        "ai_infrastructure/decisions/APP_INFRASTRUCTURE_SKELETON_DECISION.md",
+        "ai_infrastructure/decisions/APP_LEDGER_VIEWER_CLI_DECISION.md",
+        "ai_infrastructure/decisions/APP_LEDGER_VIEWER_CONTRACT_DECISION.md",
+        "ai_infrastructure/decisions/CLAIM_MATURITY_DEEP_QUESTION_SPECIALIZER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_MEMORY_LEDGER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_PLANBOOK_REFRESH_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_RUNNER_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_SCHEMA_DECISION.md",
+        "ai_infrastructure/decisions/COGNITIVE_CYCLE_VIEWER_DECISION.md"
+      ],
+      "files_or_systems_touched": [
+        "app_infrastructure/interfaces/POWER_REQUEST_QUEUE_CONTRACT.md",
+        "ai_infrastructure/decisions/POWER_REQUEST_QUEUE_CONTRACT_DECISION.md"
+      ],
+      "proposal": "Create a Power Request Queue Contract for future stage upgrades requested by GARVIS.",
+      "required_power_level": "draft_file_creation",
+      "risk_of_doing": "Could shift the project toward power escalation before continuity and review are mature.",
+      "risk_of_not_doing": "Future power requests remain scattered across conversation, PR text, and manual notes.",
+      "stage_classification": "Stage 2 draft-only",
+      "what_this_gives_adrien": "A formal review surface for requests to give GARVIS more power without granting power automatically.",
+      "what_this_gives_garvis": "A lawful path to ask for stronger permissions as its thought quality improves."
+    }
+  ],
+  "comparison": {
+    "anti_rationalization_check": "The selected move must improve thought continuity without granting external hands or automatic execution.",
+    "comparison_method": "Compare each candidate by inspection value, maturity order, risk of premature power, and value to Adrien's Jarvis cockpit.",
+    "dominant_tradeoff": "The system needs continuity of thought, but memory should begin with explicit local initialization before append behavior or power queues.",
+    "why_not_all_candidates": "Building init, append, and power queue together would blur the boundary between memory preparation, memory writing, and power escalation."
+  },
+  "cycle_id": "cycle-20260712T184856Z",
+  "cycle_version": "1.0",
+  "evolution_contract": {
+    "may_request_more_power": true,
+    "may_self_criticize": true,
+    "may_self_execute": false,
+    "may_self_observe": true,
+    "may_self_propose": true,
+    "power_unlock_requires_approval_ledger": true
+  },
+  "input_state": {
+    "cockpit_source": "tools/scientific_cockpit_snapshot.py when committed",
+    "hard_constraints": [
+      "No autonomous action",
+      "No network calls",
+      "No LLM calls",
+      "No commits",
+      "No pushes",
+      "No outside contact",
+      "No claim upgrades",
+      "Write only local draft output"
+    ],
+    "known_organs": [
+      "GARVIS message schema: ai_infrastructure/schemas/garvis_message_schema_v1.json",
+      "Stage 1 senses ledger: tools/stage1_senses_loop.py",
+      "App ledger viewer: tools/app_ledger_viewer.py",
+      "Self-design proposal runner: tools/self_design_proposal_runner.py",
+      "Scientific cockpit snapshot: tools/scientific_cockpit_snapshot.py",
+      "Experiment manifest schema: ai_infrastructure/schemas/experiment_manifest_schema_v1.json",
+      "Experiment manifest viewer: tools/experiment_manifest_viewer.py",
+      "Cognitive cycle schema: ai_infrastructure/schemas/cognitive_cycle_schema_v1.json",
+      "Cognitive cycle runner: tools/cognitive_cycle_runner.py",
+      "Cognitive cycle viewer: tools/cognitive_cycle_viewer.py",
+      "Cognitive cycle memory ledger contract: app_infrastructure/interfaces/COGNITIVE_CYCLE_MEMORY_LEDGER_CONTRACT.md",
+      "Cognitive cycle memory ledger record schema: ai_infrastructure/schemas/cognitive_cycle_memory_ledger_record_schema_v1.json",
+      "Raw thought claim maturity schema: ai_infrastructure/schemas/claim_maturity_record_schema_v1.json",
+      "Raw thought claim maturity contract: app_infrastructure/interfaces/RAW_THOUGHT_CLAIM_MATURITY_CONTRACT.md"
+    ],
+    "ledger_source": "local Stage 1 ledger exists outside committed runtime scope if present",
+    "repo_state_source": "read-only git inspection on branch main at d3b31aa",
+    "self_design_source": "tools/self_design_proposal_runner.py when committed"
+  },
+  "next_smallest_step": {
+    "expected_output": "A local CLI that can initialize an append-only cognitive-cycle memory SQLite database with the schema required by the memory ledger contract.",
+    "stage": "Stage 2 draft-only",
+    "step": "Build DIRECTIVE-008F Cognitive Cycle Memory Ledger Init CLI.",
+    "stop_condition": "Stop if initialization implies automatic memory append, external calls, background service, or power escalation.",
+    "success_condition": "The init command creates the expected local tables in an explicit operator-run step, and tests prove no network, no external contact, no automatic append, and no repository writes."
+  },
+  "observation_summary": {
+    "current_stage_assessment": "draft_only",
+    "what_changed": "The cognitive-cycle runner, viewer, and memory-ledger contract now exist, so the next evolutionary step is a local memory vessel for cognitive-cycle continuity.",
+    "what_i_see": "GARVIS has committed organs for memory viewing, cockpit state, self-design, experiment manifests, manifest validation, and cognitive-cycle schema. Current repo status: working tree has staged=0, modified=0, untracked=5.",
+    "what_is_missing": "GARVIS still lacks an implemented cognitive memory database, append command, history viewer, power request queue, and approved execution path."
+  },
+  "operator_context": {
+    "active_goal": "What did I just ask you?",
+    "final_authority": "Adrien D Thomas",
+    "mode": "lab_record",
+    "operator": "Adrien D Thomas"
+  },
+  "output_boundary": {
+    "can_commit": false,
+    "can_contact_outside_world": false,
+    "can_execute_actions": false,
+    "can_modify_files": false,
+    "can_push": false,
+    "can_upgrade_claims": false,
+    "output_is_advisory": true
+  },
+  "power_request": {
+    "approval_required": true,
+    "ledger_required": true,
+    "power_requested": false,
+    "requested_permissions": [],
+    "requested_stage": "none",
+    "why_power_is_needed": "No additional external power is needed for a draft-only memory initialization tool.",
+    "why_power_should_be_refused": "Commits, pushes, outside contact, claim upgrades, and automatic appending are not needed to define a local memory vessel."
+  },
+  "selection": {
+    "block_reason": null,
+    "blocked": false,
+    "confidence": "high",
+    "decision": "recommend",
+    "reasoning": "The Cognitive Cycle Memory Ledger Init CLI is the next smallest useful organ because GARVIS can now think and display thought, but needs a local memory vessel before it can preserve thought history.",
+    "selected_candidate_id": "C1"
+  },
+  "stage": "Stage 2 cognitive draft",
+  "status": "draft",
+  "uncertainty": {
+    "assumptions": [
+      "The viewer and memory contract are already merged",
+      "Initialization should come before append behavior",
+      "The repo should continue evolving through small audited PRs"
+    ],
+    "required_human_clarification": [],
+    "unknowns": [
+      "Whether the first memory database should live beside the Stage 1 senses ledger or under a separate cognitive memory path",
+      "How much metadata is enough before raw cycle artifacts are stored",
+      "How soon append behavior should follow initialization"
+    ],
+    "what_would_change_my_mind": [
+      "If a memory database requires an approval queue before initialization",
+      "If Adrien wants power request governance before persistence",
+      "If the memory contract needs another amendment before implementation"
+    ]
+  }
+}
