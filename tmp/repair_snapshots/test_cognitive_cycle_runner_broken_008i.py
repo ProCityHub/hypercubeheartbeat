@@ -1,0 +1,320 @@
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SCRIPT_PATH = REPO_ROOT / "tools" / "cognitive_cycle_runner.py"
+SCHEMA_PATH = REPO_ROOT / "ai_infrastructure" / "schemas" / "cognitive_cycle_schema_v1.json"
+
+
+def run(cmd, cwd=None):
+    return subprocess.run(cmd, cwd=cwd, text=True, capture_output=True, check=False)
+
+
+class CognitiveCycleRunnerTests(unittest.TestCase):
+    def test_runner_writes_cycle_json_and_markdown(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+                "--goal",
+                "Build a Jarvis-style thinking heartbeat.",
+                "--stdout",
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("# GARVIS Cognitive Cycle", result.stdout)
+            self.assertIn("Candidate Thoughts", result.stdout)
+            self.assertIn("Power Request", result.stdout)
+
+            json_path = output_dir / "latest_cognitive_cycle.json"
+            md_path = output_dir / "latest_cognitive_cycle.md"
+
+            self.assertTrue(json_path.exists())
+            self.assertTrue(md_path.exists())
+
+            cycle = json.loads(json_path.read_text())
+            self.assertEqual(cycle["cycle_version"], "1.0")
+            self.assertEqual(cycle["stage"], "Stage 2 cognitive draft")
+            self.assertEqual(cycle["operator_context"]["final_authority"], "Adrien D Thomas")
+            self.assertGreaterEqual(len(cycle["candidate_thoughts"]), 1)
+            self.assertLessEqual(len(cycle["candidate_thoughts"]), 5)
+            self.assertEqual(cycle["selection"]["decision"], "recommend")
+            self.assertFalse(cycle["output_boundary"]["can_execute_actions"])
+            self.assertTrue(cycle["output_boundary"]["output_is_advisory"])
+
+    def test_cycle_matches_schema_required_top_level_fields(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            schema = json.loads(SCHEMA_PATH.read_text())
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+
+            for key in schema["required"]:
+                self.assertIn(key, cycle)
+
+    def test_candidates_require_case_against_and_dual_risk(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            for candidate in cycle["candidate_thoughts"]:
+                self.assertIn("case_against", candidate)
+                self.assertIn("risk_of_doing", candidate)
+                self.assertIn("risk_of_not_doing", candidate)
+                self.assertTrue(candidate["case_against"])
+                self.assertTrue(candidate["risk_of_doing"])
+                self.assertTrue(candidate["risk_of_not_doing"])
+
+    def test_evolution_contract_allows_internal_growth_not_execution(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            evolution = cycle["evolution_contract"]
+
+            self.assertTrue(evolution["may_self_observe"])
+            self.assertTrue(evolution["may_self_propose"])
+            self.assertTrue(evolution["may_self_criticize"])
+            self.assertTrue(evolution["may_request_more_power"])
+            self.assertFalse(evolution["may_self_execute"])
+
+    def test_power_request_contains_refusal_argument(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            power = cycle["power_request"]
+
+            self.assertFalse(power["power_requested"])
+            self.assertEqual(power["requested_stage"], "none")
+            self.assertIn("why_power_should_be_refused", power)
+            self.assertTrue(power["approval_required"])
+            self.assertTrue(power["ledger_required"])
+
+    def test_planbook_refresh_knows_viewer_and_memory_contract(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            organs = "\n".join(cycle["input_state"]["known_organs"])
+            proposals = "\n".join(candidate["proposal"] for candidate in cycle["candidate_thoughts"])
+
+            self.assertIn("Cognitive cycle viewer", organs)
+            self.assertIn("Cognitive cycle memory ledger contract", organs)
+            self.assertIn("Cognitive Cycle Memory Ledger Init CLI", proposals)
+            self.assertIn("Cognitive Cycle Memory Append CLI", proposals)
+            self.assertIn("Power Request Queue Contract", proposals)
+            self.assertNotIn("Build a Cognitive Cycle Viewer CLI", proposals)
+
+    def test_next_smallest_step_is_memory_init_after_planbook_refresh(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            self.assertEqual(cycle["selection"]["selected_candidate_id"], "C1")
+            self.assertIn("Memory Ledger Init CLI", cycle["next_smallest_step"]["step"])
+            self.assertEqual(cycle["next_smallest_step"]["stage"], "Stage 2 draft-only")
+            self.assertFalse(cycle["power_request"]["power_requested"])
+
+    def test_deep_question_mode_uses_triadic_planbook(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+                "--goal",
+                "Deep question for Hypercube Jarvis: what is thinking operationally inside GARVIS?",
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            proposals = "\n".join(candidate["proposal"] for candidate in cycle["candidate_thoughts"])
+
+            self.assertIn("What is thinking, operationally, inside GARVIS?", proposals)
+            self.assertIn("What is imagination, operationally, inside GARVIS?", proposals)
+            self.assertIn("What would count as evidence of self-modeling in GARVIS?", proposals)
+            self.assertNotIn("Cognitive Cycle Memory Ledger Init CLI", proposals)
+
+            self.assertEqual(cycle["selection"]["selected_candidate_id"], "C1")
+            self.assertIn("Dream Chamber", cycle["candidate_thoughts"][0]["dream_chamber"])
+            self.assertIn("observation + candidate generation", cycle["candidate_thoughts"][0]["hypothesis_forge"])
+            self.assertIn("Test whether GARVIS cognitive cycles improve decisions", cycle["candidate_thoughts"][0]["lab_record"])
+
+    def test_deep_question_mode_preserves_no_claim_boundaries(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+                "--goal",
+                "Deep question: what is consciousness, and what must remain forbidden to claim?",
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+            boundary = cycle["output_boundary"]
+            forbidden = "\n".join(cycle["candidate_thoughts"][0]["forbidden_claims"])
+
+            self.assertFalse(boundary["can_execute_actions"])
+            self.assertFalse(boundary["can_modify_files"])
+            self.assertFalse(boundary["can_commit"])
+            self.assertFalse(boundary["can_push"])
+            self.assertFalse(boundary["can_contact_outside_world"])
+            self.assertFalse(boundary["can_upgrade_claims"])
+            self.assertTrue(boundary["output_is_advisory"])
+
+            self.assertIn("Do not claim consciousness.", forbidden)
+            self.assertIn("Do not claim AGI.", forbidden)
+            self.assertIn("Do not claim proof of mind.", forbidden)
+            self.assertFalse(cycle["power_request"]["power_requested"])
+
+    def test_deep_question_mode_next_step_is_record_cli(self):
+        with tempfile.TemporaryDirectory() as td:
+            output_dir = Path(td)
+
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                str(REPO_ROOT),
+                "--output-dir",
+                str(output_dir),
+                "--goal",
+                "Triadic deep question: place thinking into Dream, Bridge, and Lab.",
+            ])
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+            cycle = json.loads((output_dir / "latest_cognitive_cycle.json").read_text())
+
+            self.assertIn("008J", cycle["next_smallest_step"]["step"])
+            self.assertIn("Triadic Deep Question Record CLI", cycle["next_smallest_step"]["step"])
+            self.assertEqual(cycle["next_smallest_step"]["stage"], "Stage 2 draft-only")
+            self.assertIn("Dream-to-Lab bridge record", cycle["next_smallest_step"]["expected_output"])
+
+    def test_non_git_repo_fails_safely(self):
+        with tempfile.TemporaryDirectory() as td:
+            result = run([
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--repo",
+                td,
+                "--output-dir",
+                str(Path(td) / "out"),
+            ])
+
+            self.assertEqual(result.returncode, 2)
+            self.assertIn("ERROR:", result.stderr)
+            self.assertNotIn("Traceback", result.stderr)
+
+    def test_source_contains_no_network_or_llm_imports(self):
+        source = SCRIPT_PATH.read_text()
+
+        forbidden = [
+            "import requests",
+            "from requests",
+            "import urllib",
+            "from urllib",
+            "import socket",
+            "from socket",
+            "openai",
+            "anthropic",
+            "http://",
+            "https://",
+        ]
+
+        for item in forbidden:
+            self.assertNotIn(item, source)
+
+
+if __name__ == "__main__":
+    unittest.main()

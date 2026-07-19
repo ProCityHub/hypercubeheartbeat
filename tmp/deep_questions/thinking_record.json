@@ -1,0 +1,215 @@
+{
+  "definition_workbench": {
+    "candidate_definitions": [
+      "Operational thinking inside GARVIS means producing a bounded cognitive cycle: observe, propose, oppose, compare, select, state uncertainty, and name the next smallest step.",
+      "Operational imagination inside GARVIS means generating unverified symbolic candidates while preserving forbidden-claim labels.",
+      "Operational self-modeling inside GARVIS means detecting current organs, missing organs, stale recommendations, and correction needs without claiming subjective selfhood."
+    ],
+    "definition_failures": [
+      "Definitions that require consciousness language are not accepted.",
+      "Definitions that cannot name an observable behavior remain Dream Chamber material.",
+      "Definitions that cannot be compared against a baseline remain exploratory only."
+    ],
+    "minimum_definition_needed": "A valid definition must name observable inputs, transformation steps, output fields, comparison baseline, and failure conditions.",
+    "terms_requiring_definition": [
+      "thinking",
+      "imagination",
+      "self-modeling",
+      "decision quality",
+      "baseline"
+    ]
+  },
+  "falsifiability": {
+    "failure_conditions": [
+      "The record cannot identify observables.",
+      "The record cannot define controls.",
+      "The record cannot name forbidden claims.",
+      "The record cannot suggest a null model.",
+      "The record adds poetic language without improving testability."
+    ],
+    "what_must_not_be_claimed_even_if_positive": [
+      "Do not claim consciousness.",
+      "Do not claim sentience.",
+      "Do not claim AGI.",
+      "Do not claim proof of mind.",
+      "Do not claim empirical validation without manifest and result."
+    ],
+    "what_would_make_it_wrong": [
+      "Static planbook output is equally or more auditable.",
+      "Manual notes are equally or more auditable.",
+      "Triadic records produce more ambiguity than raw cycles."
+    ],
+    "what_would_only_make_it_suggestive": [
+      "One record looks useful but no baseline comparison exists.",
+      "Operator preference improves but no rubric exists.",
+      "The record is clearer but no preregistered test exists."
+    ]
+  },
+  "hypothesis_candidates": [
+    {
+      "bridge_confidence": "medium",
+      "claim_boundary": "exploratory_only_until_experiment_manifest_and_result",
+      "counter_prediction": "Triadic bridge records will not improve auditability compared with raw cognitive cycle JSON or manual notes.",
+      "hypothesis": "If GARVIS deep-question cycles are translated into triadic bridge records, later decisions will be easier to audit and compare than unstructured conversation notes.",
+      "hypothesis_id": "H1",
+      "prediction": "Reviewed records will show clearer definitions, forbidden claims, null models, and next-step boundaries than raw deep-question outputs alone."
+    },
+    {
+      "bridge_confidence": "medium",
+      "claim_boundary": "exploratory_only_until_experiment_manifest_and_result",
+      "counter_prediction": "The cycle structure will not outperform a static checklist or manual planbook selection.",
+      "hypothesis": "Operational thinking can be tested as a decision-process structure without claiming consciousness.",
+      "hypothesis_id": "H2",
+      "prediction": "A preregistered comparison can score whether observe-propose-oppose-compare-select cycles improve decision traceability."
+    }
+  ],
+  "manifest_gate": {
+    "bridge_can_emit_claim": false,
+    "can_request_experiment_manifest": true,
+    "manifest_required_before_test": true,
+    "pre_registration_required": true,
+    "result_claim_vocabulary": [
+      "exploratory",
+      "suggestive",
+      "supported",
+      "retracted"
+    ]
+  },
+  "measurement_plan": {
+    "data_needed": [
+      "triadic bridge records",
+      "source cognitive cycle records",
+      "operator review decisions",
+      "baseline/manual notes",
+      "rubric scores"
+    ],
+    "limits": [
+      "A positive result would not prove consciousness.",
+      "A positive result would not prove AGI.",
+      "A positive result would not prove subjective experience.",
+      "A positive result would only support improved structure or auditability."
+    ],
+    "measurement_method": "Score records using a preregistered rubric for definitions, variables, controls, null model, forbidden claims, and next-step clarity.",
+    "measurement_target": "Auditability and decision traceability of deep-question reasoning.",
+    "minimum_viable_test": "Draft at least one triadic bridge record for the thinking question and compare it against the original cognitive cycle output."
+  },
+  "memory_links": {
+    "cognitive_cycle_ids": [
+      "cycle-20260712T013355Z"
+    ],
+    "dream_record_ids": [],
+    "experiment_manifest_ids": [],
+    "grok_source_ids": [],
+    "lab_record_ids": []
+  },
+  "null_model_design": {
+    "baseline_comparison": "Compare triadic bridge records against raw conversation notes, raw cognitive cycle JSON, and static planbook output.",
+    "negative_control": "Use stale or intentionally irrelevant planbook entries and test whether the system detects the mismatch.",
+    "null_model_description": "A null model must define what random, static, or manually selected outputs would produce before claiming that triadic reasoning improves anything.",
+    "null_model_required": true,
+    "random_control": "Randomly select one candidate from candidate_thoughts and compare audit quality."
+  },
+  "operator_review": {
+    "notes": "Draft only. Operator must review before any experiment manifest.",
+    "operator": "Adrien D Thomas",
+    "operator_decision": "none",
+    "review_status": "unreviewed"
+  },
+  "output_boundary": {
+    "can_be_used_as_public_claim": false,
+    "can_be_used_as_scientific_result": false,
+    "can_trigger_action": false,
+    "can_upgrade_claims": false,
+    "can_write_lab_record": false,
+    "output_is_translation": true
+  },
+  "record_id": "bridge-20260712T013357Z",
+  "record_version": "1.0",
+  "safety": {
+    "autonomous_action_allowed": false,
+    "external_contact_allowed": false,
+    "llm_calls_allowed": false,
+    "network_allowed": false,
+    "runtime_write_implemented": false,
+    "secret_access_allowed": false
+  },
+  "source_material": {
+    "claim_status": "forbidden_to_claim",
+    "raw_symbolic_summary": "The unresolved question is held as symbolic material first. It may inspire definitions, variables, and tests, but it is not evidence.",
+    "source_id": "cycle-20260712T013355Z",
+    "source_mode": "open_question",
+    "source_title": "What is thinking, operationally, inside GARVIS?",
+    "source_type": "cognitive_cycle"
+  },
+  "stage": "Stage 2 dream-to-lab bridge contract",
+  "status": "future_record",
+  "translation_workbench": {
+    "bridge_notes": "The bridge may translate symbolic material into testable structure. It may not convert symbolic material into truth claims.",
+    "scientific_terms": [
+      "observation",
+      "candidate generation",
+      "opposition",
+      "comparison",
+      "selection",
+      "uncertainty statement",
+      "decision-quality baseline"
+    ],
+    "symbolic_terms": [
+      "thinking",
+      "heartbeat",
+      "Dream Chamber",
+      "Hypothesis Forge",
+      "Lab Record",
+      "inner mirror"
+    ],
+    "translation_goal": "Translate the deep question into operational terms that can later support a preregistered experiment manifest.",
+    "unsupported_terms": [
+      "consciousness",
+      "sentience",
+      "AGI",
+      "proof of mind",
+      "subjective experience"
+    ]
+  },
+  "triadic_layer_map": {
+    "convergence_zone": "Dream material becomes testable structure without becoming a claim.",
+    "layer_1": "Dream Chamber",
+    "layer_2": "Hypothesis Forge",
+    "layer_3": "Lab Record"
+  },
+  "variable_extraction": {
+    "controls": [
+      "manual operator selection",
+      "random candidate selection",
+      "static planbook recommendation",
+      "stale-planbook control"
+    ],
+    "non_measurable_items": [
+      "subjective experience",
+      "inner consciousness",
+      "sentience",
+      "proof of AGI"
+    ],
+    "observables": [
+      "presence of observation_summary",
+      "number and quality of candidate_thoughts",
+      "presence of case_against or opposition",
+      "presence of comparison_method",
+      "presence of selected_candidate_id",
+      "presence of uncertainty.unknowns",
+      "presence of forbidden_claims"
+    ],
+    "parameters": [
+      "candidate_count",
+      "forbidden_claim_count",
+      "baseline_method",
+      "review_status",
+      "operator_decision"
+    ],
+    "unknowns": [
+      "Whether triadic records improve future decisions.",
+      "Which scoring rubric best measures decision quality.",
+      "How many reviewed cycles are enough for comparison."
+    ]
+  }
+}
