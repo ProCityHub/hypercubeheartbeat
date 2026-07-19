@@ -16,12 +16,12 @@ import sys
 from pathlib import Path
 
 TEXT_SUFFIXES = {
-    ".py", ".md", ".json", ".yml", ".yaml", ".toml", ".txt", ".qasm", ".csv", ".sh"
+    ".py", ".md", ".jsonl", ".json", ".yml", ".yaml", ".toml", ".txt", ".qasm", ".csv", ".sh"
 }
 PATH_PATTERN = re.compile(
     r"(?<![A-Za-z0-9_./-])"
     r"((?:ai_infrastructure|app_infrastructure|tools|tests|docs|research|claims|reports|data|"
-    r"\.github)/[A-Za-z0-9_.?*+\-/]+\.(?:py|md|json|ya?ml|toml|txt|qasm|csv|sh))"
+    r"\.github)/[A-Za-z0-9_.?*+\-/]+\.(?:py|md|jsonl|json|ya?ml|toml|txt|qasm|csv|sh))(?![A-Za-z0-9_])"
 )
 STALE_DIRECTIVES = ("008M", "008N")
 
