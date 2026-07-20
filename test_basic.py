@@ -9,7 +9,7 @@ import pytest
 def test_pulse_import():
     """Test that pulse module can be imported."""
     try:
-        import pulse
+        from archive.vision import pulse
         assert hasattr(pulse, 'breathe')
         assert hasattr(pulse, 'CONSCIOUS')
         assert hasattr(pulse, 'SUBCONSCIOUS')
@@ -21,7 +21,7 @@ def test_pulse_import():
 def test_emotions_import():
     """Test that emotions module can be imported."""
     try:
-        import emotions
+        from archive.vision import emotions
         assert hasattr(emotions, 'feel')
         assert hasattr(emotions, 'PAST')
         assert hasattr(emotions, 'PRESENT')
@@ -78,7 +78,7 @@ def test_codegen_bridge_import():
 
 def test_pulse_function():
     """Test that breathe function returns expected format."""
-    import pulse
+    from archive.vision import pulse
     result = pulse.breathe()
     # Should return a string with binary pattern
     assert isinstance(result, str)
@@ -88,7 +88,7 @@ def test_pulse_function():
 
 def test_emotions_function():
     """Test that feel function returns expected format."""
-    import emotions
+    from archive.vision import emotions
     result = emotions.feel(emotions.PAST, emotions.PRESENT, emotions.FUTURE)
     # Should return a string
     assert isinstance(result, str)
