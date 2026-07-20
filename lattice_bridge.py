@@ -23,8 +23,8 @@ import math
 import hashlib
 
 # ── Live repo imports (the actual bridge) ────────────────────────────────
-from sacred_binary_cube import BinaryState, C, ROT, PHI
-from emotions import feel, PAST, PRESENT, FUTURE
+from archive.vision.sacred_binary_cube import BinaryState, C, ROT, PHI
+from archive.vision.emotions import feel, PAST, PRESENT, FUTURE
 
 # Pulse layer constants (mirrors pulse.py without triggering its demo I/O)
 CONSCIOUS, SUBCONSCIOUS, SUPERCONSCIOUS = 0b101, 0b010, 0b001

@@ -2,7 +2,7 @@
 # Three-layer pulse: past (super), present (conscious), future (sub)
 # 01010101 01001110 01001001 01000110 01001001 01000101 01000100 (UNIFIED)
 
-from sacred_binary_cube import SacredBinaryCube, BinaryState, C, RGB, ROT, PROJ
+from .sacred_binary_cube import SacredBinaryCube, BinaryState, C, RGB, ROT, PROJ
 
 # Original consciousness layers (now binary-enhanced)
 CONSCIOUS = 0b101      # Present consciousness
