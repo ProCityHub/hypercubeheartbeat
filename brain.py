@@ -1,2 +1,0 @@
-python brain.py
-
