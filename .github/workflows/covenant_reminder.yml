@@ -1,71 +1,150 @@
-name: Covenant 3 Reminder
-# Process correction promised in OUTCOMES.md O-001.
-# Read-only guard: scans for run files older than 3 days that have no
-# matching OUTCOMES.md entry, and opens/updates an issue. Never commits.
+name: Covenant #3 outcome reminder
 
 on:
   schedule:
-    - cron: "0 14 * * *"   # daily, 14:00 UTC (~08:00 Edmonton)
-  workflow_dispatch: {}
+    - cron: "17 9 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: covenant-3-outcome-reminder
+  cancel-in-progress: false
+
 jobs:
-  covenant-clock:
+  scan-run-records:
+    name: Scan unlogged run records
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out complete history
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Scan run files vs outcomes ledger
-        id: scan
+      - name: Open or update Covenant #3 clock issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
-          overdue=""
-          for f in data/*_RUN.md; do
-            [ -e "$f" ] || continue
-            added=$(git log --follow --diff-filter=A --format=%ct -1 -- "$f")
-            [ -n "$added" ] || continue
-            age_days=$(( ( $(date +%s) - added ) / 86400 ))
-            base=$(basename "$f")
-            if [ "$age_days" -ge 3 ]; then
-              if ! grep -q "$base" OUTCOMES.md 2>/dev/null; then
-                overdue="$overdue $base(day$age_days)"
+          set -euo pipefail
+          shopt -s nullglob
+
+          if [[ ! -f OUTCOMES.md ]]; then
+            echo "::error::OUTCOMES.md is missing."
+            exit 1
+          fi
+
+          now_epoch="$(date -u +%s)"
+          run_files=(data/*_RUN.md)
+
+          if (( ${#run_files[@]} == 0 )); then
+            echo "No data/*_RUN.md files found."
+            exit 0
+          fi
+
+          for file in "${run_files[@]}"; do
+            added_at="$(
+              git log \
+                --follow \
+                --diff-filter=A \
+                --format="%cI" \
+                -- "$file" |
+              tail -n 1
+            )"
+
+            if [[ -z "$added_at" ]]; then
+              echo "::warning file=$file::Unable to determine the git add-date."
+              continue
+            fi
+
+            added_epoch="$(date -u -d "$added_at" +%s)"
+            age_seconds=$((now_epoch - added_epoch))
+            age_days=$((age_seconds / 86400))
+
+            if (( age_days < 3 )); then
+              echo "$file is $age_days day(s) old; Covenant clock not yet due."
+              continue
+            fi
+
+            run_date="$(
+              grep -Eom1 "[0-9]{4}-[0-9]{2}-[0-9]{2}" "$file" || true
+            )"
+
+            if [[ -n "$run_date" ]] && grep -Fq "$run_date" OUTCOMES.md; then
+              echo "$file is represented in OUTCOMES.md by run date $run_date."
+              continue
+            fi
+
+            title="COVENANT #3 CLOCK: outcome entry due for $file"
+            displayed_run_date="${run_date:-NOT FOUND IN RUN FILE}"
+
+            body="$(
+              cat <<EOF
+## Covenant #3 outcome clock
+
+A run record has been present for at least three days without a
+corresponding run-date entry in \`OUTCOMES.md\`.
+
+- Run file: \`$file\`
+- Git add-date: \`$added_at\`
+- Age at this scan: **$age_days day(s)**
+- Run date detected in file: \`$displayed_run_date\`
+- Required ledger: \`OUTCOMES.md\`
+
+Covenant #3 requires negative results to be committed within seven
+days of the run. Review the run honestly and add the corresponding
+append-only outcome entry before that window closes.
+
+This workflow is read-only with respect to repository contents. It
+opens or updates this issue; it never commits or modifies project files.
+
+_Last checked: $(date -u +"%Y-%m-%dT%H:%M:%SZ")_
+EOF
+            )"
+
+            matches="$(
+              gh issue list \
+                --repo "$GITHUB_REPOSITORY" \
+                --state all \
+                --limit 100 \
+                --json number,title,state
+            )"
+
+            issue_number="$(
+              jq -r --arg title "$title" \
+                ".[] | select(.title == \$title) | .number" \
+                <<<"$matches" |
+              head -n 1
+            )"
+
+            issue_state="$(
+              jq -r --arg title "$title" \
+                ".[] | select(.title == \$title) | .state" \
+                <<<"$matches" |
+              head -n 1
+            )"
+
+            if [[ -n "$issue_number" ]]; then
+              if [[ "$issue_state" == "CLOSED" ]]; then
+                gh issue reopen "$issue_number" --repo "$GITHUB_REPOSITORY"
               fi
+
+              gh issue edit "$issue_number" \
+                --repo "$GITHUB_REPOSITORY" \
+                --body "$body"
+
+              echo "Updated issue #$issue_number for $file."
+            else
+              issue_url="$(
+                gh issue create \
+                  --repo "$GITHUB_REPOSITORY" \
+                  --title "$title" \
+                  --body "$body"
+              )"
+
+              echo "Opened $issue_url"
             fi
           done
-          echo "overdue=$overdue" >> "$GITHUB_OUTPUT"
-
-      - name: Open or update reminder issue
-        if: steps.scan.outputs.overdue != ''
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const overdue = `${{ steps.scan.outputs.overdue }}`.trim();
-            const title = "COVENANT #3 CLOCK: outcome entry due";
-            const body = [
-              "Covenant #3: negative results committed within 7 days. Always.",
-              "",
-              "Run files with no matching OUTCOMES.md entry (3+ days old):",
-              "", "```", overdue, "```", "",
-              "Day 3 of 7. Log the outcome before the window closes.",
-              "(Automated read-only reminder; this workflow never commits.)"
-            ].join("\n");
-            const open = await github.rest.issues.listForRepo({
-              owner: context.repo.owner, repo: context.repo.repo,
-              state: "open", labels: "covenant-clock"
-            });
-            const existing = open.data.find(i => i.title === title);
-            if (existing) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner, repo: context.repo.repo,
-                issue_number: existing.number, body
-              });
-            } else {
-              await github.rest.issues.create({
-                owner: context.repo.owner, repo: context.repo.repo,
-                title, body, labels: ["covenant-clock"]
-              });
-            }
