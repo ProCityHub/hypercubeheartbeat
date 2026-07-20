@@ -83,27 +83,27 @@ jobs:
             displayed_run_date="${run_date:-NOT FOUND IN RUN FILE}"
 
             body="$(
-              cat <<EOF
-## Covenant #3 outcome clock
-
-A run record has been present for at least three days without a
-corresponding run-date entry in \`OUTCOMES.md\`.
-
-- Run file: \`$file\`
-- Git add-date: \`$added_at\`
-- Age at this scan: **$age_days day(s)**
-- Run date detected in file: \`$displayed_run_date\`
-- Required ledger: \`OUTCOMES.md\`
-
-Covenant #3 requires negative results to be committed within seven
-days of the run. Review the run honestly and add the corresponding
-append-only outcome entry before that window closes.
-
-This workflow is read-only with respect to repository contents. It
-opens or updates this issue; it never commits or modifies project files.
-
-_Last checked: $(date -u +"%Y-%m-%dT%H:%M:%SZ")_
-EOF
+              printf '%s\n' \
+                '## Covenant #3 outcome clock' \
+                '' \
+                'A run record has been present for at least three days without a' \
+                'corresponding run-date entry in `OUTCOMES.md`.' \
+                ''
+              printf -- '- Run file: `%s`\n' "$file"
+              printf -- '- Git add-date: `%s`\n' "$added_at"
+              printf -- '- Age at this scan: **%s day(s)**\n' "$age_days"
+              printf -- '- Run date detected in file: `%s`\n' "$displayed_run_date"
+              printf '%s\n' \
+                '- Required ledger: `OUTCOMES.md`' \
+                '' \
+                'Covenant #3 requires negative results to be committed within seven' \
+                'days of the run. Review the run honestly and add the corresponding' \
+                'append-only outcome entry before that window closes.' \
+                '' \
+                'This workflow is read-only with respect to repository contents. It' \
+                'opens or updates this issue; it never commits or modifies project files.' \
+                ''
+              printf '_Last checked: %s_\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             )"
 
             find_exact_issue() {
