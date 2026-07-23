@@ -62,7 +62,7 @@ END;
 
 
 def utc_now() -> str:
-    return _dt.datetime.utcnow().isoformat(timespec="seconds") + "Z"
+    return _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
 def sha256_text(text: str) -> str:
